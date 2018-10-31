@@ -1,4 +1,4 @@
-from typing import Callable, TypeVar, List, Dict, Set
+from typing import Callable, TypeVar, List, Dict, Set, cast
 import functools
 
 T = TypeVar('T')
@@ -64,7 +64,7 @@ def model(f: Callable[..., T]) -> Callable[..., T]:
     def wrapper(*args, **kw) -> T:
         result = f(*args, **kw)
 
-        return ModelProxy(result)
+        return cast(T, ModelProxy(result))
 
     return wrapper
 
