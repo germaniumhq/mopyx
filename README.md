@@ -48,7 +48,7 @@ class UiComponent:
         self.title = self.model.title
 ```
 
-You decorate you model classes with `@model`. Whenever properties change in the
+You decorate your model classes with `@model`. Whenever properties change in the
 model, the `@render` function will be called again, but only for the components
 that are affected by the model update.
 
