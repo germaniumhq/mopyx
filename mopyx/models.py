@@ -50,7 +50,10 @@ class ModelProxy(object):
                 renderers = set()
                 self._mopyx_renderers[name] = renderers
 
-            renderers.add(rendering.active_renderers[-1])
+            renderer = rendering.active_renderers[-1]
+            renderers.add(renderer)
+
+            renderer.add_model_listener(self, name)
 
         return self._mopyx_target.__getattribute__(name)
 
@@ -71,6 +74,12 @@ class ModelProxy(object):
             for renderer in renderers:
                 rendering.register_render_refresh(renderer)
 
+    def _mopyx_unregister(self, name, renderer):
+        """
+        Unregister a renderer from the given property.
+        """
+        self._mopyx_renderers[name].remove(renderer)
+
 
 def model(f: Callable[..., T]) -> Callable[..., T]:
     @functools.wraps(f)
@@ -80,5 +89,4 @@ def model(f: Callable[..., T]) -> Callable[..., T]:
         return cast(T, ModelProxy(result))
 
     return wrapper
-
 

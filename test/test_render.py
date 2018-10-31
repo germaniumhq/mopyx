@@ -1,6 +1,6 @@
 import unittest
 
-from mopyx import render, render_call, model
+from mopyx import render, render_call, model, update
 
 
 @model
@@ -66,6 +66,31 @@ class TestRender(unittest.TestCase):
 
         self.assertEqual(model.name, ui.name.label)
         self.assertEqual(model.desc, ui.description.label)
+
+        basic_rerender = [
+            'UiComponent.update_data',
+            'UiLabel.set_label',
+            'UiLabel.set_label',
+            'UiLabel.set_label',
+            'UiLabel.set_label',
+        ]
+        self.assertEqual(registered_events, basic_rerender)
+
+        registered_events.clear()
+
+        @update
+        def custom_action():
+            model.name = "new name"
+            model.title = "new title"
+
+        custom_action()
+
+        main_rerender = [
+            'UiComponent.update_data',
+            'UiLabel.set_label',
+            'UiLabel.set_label',
+        ]
+        self.assertEqual(registered_events, main_rerender)
 
 
 if __name__ == '__main__':
