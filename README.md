@@ -52,7 +52,7 @@ class UiComponent:
         self.update_data()
 
     # MoPyX will know about this rendering. Here it learns that from the
-    # model, `name`, `desc`, and `title` are needed for the rendering.
+    # model `name`, `desc`, and `title` are needed for the rendering.
     # After this render whenever any of the model properties change,
     # the `@render` method will be invoked automatically.
     @render
