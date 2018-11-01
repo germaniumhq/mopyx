@@ -4,6 +4,16 @@ mopyx
 mopyx is a MobX/Vue inspired reactive model driven UI library. UI
 Toolkit independent.
 
+Demo
+----
+
+.. figure:: https://raw.githubusercontent.com/germaniumhq/mopyx-sample/master/demo.gif
+   :alt: PySide2 MoPyX Demo
+
+   PySide2 MoPyX Demo
+
+Demo project is here: https://github.com/germaniumhq/mopyx-sample
+
 Installation
 ------------
 
@@ -57,7 +67,7 @@ Usage
             self.update_data()
 
         # MoPyX will know about this rendering. Here it learns that from the
-        # model, `name`, `desc`, and `title` are needed for the rendering.
+        # model `name`, `desc`, and `title` are needed for the rendering.
         # After this render whenever any of the model properties change,
         # the `@render` method will be invoked automatically.
         @render
@@ -99,3 +109,31 @@ you can just wrap it in ``render_call``\ s:
 .. code:: py
 
     render_call(lambda: self.name.set_label(self.model.name))
+
+List
+----
+
+If one of the properties is a list, the list will be replaced with a
+special implementation, that will also notify its changes on the top
+property.
+
+.. code:: py
+
+    @model
+    class RootModel:
+        def __init__(self):
+            self.items = []
+
+
+    class UiComponent:
+        @render
+        def update_ui(self):
+            for item in self.items:
+                self.render_sub_component(item)
+
+
+    model = RootModel()
+    ui = UiComponent(model)
+
+
+    model.items.append("new item")  # this will trigger the update_ui rerender.

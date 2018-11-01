@@ -1,6 +1,12 @@
-# mopyx
+# MoPyX
 
-mopyx is a MobX/Vue inspired reactive model driven UI library. UI Toolkit independent.
+MoPyX is a MobX/Vue inspired reactive model driven UI library. UI Toolkit independent.
+
+## Demo
+
+![PySide2 MoPyX Demo](https://raw.githubusercontent.com/germaniumhq/mopyx-sample/master/demo.gif)
+
+Demo project is here: [https://github.com/germaniumhq/mopyx-sample](https://github.com/germaniumhq/mopyx-sample)
 
 ## Installation
 
