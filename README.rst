@@ -1,7 +1,7 @@
-mopyx
+MoPyX
 =====
 
-mopyx is a MobX/Vue inspired reactive model driven UI library. UI
+MoPyX is a MobX/Vue inspired reactive model driven UI library. UI
 Toolkit independent.
 
 Demo
