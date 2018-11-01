@@ -7,7 +7,7 @@ T = TypeVar('T')
 _update_index: int = 0
 
 
-def update(f: Callable[..., T]) -> Callable[..., T]:
+def action(f: Callable[..., T]) -> Callable[..., T]:
     """
     Do multiple operations on the model, at the end of which the
     rendering will be updated.
@@ -57,11 +57,11 @@ class ModelProxy(object):
 
         return self._mopyx_target.__getattribute__(name)
 
-    @update
+    @action
     def __setattr__(self, name: str, value: Any):
         """
         Sets an attribute to the underlying object. Registered renderers
-        will be called at the end of the @update operation.
+        will be called at the end of the root @action operation.
         """
         if name.startswith("_mopyx"):
             super().__setattr__(name, value)

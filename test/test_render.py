@@ -1,6 +1,6 @@
 import unittest
 
-from mopyx import render, render_call, model, update
+from mopyx import render, render_call, model, action
 
 
 @model
@@ -78,7 +78,7 @@ class TestRender(unittest.TestCase):
 
         registered_events.clear()
 
-        @update
+        @action
         def custom_action():
             model.name = "new name"
             model.title = "new title"
