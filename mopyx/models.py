@@ -48,31 +48,27 @@ class ListModelProxy(list):
         return super().__getslice__(i, j)
 
     @action
-    def __setitem__(self, i, y):
-        result = super().__setitem__(self, i, y)
+    def __setitem__(self, *argv, **kw):
+        result = super().__setitem__(*argv, **kw)
         self._mopyx_model._mopyx_register_refresh(self._mopyx_property_name)
-
         return result
 
     @action
-    def __setslice__(self, i, j):
-        result = super().__setslice__(self, i, j)
+    def __setslice__(self, *argv, **kw):
+        result = super().__setslice__(*argv, **kw)
         self._mopyx_model._mopyx_register_refresh(self._mopyx_property_name)
-
         return result
 
     @action
-    def __delitem__(self, i):
-        result = super().__delitem__(self, i)
+    def __delitem__(self, *argv, **kw):
+        result = super().__delitem__(*argv, **kw)
         self._mopyx_model._mopyx_register_refresh(self._mopyx_property_name)
-
         return result
 
     @action
-    def __delslice__(self, i, j):
-        result = super().__delslice__(self, i, j)
+    def __delslice__(self, *argv, **kw):
+        result = super().__delslice__(*argv, **kw)
         self._mopyx_model._mopyx_register_refresh(self._mopyx_property_name)
-
         return result
 
     @action

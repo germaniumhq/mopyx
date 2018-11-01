@@ -120,11 +120,17 @@ class TestRender(unittest.TestCase):
 
         registered_events.clear()
 
-        model.items.append("x")
+        @action
+        def update_table_action():
+            model.items.append("x")
+            model.items[2] = "y"
+
+        update_table_action()
+
         self.assertEqual(model.items, ui.items_table.table_items)
 
         table_renderer = [
-            'UiComponent.update_table'
+            'UiComponent.update_table',
         ]
         self.assertEqual(registered_events, table_renderer)
 
