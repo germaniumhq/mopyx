@@ -95,3 +95,30 @@ example if there is a `Label` component of some sort, you can just wrap it in
 ```py
 render_call(lambda: self.name.set_label(self.model.name))
 ```
+
+## List
+
+If one of the properties is a list, the list will be replaced with a special
+implementation, that will also notify its changes on the top property.
+
+```py
+@model
+class RootModel:
+    def __init__(self):
+        self.items = []
+
+
+class UiComponent:
+    @render
+    def update_ui(self):
+        for item in self.items:
+            self.render_sub_component(item)
+
+
+model = RootModel()
+ui = UiComponent(model)
+
+
+model.items.append("new item")  # this will trigger the update_ui rerender.
+```
+
