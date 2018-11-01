@@ -80,43 +80,43 @@ class ListModelProxy(list):
     @action
     def clear(self, *argv, **kw):
         result = super().clear(*argv, **kw)
-        self._mopyx_model._mopix_register_refresh(self._mopyx_property_name)
+        self._mopyx_model._mopyx_register_refresh(self._mopyx_property_name)
         return result
 
     @action
     def extend(self, *argv, **kw):
         result = super().extend(*argv, **kw)
-        self._mopyx_model._mopix_register_refresh(self._mopyx_property_name)
+        self._mopyx_model._mopyx_register_refresh(self._mopyx_property_name)
         return result
 
     @action
     def insert(self, *argv, **kw):
         result = super().insert(*argv, **kw)
-        self._mopyx_model._mopix_register_refresh(self._mopyx_property_name)
+        self._mopyx_model._mopyx_register_refresh(self._mopyx_property_name)
         return result
 
     @action
     def pop(self, *argv, **kw):
         result = super().pop(*argv, **kw)
-        self._mopyx_model._mopix_register_refresh(self._mopyx_property_name)
+        self._mopyx_model._mopyx_register_refresh(self._mopyx_property_name)
         return result
 
     @action
     def remove(self, *argv, **kw):
         result = super().remove(*argv, **kw)
-        self._mopyx_model._mopix_register_refresh(self._mopyx_property_name)
+        self._mopyx_model._mopyx_register_refresh(self._mopyx_property_name)
         return result
 
     @action
     def reverse(self, *argv, **kw):
         result = super().reverse(*argv, **kw)
-        self._mopyx_model._mopix_register_refresh(self._mopyx_property_name)
+        self._mopyx_model._mopyx_register_refresh(self._mopyx_property_name)
         return result
 
     @action
     def sort(self, *argv, **kw):
         result = super().sort(*argv, **kw)
-        self._mopyx_model._mopix_register_refresh(self._mopyx_property_name)
+        self._mopyx_model._mopyx_register_refresh(self._mopyx_property_name)
         return result
 
 

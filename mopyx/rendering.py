@@ -1,4 +1,4 @@
-from typing import List, TypeVar, Callable, Set, Optional, Any, Tuple
+from typing import List, TypeVar, Callable, Set, Optional, Any, Tuple, Union
 import functools
 
 T = TypeVar('T')
@@ -6,32 +6,42 @@ T = TypeVar('T')
 
 active_renderers: List['RendererFunction'] = list()
 registered_renderers: Set['RendererFunction'] = set()
+is_rendering_in_progress = False
 
 
 class RendererFunction:
     def __init__(self,
                  parent: Optional['RendererFunction'],
                  f: Callable[..., T],
-                 args,
-                 kw) -> None:
+                 ignore_updates: bool) -> None:
         self.parent = parent
         self.f = f
-        self.args = args
-        self.kw = kw
         self.dependents: List['RendererFunction'] = list()
         self._terminated = False
         self._models: Set[Tuple[Any, str]] = set()
+        self.ignore_updates = ignore_updates
+        self.args: Any = None
+        self.kw: Any = None
 
         if parent:
             parent.dependents.append(self)
 
     def render(self) -> T:
-        for dependent in self.dependents:
-            dependent.unregister()
+        try:
+            active_renderers.append(self)
 
-        self.dependents.clear()
+            for dependent in self.dependents:
+                dependent.unregister()
 
-        return self.f(*self.args, **self.kw)
+            self.dependents.clear()
+
+            return self.f(*self.args, **self.kw)
+        finally:
+            active_renderers.pop()
+
+    def _set_args_kw(self, *args, **kw):
+        self.args = args
+        self.kw = kw
 
     def unregister(self):
         if self._terminated:
@@ -59,28 +69,39 @@ class RendererFunction:
         return False
 
 
-def render(f: Callable[..., T]) -> Callable[..., T]:
+def render(*r_args, **r_kw) -> Union[Callable[..., Callable[..., T]], Callable[..., T]]:
     """
     Calls the given renderer function, and registers the call for
     future use.
     """
-    @functools.wraps(f)
-    def wrapper(*args, **kw) -> T:
-        try:
-            parent = active_renderers[-1] if active_renderers else None
-            renderer = RendererFunction(parent=parent, f=f, args=args, kw=kw)
+    ignore_updates = False
 
-            active_renderers.append(renderer)
+    if 'ignore_updates' in r_kw:
+        ignore_updates = r_kw['ignore_updates']
+
+    def wrapper_builder(f: Callable[..., T]) -> Callable[..., T]:
+        parent = active_renderers[-1] if active_renderers else None
+        renderer = RendererFunction(parent=parent,
+                                    f=f,
+                                    ignore_updates=ignore_updates)
+
+        @functools.wraps(f)
+        def wrapper(*args, **kw) -> T:
+            renderer._set_args_kw(*args, **kw)
 
             return renderer.render()
-        finally:
-            active_renderers.pop()
 
-    return wrapper
+        return wrapper
+
+    if r_args:
+        return wrapper_builder(r_args[0])
+
+    return wrapper_builder
 
 
-def render_call(f: Callable[..., T]) -> T:
-    @render
+def render_call(f: Callable[..., T],
+                ignore_updates: bool = False) -> T:
+    @render(ignore_updates=ignore_updates)
     def internal_render():
         return f()
 
@@ -88,17 +109,35 @@ def render_call(f: Callable[..., T]) -> T:
 
 
 def register_render_refresh(renderer: RendererFunction):
+    global is_rendering_in_progress
+
+    if is_rendering_in_progress:
+        if not active_renderers or not active_renderers[-1].ignore_updates:
+            raise Exception("Rendering is already in progress. Normally you shouldn't call actions inside rendering. "
+                            "If you really know what you're doing you can explicitly ignore the model updates in "
+                            "rendering (`@render(ignore_updates=True)`) to break circular dependencies.")
+
+        return  # we don't add the renderers, because we're ignoring updates
+
     registered_renderers.add(renderer)
 
 
 def call_registered_renderers():
-    for renderer in list(registered_renderers):
-        if renderer.has_parents(registered_renderers):
-            registered_renderers.remove(renderer)
-            continue
+    global is_rendering_in_progress
 
-    for renderer in registered_renderers:
-        renderer.render()
+    try:
+        is_rendering_in_progress = True
 
-    registered_renderers.clear()
+        for renderer in list(registered_renderers):
+            if renderer.has_parents(registered_renderers):
+                registered_renderers.remove(renderer)
+                continue
+
+        registered_renderers_copy = registered_renderers.copy()
+        registered_renderers.clear()
+
+        for renderer in registered_renderers_copy:
+            renderer.render()
+    finally:
+        is_rendering_in_progress = False
 
