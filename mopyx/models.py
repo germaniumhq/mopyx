@@ -34,7 +34,7 @@ class ListModelProxy(list):
     parent model property as changed.
     """
     def __init__(self,
-                 model: 'ModelProxy',
+                 model,
                  property_name: str,
                  target: List) -> None:
         super().__init__(target)
@@ -120,83 +120,80 @@ class ListModelProxy(list):
         return result
 
 
-class ModelProxy:
-    """
-    Tracks who was rendered from what properties.
-    """
+def model(base: Callable[..., T]) -> Callable[..., T]:
+    class ModelProxy(base):
+        """
+        Tracks who was rendered from what properties.
+        """
 
-    def __init__(self, target=None):
-        self._mopyx_target = target
-        self._mopyx_renderers: Dict[str, Set[rendering.RendererFunction]] = dict()
+        def __init__(self, *argv, **kw):
+            self._mopyx_renderers: Dict[str, Set[rendering.RendererFunction]] = dict()
+            super().__init__(*argv, **kw)
 
-        for key in dir(target):
-            value = getattr(target, key)
+            for key in dir(self):
+                value = getattr(self, key)
+                if isinstance(value, list):
+                    self.__setattr__(key, ListModelProxy(self, key, value))
+
+        @property
+        def __dict__(self):
+            result = dict(super().__dict__)
+
+            if "_mopyx_renderers" in result:
+                del result["_mopyx_renderers"]
+
+            return result
+
+        def __getattribute__(self, name: str):
+            """
+            Gets an attribute from the underlying object. In case there
+            is an active renderer, it's registered as a dependency for
+            this model property.
+            """
+            if name.startswith("_mopyx"):
+                return super().__getattribute__(name)
+
+            if rendering.active_renderers:
+                renderers = self._mopyx_renderers.get(name, None)
+
+                if not renderers:
+                    renderers = set()
+                    self._mopyx_renderers[name] = renderers
+
+                renderer = rendering.active_renderers[-1]
+                renderers.add(renderer)
+
+                renderer.add_model_listener(self, name)
+
+            return super().__getattribute__(name)
+
+        @action
+        def __setattr__(self, name: str, value: Any):
+            """
+            Sets an attribute to the underlying object. Registered renderers
+            will be called at the end of the root @action operation.
+            """
+            if name.startswith("_mopyx"):
+                super().__setattr__(name, value)
+                return
+
             if isinstance(value, list):
-                target.__setattr__(key, ListModelProxy(self, key, value))
+                value = ListModelProxy(self, name, value)
 
-    @property
-    def __dir__(self):
-        return self._mopyx_target.__dir__
-
-    @property
-    def __dict__(self):
-        return self._mopyx_target.__dict__
-
-    def __getattr__(self, name: str):
-        """
-        Gets an attribute from the underlying object. In case there
-        is an active renderer, it's registered as a dependency for
-        this model property.
-        """
-        if rendering.active_renderers:
-            renderers = self._mopyx_renderers.get(name, None)
-
-            if not renderers:
-                renderers = set()
-                self._mopyx_renderers[name] = renderers
-
-            renderer = rendering.active_renderers[-1]
-            renderers.add(renderer)
-
-            renderer.add_model_listener(self, name)
-
-        return self._mopyx_target.__getattribute__(name)
-
-    @action
-    def __setattr__(self, name: str, value: Any):
-        """
-        Sets an attribute to the underlying object. Registered renderers
-        will be called at the end of the root @action operation.
-        """
-        if name.startswith("_mopyx"):
             super().__setattr__(name, value)
-            return
+            self._mopyx_register_refresh(name)
 
-        if isinstance(value, list):
-            value = ListModelProxy(self, name, value)
+        def _mopyx_register_refresh(self, name):
+            renderers = self._mopyx_renderers.get(name, None)
+            if renderers:
+                for renderer in renderers:
+                    rendering.register_render_refresh(renderer)
 
-        setattr(self._mopyx_target, name, value)
-        self._mopyx_register_refresh(name)
+        def _mopyx_unregister(self, name, renderer):
+            """
+            Unregister a renderer from the given property.
+            """
+            self._mopyx_renderers[name].remove(renderer)
 
-    def _mopyx_register_refresh(self, name):
-        renderers = self._mopyx_renderers.get(name, None)
-        if renderers:
-            for renderer in renderers:
-                rendering.register_render_refresh(renderer)
-
-    def _mopyx_unregister(self, name, renderer):
-        """
-        Unregister a renderer from the given property.
-        """
-        self._mopyx_renderers[name].remove(renderer)
-
-
-def model(f: Callable[..., T]) -> Callable[..., T]:
-    @functools.wraps(f)
-    def wrapper(*args, **kw) -> T:
-        result = f(*args, **kw)
-
-        return cast(T, ModelProxy(result))
-
-    return wrapper
+    return ModelProxy
 
