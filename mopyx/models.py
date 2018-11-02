@@ -121,10 +121,7 @@ class ListModelProxy(list):
 
 
 def model(base: Callable[..., T]) -> Callable[..., T]:
-
-    wut: Any = base
-
-    class ModelProxy(wut):
+    class ModelProxy(base):  # type: ignore
         """
         Tracks who was rendered from what properties.
         """
