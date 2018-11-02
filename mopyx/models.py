@@ -1,4 +1,4 @@
-from typing import Any, Set, Dict, TypeVar, Callable, cast, List
+from typing import Any, Set, Dict, TypeVar, Callable, List
 import functools
 
 import mopyx.rendering as rendering
@@ -121,7 +121,10 @@ class ListModelProxy(list):
 
 
 def model(base: Callable[..., T]) -> Callable[..., T]:
-    class ModelProxy(base):
+
+    wut: Any = base
+
+    class ModelProxy(wut):
         """
         Tracks who was rendered from what properties.
         """
