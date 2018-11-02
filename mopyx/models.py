@@ -125,7 +125,7 @@ class ModelProxy:
     Tracks who was rendered from what properties.
     """
 
-    def __init__(self, target):
+    def __init__(self, target=None):
         self._mopyx_target = target
         self._mopyx_renderers: Dict[str, Set[rendering.RendererFunction]] = dict()
 
@@ -133,6 +133,14 @@ class ModelProxy:
             value = getattr(target, key)
             if isinstance(value, list):
                 target.__setattr__(key, ListModelProxy(self, key, value))
+
+    @property
+    def __dir__(self):
+        return self._mopyx_target.__dir__
+
+    @property
+    def __dict__(self):
+        return self._mopyx_target.__dict__
 
     def __getattr__(self, name: str):
         """
