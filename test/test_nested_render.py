@@ -71,5 +71,6 @@ class TestNestedRender(unittest.TestCase):
         self.assertFalse(root_node.children[0].checked)
         self.assertFalse(root_node.children[1].checked)
 
+
 if __name__ == '__main__':
     unittest.main()
