@@ -153,6 +153,9 @@ def model(base: Callable[..., T]) -> Callable[..., T]:
             if name.startswith("_mopyx"):
                 return super().__getattribute__(name)
 
+            if name == "__class__":
+                return super().__getattribute__(name)
+
             if rendering.active_renderers:
                 renderers = self._mopyx_renderers.get(name, None)
 
@@ -161,9 +164,11 @@ def model(base: Callable[..., T]) -> Callable[..., T]:
                     self._mopyx_renderers[name] = renderers
 
                 renderer = rendering.active_renderers[-1]
-                renderers.add(renderer)
 
-                renderer.add_model_listener(self, name)
+                if renderer not in renderers:
+                    renderers.add(renderer)
+
+                    renderer.add_model_listener(self, name)
 
             return super().__getattribute__(name)
 
