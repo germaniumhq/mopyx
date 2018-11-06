@@ -92,18 +92,18 @@ def render(*r_args, **r_kw) -> Union[Callable[..., Callable[..., T]], Callable[.
         ignore_updates = r_kw['ignore_updates']
 
     def wrapper_builder(f: Callable[..., T]) -> Callable[..., T]:
-        parent = active_renderers[-1] if active_renderers else None
-        renderer = RendererFunction(parent=parent,
-                                    f=f,
-                                    ignore_updates=ignore_updates)
-
         @functools.wraps(f)
-        def wrapper(*args, **kw) -> T:
+        def render_wrapper(*args, **kw) -> T:
+            parent = active_renderers[-1] if active_renderers else None
+            renderer = RendererFunction(parent=parent,
+                                        f=f,
+                                        ignore_updates=ignore_updates)
+
             renderer._set_args_kw(*args, **kw)
 
             return renderer.render()
 
-        return wrapper
+        return render_wrapper
 
     if r_args:
         return wrapper_builder(r_args[0])

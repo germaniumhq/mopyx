@@ -99,7 +99,7 @@ class TestRender(unittest.TestCase):
             'UiLabel.set_label',
             'UiLabel.set_label',
         ]
-        self.assertEqual(registered_events, basic_rerender)
+        self.assertEqual(basic_rerender, registered_events)
 
         registered_events.clear()
 
@@ -116,7 +116,7 @@ class TestRender(unittest.TestCase):
             'UiLabel.set_label',
             'UiComponent.update_table'
         ]
-        self.assertEqual(registered_events, main_rerender)
+        self.assertEqual(main_rerender, registered_events)
 
         registered_events.clear()
 
@@ -124,6 +124,7 @@ class TestRender(unittest.TestCase):
         def update_table_action():
             model.items.append("x")
             model.items[2] = "y"
+            model.items[0] = "z"
 
         update_table_action()
 
@@ -132,7 +133,7 @@ class TestRender(unittest.TestCase):
         table_renderer = [
             'UiComponent.update_table',
         ]
-        self.assertEqual(registered_events, table_renderer)
+        self.assertEqual(table_renderer, registered_events)
 
 
 if __name__ == '__main__':

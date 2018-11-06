@@ -13,7 +13,7 @@ def action(f: Callable[..., T]) -> Callable[..., T]:
     rendering will be updated.
     """
     @functools.wraps(f)
-    def wrapper(*args, **kw) -> T:
+    def action_wrapper(*args, **kw) -> T:
         global _update_index
 
         try:
@@ -25,7 +25,7 @@ def action(f: Callable[..., T]) -> Callable[..., T]:
             if _update_index == 0:
                 rendering.call_registered_renderers()
 
-    return wrapper
+    return action_wrapper
 
 
 class ListModelProxy(list):
@@ -153,7 +153,7 @@ def model(base: Callable[..., T]) -> Callable[..., T]:
             if name.startswith("_mopyx"):
                 return super().__getattribute__(name)
 
-            if name == "__class__":
+            if name == "__class__" or name == "__iter__":
                 return super().__getattribute__(name)
 
             if rendering.active_renderers:
