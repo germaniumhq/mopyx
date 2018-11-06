@@ -1,5 +1,6 @@
 from typing import List, TypeVar, Callable, Set, Optional, Any, Tuple, Union
 import functools
+import os
 
 T = TypeVar('T')
 
@@ -7,6 +8,11 @@ T = TypeVar('T')
 active_renderers: List['RendererFunction'] = list()
 registered_renderers: Set['RendererFunction'] = set()
 is_rendering_in_progress = False
+is_debug_mode = 'MOPYX_DEBUG' in os.environ
+
+
+def indent():
+    return "  " * len(active_renderers)
 
 
 class RendererFunction:
@@ -28,6 +34,9 @@ class RendererFunction:
 
     def render(self) -> T:
         try:
+            if is_debug_mode:
+                print(f"{indent()}renderer: {self} ({self.f})")
+
             active_renderers.append(self)
 
             for dependent in self.dependents:
@@ -56,6 +65,9 @@ class RendererFunction:
             model._mopyx_unregister(property_name, self)
 
     def add_model_listener(self, model: Any, property_name: str) -> None:
+        if is_debug_mode:
+            print(f"{indent()}model: {model}.{property_name}")
+
         self._models.add((model, property_name))
 
     def has_parents(self, parent_set: Set['RendererFunction']) -> bool:
