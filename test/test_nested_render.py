@@ -19,7 +19,7 @@ class TreeItem:
 class TreeWidgetNode:
     def __init__(self,
                  parent_node: Optional['TreeWidgetNode'],
-                 item: Optional[TreeItem]):
+                 item: TreeItem):
         self.label: str = ""
         self.checked = True
         self.children: List['TreeWidgetNode'] = []

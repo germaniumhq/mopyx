@@ -1,4 +1,4 @@
-from typing import Any, Set, Dict, TypeVar, Callable, List, cast
+from typing import Any, Set, Dict, TypeVar, Callable, List
 import functools
 
 import mopyx.rendering as rendering
