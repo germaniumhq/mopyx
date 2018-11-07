@@ -128,3 +128,14 @@ ui = UiComponent(model)
 model.items.append("new item")  # this will trigger the update_ui rerender.
 ```
 
+## ignore_updates
+
+If the renderer will call a value that sets something in the UI that will make
+the UI trigger an event, that will in turn might land in an action (model
+updates are also actions), you can disable the rendering using the
+`ignore_updates` attribute. This will supress _all action invocations_ from
+that rendering method, including _all model updates_.
+
+This is great for onchange events for input edits, or tree updates such as
+selected nodes that otherwise would enter an infinite recursion.
+
