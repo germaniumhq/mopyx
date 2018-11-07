@@ -124,7 +124,7 @@ def register_render_refresh(renderer: RendererFunction):
     global is_rendering_in_progress
 
     if is_rendering_in_progress:
-        if not active_renderers or not active_renderers[-1].ignore_updates:
+        if not is_active_ignore_updates_renderer():
             active_renderers_names = ", ".join(map(lambda it: str(it.f), active_renderers))
             raise Exception("Rendering is already in progress. Normally you shouldn't call actions inside rendering. "
                             "If you really know what you're doing you can explicitly ignore the model updates in "
@@ -155,3 +155,13 @@ def call_registered_renderers():
     finally:
         is_rendering_in_progress = False
 
+
+def is_active_ignore_updates_renderer() -> bool:
+    if not active_renderers:
+        return False
+
+    for renderer in active_renderers:
+        if renderer.ignore_updates:
+            return True
+
+    return False

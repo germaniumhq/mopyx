@@ -1,4 +1,4 @@
-from typing import Any, Set, Dict, TypeVar, Callable, List
+from typing import Any, Set, Dict, TypeVar, Callable, List, cast
 import functools
 
 import mopyx.rendering as rendering
@@ -7,22 +7,29 @@ T = TypeVar('T')
 _update_index: int = 0
 
 
-def action(f: Callable[..., T]) -> Callable[..., T]:
+def action(f: Callable[..., None]) -> Callable[..., None]:
     """
     Do multiple operations on the model, at the end of which the
     rendering will be updated.
     """
     @functools.wraps(f)
-    def action_wrapper(*args, **kw) -> T:
+    def action_wrapper(*args, **kw) -> None:
         global _update_index
+
+        if rendering.is_active_ignore_updates_renderer():
+            return None
 
         try:
             _update_index += 1
-            return f(*args, **kw)
+
+            f(*args, **kw)
         finally:
             _update_index -= 1
 
             if _update_index == 0:
+                if rendering.is_debug_mode:
+                    print(f"{rendering.indent()}action: {f}")
+
                 rendering.call_registered_renderers()
 
     return action_wrapper
