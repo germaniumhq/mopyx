@@ -81,8 +81,8 @@ class TestNestedListsRender(unittest.TestCase):
         events = []
 
         server.jobs[0].branches[0].builds[0].name = "2"
-
         self.assertEqual(['build 2'], events)
+
         events = []
 
         branch = Branch()
@@ -94,7 +94,7 @@ class TestNestedListsRender(unittest.TestCase):
             server.jobs[0].branches = [branch]
 
         action_call()
-        self.assertEqual(['server', 'job', 'branch', 'build 1'], events)
+        self.assertEqual(['job', 'branch', 'build 1', 'build 1'], events)
 
 
 if __name__ == '__main__':
