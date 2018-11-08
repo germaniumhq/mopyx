@@ -1,4 +1,4 @@
-from typing import Any, Set, Dict, TypeVar, Callable, List
+from typing import Any, Set, Dict, TypeVar, Callable, List, cast
 import functools
 
 import mopyx.rendering as rendering
@@ -33,6 +33,28 @@ def action(f: Callable[..., None]) -> Callable[..., None]:
                 rendering.call_registered_renderers()
 
     return action_wrapper
+
+
+def computed(f: Callable[..., T]) -> Callable[..., T]:
+    @functools.wraps(f)
+    def wrapper(*args, **kw) -> T:
+        context = {
+            "rendered": False,
+            "value": None
+        }
+
+        if context["rendered"]:
+            return cast(T, context["value"])
+
+        @rendering.render
+        def invoke_function():
+            context["value"] = f(*args, **kw)
+            context["rendered"] = True
+
+        invoke_function()
+        return cast(T, context["value"])
+
+    return wrapper
 
 
 class ListModelProxy(list):
@@ -208,4 +230,3 @@ def model(base: Callable[..., T]) -> Callable[..., T]:
             self._mopyx_renderers[name].remove(renderer)
 
     return ModelProxy
-
