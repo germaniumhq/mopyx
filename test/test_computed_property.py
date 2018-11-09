@@ -43,7 +43,6 @@ class TestComputedDecorator(unittest.TestCase):
         initial_events = [
             "Sumator.sumation",
             "SumatorUi.update_label",
-            "Sumator.sumation"
         ]
 
         self.assertEqual(initial_events, registered_events)
@@ -54,17 +53,18 @@ class TestComputedDecorator(unittest.TestCase):
         self.assertEqual(6, m.sumation)
 
         items_update_events = [
-            "wut"
+            "Sumator.sumation",
+            "SumatorUi.update_label",
         ]
         self.assertEqual(items_update_events, registered_events)
         registered_events = []
 
-        model.label = "sumation is"
+        m.label = "sumation is"
         self.assertEqual("sumation is 6", ui.label)
         self.assertEqual(6, m.sumation)
 
         label_update_events = [
-            "wut"
+            "SumatorUi.update_label"
         ]
         self.assertEqual(label_update_events, registered_events)
 

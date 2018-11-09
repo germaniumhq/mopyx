@@ -35,26 +35,31 @@ def action(f: Callable[..., None]) -> Callable[..., None]:
     return action_wrapper
 
 
-class Context:
+class ComputedProperty:
     def __init__(self):
         self.updated = False
         self.value = None
 
 
 def computed(f: Callable[..., T]) -> T:
+    """
+    Add a computed property. A computed property only updates
+    when one of the inner values changes. A computed property
+    is allowed to still change the state of the object.
+    """
     @property  # type: ignore
     @functools.wraps(f)
     def computed_wrapper(self) -> T:
-        context = Context()
+        self._mopyx_register_active_renderers(f.__name__)
+        context = self._mopyx_get_computed_property(f.__name__)
 
         if context.updated:
-            raise Exception("updated")
             return context.value
 
         def invoke_render():
-            self._mopyx_register_active_renderers(f.__name__)
             context.value = f(self)
-            # print("return value: " + f.__name__)
+            if context.updated:
+                self._mopyx_register_refresh(f.__name__)
 
         rendering.render_call(invoke_render, _mode=rendering.RenderMode.COMPUTE)
         context.updated = True
@@ -164,6 +169,8 @@ def model(base: Callable[..., T]) -> Callable[..., T]:
 
         def __init__(self, *argv, **kw):
             self._mopyx_renderers: Dict[str, Set[rendering.RendererFunction]] = dict()
+            self._mopyx_computed: Dict[str, ComputedProperty] = dict()
+
             super().__init__(*argv, **kw)
 
             for key in dir(self):
@@ -177,6 +184,9 @@ def model(base: Callable[..., T]) -> Callable[..., T]:
 
             if "_mopyx_renderers" in result:
                 del result["_mopyx_renderers"]
+
+            if "_mopyx_computed" in result:
+                del result["_mopyx_computed"]
 
             return result
 
@@ -238,5 +248,14 @@ def model(base: Callable[..., T]) -> Callable[..., T]:
             Unregister a renderer from the given property.
             """
             self._mopyx_renderers[name].remove(renderer)
+
+        def _mopyx_get_computed_property(self, name: str) -> ComputedProperty:
+            computed_property_context = self._mopyx_computed.get(name, None)
+
+            if not computed_property_context:
+                computed_property_context = ComputedProperty()
+                self._mopyx_computed[name] = computed_property_context
+
+            return computed_property_context
 
     return ModelProxy
