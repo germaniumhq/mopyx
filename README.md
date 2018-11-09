@@ -17,7 +17,7 @@ pip install mopyx
 ## Usage
 
 ```py
-from mopyx import render, render_call, model, action
+from mopyx import render, render_call, model, action, computed
 
 
 @model
@@ -27,6 +27,12 @@ class RootModel:
         self.desc = "initial description" # a rerender will be triggered. This is
         self.title = "initial title"      # mapped in the actual rendering. Changing
         self.other = "initial other"      # `other` will not trigger a rerender.
+
+    # Computed properties change only when properties they depend on change, and are
+    # great at moving the logic of caching outside the renderer.
+    @computed
+    def title_desc(self):
+        return f"{self.title} {self.desc}"
 
 
 class UpdateModelService:
@@ -53,6 +59,7 @@ class UiComponent:
 
         self.name = UiLabel()
         self.description = UiLabel()
+        self.both = UiLabel()
         self.title = None
 
         self.update_data()
@@ -65,6 +72,7 @@ class UiComponent:
     def update_data(self):
         render_call(lambda: self.name.set_label(self.model.name))
         render_call(lambda: self.description.set_label(self.model.desc))
+        render_call(lambda: self.both.set_label(self.model.title_desc))
 
         self.title = self.model.title
 ```
