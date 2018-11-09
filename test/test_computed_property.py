@@ -15,12 +15,29 @@ class TestComputedDecorator(unittest.TestCase):
         class Sumator:
             def __init__(self):
                 self.label = "sum is"
+                self.other = "other"
                 self.items = []
 
             @computed
             def sumation(self):
                 registered_events.append("Sumator.sumation")
+
+                # This should register the current sumation as a listener
+                # for self.other changes via the renderer
+                self.other
+
+                # We update the same value with a new value. This should
+                # not trigger the listener, since that would be an
+                # infinite loop.
+#                self.other = "other test"
+
                 return sum(self.items)
+
+            @computed
+            def nested_sumation(self):
+                registered_events.append("Sumator.nested_sumation")
+
+                return f"{self.sumation} sum"
 
         class SumatorUi:
             def __init__(self, model):
@@ -41,6 +58,7 @@ class TestComputedDecorator(unittest.TestCase):
         ui = SumatorUi(m)
 
         initial_events = [
+            "Sumator.nested_sumation",
             "Sumator.sumation",
             "SumatorUi.update_label",
         ]
@@ -51,9 +69,11 @@ class TestComputedDecorator(unittest.TestCase):
         m.items = [1, 2, 3]
         self.assertEqual("sum is 6", ui.label)
         self.assertEqual(6, m.sumation)
+        self.assertEqual("6 sum", m.nested_sumation)
 
         items_update_events = [
             "Sumator.sumation",
+            "Sumator.nested_sumation",
             "SumatorUi.update_label",
         ]
         self.assertEqual(items_update_events, registered_events)
@@ -67,6 +87,9 @@ class TestComputedDecorator(unittest.TestCase):
             "SumatorUi.update_label"
         ]
         self.assertEqual(label_update_events, registered_events)
+
+        m.items.append(4)
+        self.assertEqual("10 sum", m.nested_sumation)
 
 
 if __name__ == '__main__':
