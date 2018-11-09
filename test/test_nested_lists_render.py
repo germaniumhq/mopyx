@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, cast
 from mopyx import model, render_call, action
 import unittest
 
@@ -33,7 +33,7 @@ class RootModel:
         self.servers: List[Server] = []
 
 
-model = RootModel()
+root_model: RootModel = cast(RootModel, RootModel())
 
 
 class TestNestedListsRender(unittest.TestCase):
@@ -48,22 +48,22 @@ class TestNestedListsRender(unittest.TestCase):
         events = []
 
         @render_call
-        def render_servers():
-            for server in model.servers:
+        def render_servers() -> None:
+            for server in root_model.servers:
                 @render_call
-                def render_server():
+                def render_server() -> None:
                     events.append("server")
                     for job in server.jobs:
                         @render_call
-                        def render_job():
+                        def render_job() -> None:
                             events.append("job")
                             for branch in job.branches:
                                 @render_call
-                                def render_branch():
+                                def render_branch() -> None:
                                     events.append("branch")
                                     for build in branch.builds:
                                         @render_call
-                                        def render_build():
+                                        def render_build() -> None:
                                             events.append(f"build {build.name}")
 
         self.assertEqual([], events)
@@ -75,7 +75,7 @@ class TestNestedListsRender(unittest.TestCase):
 
         self.assertEqual([], events)
 
-        model.servers.append(server)
+        root_model.servers.append(server)
 
         self.assertEqual(['server', 'job', 'branch', 'build 1'], events)
         events = []
