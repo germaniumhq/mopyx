@@ -26,7 +26,7 @@ Usage
 
 .. code:: py
 
-    from mopyx import render, render_call, model, action
+    from mopyx import render, render_call, model, action, computed
 
 
     @model
@@ -36,6 +36,12 @@ Usage
             self.desc = "initial description" # a rerender will be triggered. This is
             self.title = "initial title"      # mapped in the actual rendering. Changing
             self.other = "initial other"      # `other` will not trigger a rerender.
+
+        # Computed properties change only when properties they depend on change, and are
+        # great at moving the logic of caching outside the renderer.
+        @computed
+        def title_desc(self):
+            return f"{self.title} {self.desc}"
 
 
     class UpdateModelService:
@@ -62,6 +68,7 @@ Usage
 
             self.name = UiLabel()
             self.description = UiLabel()
+            self.both = UiLabel()
             self.title = None
 
             self.update_data()
@@ -74,6 +81,7 @@ Usage
         def update_data(self):
             render_call(lambda: self.name.set_label(self.model.name))
             render_call(lambda: self.description.set_label(self.model.desc))
+            render_call(lambda: self.both.set_label(self.model.title_desc))
 
             self.title = self.model.title
 
@@ -137,3 +145,15 @@ property.
 
 
     model.items.append("new item")  # this will trigger the update_ui rerender.
+
+ignore\_updates
+---------------
+
+If the renderer will call a value that sets something in the UI that
+will make the UI trigger an event, that will in turn might land in an
+action (model updates are also actions), you can disable the rendering
+using the ``ignore_updates`` attribute. This will supress *all action
+invocations* from that rendering method, including *all model updates*.
+
+This is great for onchange events for input edits, or tree updates such
+as selected nodes that otherwise would enter an infinite recursion.
