@@ -32,7 +32,7 @@ class TestComputedDecorator(unittest.TestCase):
             @render
             def update_label(self):
                 registered_events.append("SumatorUi.update_label")
-                self.label = f"{self.model.label} {self.model.sumation()}"
+                self.label = f"{self.model.label} {self.model.sumation}"
 
         """
         Just a basic sumator test
@@ -41,6 +41,7 @@ class TestComputedDecorator(unittest.TestCase):
         ui = SumatorUi(m)
 
         initial_events = [
+            "Sumator.sumation",
             "SumatorUi.update_label",
             "Sumator.sumation"
         ]

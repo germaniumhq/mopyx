@@ -1,4 +1,4 @@
-from typing import Any, Set, Dict, TypeVar, Callable, List, cast
+from typing import Any, Set, Dict, TypeVar, Callable, List
 import functools
 
 import mopyx.rendering as rendering
@@ -35,26 +35,33 @@ def action(f: Callable[..., None]) -> Callable[..., None]:
     return action_wrapper
 
 
-def computed(f: Callable[..., T]) -> Callable[..., T]:
+class Context:
+    def __init__(self):
+        self.updated = False
+        self.value = None
+
+
+def computed(f: Callable[..., T]) -> T:
+    @property  # type: ignore
     @functools.wraps(f)
-    def wrapper(*args, **kw) -> T:
-        context = {
-            "rendered": False,
-            "value": None
-        }
+    def computed_wrapper(self) -> T:
+        context = Context()
 
-        if context["rendered"]:
-            return cast(T, context["value"])
+        if context.updated:
+            raise Exception("updated")
+            return context.value
 
-        @rendering.render
-        def invoke_function():
-            context["value"] = f(*args, **kw)
-            context["rendered"] = True
+        def invoke_render():
+            self._mopyx_register_active_renderers(f.__name__)
+            context.value = f(self)
+            # print("return value: " + f.__name__)
 
-        invoke_function()
-        return cast(T, context["value"])
+        rendering.render_call(invoke_render, _mode=rendering.RenderMode.COMPUTE)
+        context.updated = True
 
-    return wrapper
+        return context.value
+
+    return computed_wrapper  # type: ignore
 
 
 class ListModelProxy(list):
@@ -185,6 +192,11 @@ def model(base: Callable[..., T]) -> Callable[..., T]:
             if name == "__class__" or name == "__iter__":
                 return super().__getattribute__(name)
 
+            self._mopyx_register_active_renderers(name)
+
+            return super().__getattribute__(name)
+
+        def _mopyx_register_active_renderers(self, name: str) -> None:
             if rendering.active_renderers:
                 renderers = self._mopyx_renderers.get(name, None)
 
@@ -198,8 +210,6 @@ def model(base: Callable[..., T]) -> Callable[..., T]:
                     renderers.add(renderer)
 
                     renderer.add_model_listener(self, name)
-
-            return super().__getattribute__(name)
 
         @action
         def __setattr__(self, name: str, value: Any):
