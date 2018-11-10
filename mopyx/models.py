@@ -37,7 +37,7 @@ def action(f: Callable[..., None]) -> Callable[..., None]:
 
 class ComputedProperty:
     def __init__(self):
-        self.updated = False
+        self.initial_render = True
         self.value = None
 
 
@@ -63,14 +63,21 @@ def computed(f: Callable[..., T]) -> T:
 
         # the renderer will never reload when called from a
         # different renderer
-        def computed_call_internal_render():
+        @functools.wraps(f)
+        def update_value():
             context.value = f(self)
-            if rendering.is_rendering_in_progress is None:
-                self._mopyx_register_refresh(f.__name__)
+            self._mopyx_register_refresh(f.__name__)
 
-        rendering.render_call(computed_call_internal_render,
-                              _mode=rendering.RenderMode.COMPUTE)
-        context.updated = True
+        if context.initial_render:
+            r = rendering.RendererFunction(
+                parent=None,
+                f=update_value,
+                _mode=rendering.RenderMode.COMPUTE,
+                ignore_updates=False)
+
+            r.render()
+
+            context.initial_render = False
 
         return context.value
 

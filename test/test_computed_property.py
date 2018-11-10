@@ -15,30 +15,22 @@ class TestComputedDecorator(unittest.TestCase):
         class Sumator:
             def __init__(self):
                 self.label = "sum is"
-                self.other = "other"
                 self.items = []
 
             @computed
             def sumation(self):
-                print("sumation")
                 registered_events.append("Sumator.sumation")
-
-                # This should register the current sumation as a listener
-                # for self.other changes via the renderer
-                self.other
 
                 return sum(self.items)
 
             @computed
             def nested_sumation(self):
-                print("nested_sumation")
                 registered_events.append("Sumator.nested_sumation")
 
                 return f"{self.sumation} sum"
 
             @computed
             def deep_nested_sumation(self):
-                print("deep_nested_sumation")
                 registered_events.append("Sumator.deep_nested_sumation")
 
                 return f"{self.nested_sumation} sum"
@@ -52,7 +44,6 @@ class TestComputedDecorator(unittest.TestCase):
 
             @render
             def update_label(self):
-                print("ui.update_label")
                 registered_events.append("SumatorUi.update_label")
                 self.label = f"{self.model.label} {self.model.sumation}"
 
@@ -67,7 +58,7 @@ class TestComputedDecorator(unittest.TestCase):
             "Sumator.sumation",
         ]
 
-        # self.assertEqual(initial_events, registered_events)
+        self.assertEqual(initial_events, registered_events)
         registered_events = []
 
         m.items = [1, 2, 3]
@@ -78,24 +69,33 @@ class TestComputedDecorator(unittest.TestCase):
         items_update_events = [  # NOQA
             "Sumator.sumation",
             "SumatorUi.update_label",
-            "Sumator.sumation",
             "Sumator.nested_sumation",
         ]
-        # self.assertEqual(items_update_events, registered_events)
+        self.assertEqual(items_update_events, registered_events)
         registered_events = []
 
         m.label = "sumation is"
         self.assertEqual("sumation is 6", ui.label)
         self.assertEqual(6, m.sumation)
 
+        # label is not used in sumation, no eevnt should be triggered
+
         label_update_events = [  # NOQA
             "SumatorUi.update_label",
-            "Sumator.sumation",
         ]
-        # self.assertEqual(label_update_events, registered_events)
+        self.assertEqual(label_update_events, registered_events)
+        registered_events = []
 
         m.items.append(4)
         self.assertEqual("10 sum sum", m.deep_nested_sumation)
+
+        label_update_events = [  # NOQA
+            "Sumator.sumation",
+            "Sumator.nested_sumation",
+            "SumatorUi.update_label",
+            "Sumator.deep_nested_sumation",
+        ]
+        self.assertEqual(label_update_events, registered_events)
 
 
 if __name__ == '__main__':

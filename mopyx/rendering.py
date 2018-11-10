@@ -56,7 +56,10 @@ class RendererFunction:
 
             self.dependents.clear()
 
-            return self.f(*self.args, **self.kw)
+            if self.args is not None and self.kw is not None:
+                return self.f(*self.args, **self.kw)
+            else:
+                return self.f()
         finally:
             active_renderers.pop()
 
@@ -132,6 +135,7 @@ def render_call(f: Callable[..., T],
                 _mode: RenderMode = RenderMode.RENDER,
                 ignore_updates: bool = False) -> T:
     @render(ignore_updates=ignore_updates, _mode=_mode)
+    @functools.wraps(f)
     def render_call_internal_render():
         return f()
 
