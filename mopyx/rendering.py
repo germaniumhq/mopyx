@@ -12,7 +12,7 @@ class RenderMode(Enum):
 
 
 active_renderers: List['RendererFunction'] = list()
-is_rendering_in_progress = False
+is_rendering_in_progress: Optional[RenderMode] = None
 is_debug_mode = 'MOPYX_DEBUG' in os.environ
 
 registered_renderers: Dict[RenderMode, Set['RendererFunction']] = dict()
@@ -132,16 +132,16 @@ def render_call(f: Callable[..., T],
                 _mode: RenderMode = RenderMode.RENDER,
                 ignore_updates: bool = False) -> T:
     @render(ignore_updates=ignore_updates, _mode=_mode)
-    def internal_render():
+    def render_call_internal_render():
         return f()
 
-    return internal_render()
+    return render_call_internal_render()
 
 
 def register_render_refresh(renderer: RendererFunction):
     global is_rendering_in_progress
 
-    if is_rendering_in_progress:
+    if is_rendering_in_progress == RenderMode.RENDER and renderer._mode == RenderMode.RENDER:
         if not is_active_ignore_updates_renderer():
             active_renderers_names = ", ".join(map(lambda it: str(it.f), active_renderers))
             raise Exception("Rendering is already in progress. Normally you shouldn't call actions inside rendering. "
@@ -157,24 +157,26 @@ def register_render_refresh(renderer: RendererFunction):
 def call_registered_renderers():
     global is_rendering_in_progress
 
-    for i in range(1000):
-        if not registered_renderers[RenderMode.COMPUTE]:
-            break
-
-        for compute_renderer in clean_renderers(RenderMode.COMPUTE):
-            compute_renderer.render()
-
-    if registered_renderers[RenderMode.COMPUTE]:
-        raise Exception("After iterating 1000 times, we still have registered renderers for @computed "
-                        "values. Assuming an infinite loop.")
-
     try:
-        is_rendering_in_progress = True
+        is_rendering_in_progress = RenderMode.COMPUTE
+
+        for i in range(5):
+            if not registered_renderers[RenderMode.COMPUTE]:
+                break
+
+            for compute_renderer in clean_renderers(RenderMode.COMPUTE):
+                compute_renderer.render()
+
+        if registered_renderers[RenderMode.COMPUTE]:
+            raise Exception("After iterating 1000 times, we still have registered renderers for @computed "
+                            "values. Assuming an infinite loop.")
+
+        is_rendering_in_progress = RenderMode.RENDER
 
         for renderer in clean_renderers(RenderMode.RENDER):
             renderer.render()
     finally:
-        is_rendering_in_progress = False
+        is_rendering_in_progress = None
 
 
 def is_active_ignore_updates_renderer() -> bool:

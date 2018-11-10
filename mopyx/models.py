@@ -50,19 +50,29 @@ def computed(f: Callable[..., T]) -> T:
     @property  # type: ignore
     @functools.wraps(f)
     def computed_wrapper(self) -> T:
-        self._mopyx_register_active_renderers(f.__name__)
         context = self._mopyx_get_computed_property(f.__name__)
+        self._mopyx_register_active_renderers(f.__name__)
 
-        if context.updated:
-            return context.value
+        # @computed properties might get evaluated for the first time
+        # when already inside a @render function.
+        #
+        # This is a problem since when the parent render refreshes,
+        # the computed wrapper will be called again. Since
+        # this is actually a forced rerender that should recreate the
+        # render call, but not invoke the function again.
+        #
 
+        context.updated = True
+
+        # the renderer will never reload when called from a
+        # different renderer
         def invoke_render():
             context.value = f(self)
-            if context.updated:
+            if rendering.is_rendering_in_progress is None:
                 self._mopyx_register_refresh(f.__name__)
 
-        rendering.render_call(invoke_render, _mode=rendering.RenderMode.COMPUTE)
-        context.updated = True
+        rendering.render_call(invoke_render,
+                              _mode=rendering.RenderMode.COMPUTE)
 
         return context.value
 
@@ -78,14 +88,16 @@ class ListModelProxy(list):
                  model,
                  property_name: str,
                  target: List) -> None:
-        super().__init__(target)
+        super().__init__(list(target))
         self._mopyx_model = model
         self._mopyx_property_name = property_name
 
     def __getitem__(self, i):
+        self._mopyx_model._mopyx_register_active_renderers(self._mopyx_property_name)
         return super().__getitem__(i)
 
     def __getslice__(self, i, j):
+        self._mopyx_model._mopyx_register_active_renderers(self._mopyx_property_name)
         return super().__getslice__(i, j)
 
     @action
@@ -225,7 +237,8 @@ def model(base: Callable[..., T]) -> Callable[..., T]:
         def __setattr__(self, name: str, value: Any):
             """
             Sets an attribute to the underlying object. Registered renderers
-            will be called at the end of the root @action operation.
+            will be called at the end of the root @action operation that started
+            doing the updates.
             """
             if name.startswith("_mopyx"):
                 super().__setattr__(name, value)
@@ -235,6 +248,10 @@ def model(base: Callable[..., T]) -> Callable[..., T]:
                 value = ListModelProxy(self, name, value)
 
             super().__setattr__(name, value)
+
+            if rendering.is_debug_mode:
+                print(f"{rendering.indent()}change: {self}.{name} = {value}")
+
             self._mopyx_register_refresh(name)
 
         def _mopyx_register_refresh(self, name):
