@@ -137,8 +137,13 @@ class ListModelProxy(list):
 
     @action
     def clear(self, *argv, **kw):
+        current_len = len(self)
+
         result = super().clear(*argv, **kw)
-        self._mopyx_model._mopyx_register_refresh(self._mopyx_property_name)
+
+        if current_len:
+            self._mopyx_model._mopyx_register_refresh(self._mopyx_property_name)
+
         return result
 
     @action

@@ -19,12 +19,20 @@ class TestListRender(unittest.TestCase):
         Test if a list can do multiple appends.
         """
         root_model = RootModel()
-
         list_length = [0]
+        registered_events = []
 
         @render_call
         def update_length():
+            registered_events.append('update_length')
             list_length[0] = len(root_model.items)
+
+        self.assertEqual(['update_length'], registered_events)
+        registered_events.clear()
+
+        root_model.items.clear()  # clearing an empty list shouldn't trigger events
+        self.assertEqual([], registered_events)
+        registered_events.clear()
 
         self.assertEqual(0, list_length[0])
         root_model.items.append(1)
