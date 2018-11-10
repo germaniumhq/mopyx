@@ -45,7 +45,7 @@ def computed(f: Callable[..., T]) -> T:
     """
     Add a computed property. A computed property only updates
     when one of the inner values changes. A computed property
-    is allowed to still change the state of the object.
+    is not allowed to change the state of the object.
     """
     @property  # type: ignore
     @functools.wraps(f)
@@ -60,7 +60,13 @@ def computed(f: Callable[..., T]) -> T:
         # the computed wrapper will be called again. Since
         # this is actually a forced rerender that should recreate the
         # render call, but not invoke the function again.
-        #
+
+        # if context.updated and rendering.is_rendering_in_progress is None:
+        #     return context.value
+
+        # if context.updated and rendering.is_rendering_in_progress and not parent_renderer:
+        #     register_invoke_renderer_withoutl ca
+        #     return context.value
 
         context.updated = True
 
@@ -185,11 +191,6 @@ def model(base: Callable[..., T]) -> Callable[..., T]:
 
             super().__init__(*argv, **kw)
 
-            for key in dir(self):
-                value = getattr(self, key)
-                if isinstance(value, list):
-                    self.__setattr__(key, ListModelProxy(self, key, value))
-
         @property
         def __dict__(self):
             result = dict(super().__dict__)
@@ -220,18 +221,21 @@ def model(base: Callable[..., T]) -> Callable[..., T]:
 
         def _mopyx_register_active_renderers(self, name: str) -> None:
             if rendering.active_renderers:
-                renderers = self._mopyx_renderers.get(name, None)
-
-                if not renderers:
-                    renderers = set()
-                    self._mopyx_renderers[name] = renderers
-
                 renderer = rendering.active_renderers[-1]
+                
+                self._mopyx_register_renderer(name, renderer)
+        
+        def _mopyx_register_renderer(self, name: str, renderer) -> None:
+            renderers = self._mopyx_renderers.get(name, None)
 
-                if renderer not in renderers:
-                    renderers.add(renderer)
+            if not renderers:
+                renderers = set()
+                self._mopyx_renderers[name] = renderers
 
-                    renderer.add_model_listener(self, name)
+            if renderer not in renderers:
+                renderers.add(renderer)
+
+                renderer.add_model_listener(self, name)
 
         @action
         def __setattr__(self, name: str, value: Any):

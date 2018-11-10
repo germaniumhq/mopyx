@@ -36,6 +36,13 @@ class TestComputedDecorator(unittest.TestCase):
 
                 return f"{self.sumation} sum"
 
+            @computed
+            def deep_nested_sumation(self):
+                print("deep_nested_sumation")
+                registered_events.append("Sumator.deep_nested_sumation")
+
+                return f"{self.nested_sumation} sum"
+
         class SumatorUi:
             def __init__(self, model):
                 self.label = ""
@@ -86,7 +93,7 @@ class TestComputedDecorator(unittest.TestCase):
         # ]
         # self.assertEqual(label_update_events, registered_events)
         m.items.append(4)
-        self.assertEqual("10 sum", m.nested_sumation)
+        self.assertEqual("10 sum sum", m.deep_nested_sumation)
 
 
 if __name__ == '__main__':
