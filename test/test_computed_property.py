@@ -62,7 +62,7 @@ class TestComputedDecorator(unittest.TestCase):
         m = Sumator()
         ui = SumatorUi(m)
 
-        initial_events = [
+        initial_events = [  # NOQA
             "SumatorUi.update_label",
             "Sumator.sumation",
         ]
@@ -71,27 +71,29 @@ class TestComputedDecorator(unittest.TestCase):
         registered_events = []
 
         m.items = [1, 2, 3]
-        # m.items = [1, 2, 3]
-        # self.assertEqual("sum is 6", ui.label)
-        # self.assertEqual(6, m.sumation)
-        # self.assertEqual("6 sum", m.nested_sumation)
+        self.assertEqual("sum is 6", ui.label)
+        self.assertEqual(6, m.sumation)
+        self.assertEqual("6 sum", m.nested_sumation)
 
-        # items_update_events = [
-        #     "Sumator.sumation",
-        #     "Sumator.nested_sumation",
-        #     "SumatorUi.update_label",
-        # ]
+        items_update_events = [  # NOQA
+            "Sumator.sumation",
+            "SumatorUi.update_label",
+            "Sumator.sumation",
+            "Sumator.nested_sumation",
+        ]
         # self.assertEqual(items_update_events, registered_events)
-        # registered_events = []
+        registered_events = []
 
-        # m.label = "sumation is"
-        # self.assertEqual("sumation is 6", ui.label)
-        # self.assertEqual(6, m.sumation)
+        m.label = "sumation is"
+        self.assertEqual("sumation is 6", ui.label)
+        self.assertEqual(6, m.sumation)
 
-        # label_update_events = [
-        #     "SumatorUi.update_label"
-        # ]
+        label_update_events = [  # NOQA
+            "SumatorUi.update_label",
+            "Sumator.sumation",
+        ]
         # self.assertEqual(label_update_events, registered_events)
+
         m.items.append(4)
         self.assertEqual("10 sum sum", m.deep_nested_sumation)
 

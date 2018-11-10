@@ -61,9 +61,6 @@ def computed(f: Callable[..., T]) -> T:
         # this is actually a forced rerender that should recreate the
         # render call, but not invoke the function again.
 
-        if context.updated and rendering.is_rendering_in_progress is None:
-            return context.value
-
         # the renderer will never reload when called from a
         # different renderer
         def computed_call_internal_render():
@@ -217,9 +214,9 @@ def model(base: Callable[..., T]) -> Callable[..., T]:
         def _mopyx_register_active_renderers(self, name: str) -> None:
             if rendering.active_renderers:
                 renderer = rendering.active_renderers[-1]
-                
+
                 self._mopyx_register_renderer(name, renderer)
-        
+
         def _mopyx_register_renderer(self, name: str, renderer) -> None:
             renderers = self._mopyx_renderers.get(name, None)
 
