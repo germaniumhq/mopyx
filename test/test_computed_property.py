@@ -53,7 +53,7 @@ class TestComputedDecorator(unittest.TestCase):
         m = Sumator()
         ui = SumatorUi(m)
 
-        initial_events = [  # NOQA
+        initial_events = [
             "SumatorUi.update_label",
             "Sumator.sumation",
         ]
@@ -66,7 +66,7 @@ class TestComputedDecorator(unittest.TestCase):
         self.assertEqual(6, m.sumation)
         self.assertEqual("6 sum", m.nested_sumation)
 
-        items_update_events = [  # NOQA
+        items_update_events = [
             "Sumator.sumation",
             "SumatorUi.update_label",
             "Sumator.nested_sumation",
@@ -80,7 +80,7 @@ class TestComputedDecorator(unittest.TestCase):
 
         # label is not used in sumation, no eevnt should be triggered
 
-        label_update_events = [  # NOQA
+        label_update_events = [
             "SumatorUi.update_label",
         ]
         self.assertEqual(label_update_events, registered_events)
@@ -89,7 +89,7 @@ class TestComputedDecorator(unittest.TestCase):
         m.items.append(4)
         self.assertEqual("10 sum sum", m.deep_nested_sumation)
 
-        label_update_events = [  # NOQA
+        label_update_events = [
             "Sumator.sumation",
             "Sumator.nested_sumation",
             "SumatorUi.update_label",
