@@ -66,6 +66,14 @@ def computed(f: Callable[..., T]) -> T:
         @functools.wraps(f)
         def update_value():
             context.value = f(self)
+
+            # @computed properties are allowed to be computed first during the rendering
+            # since they should not have side effects. Because of that, they will
+            # not fire the model change on the very first rendering, if we're already
+            # in a rendering stage.
+            if context.initial_render and rendering.is_rendering_in_progress:
+                return
+
             self._mopyx_register_refresh(f.__name__)
 
         if context.initial_render:
