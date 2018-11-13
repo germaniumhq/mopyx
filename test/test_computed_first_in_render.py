@@ -8,7 +8,7 @@ class RootModel:
         self.access_computed = False
 
     @computed
-    def calculated_value(self) -> None:
+    def calculated_value(self) -> str:
         return "calculated"
 
 
@@ -34,7 +34,7 @@ class Ui:
 
 class TestComputedFirstRender(unittest.TestCase):
     def test_compute_first_render(self):
-        ui = Ui(root_model)
+        Ui(root_model)
 
         root_model.access_computed = True
 
