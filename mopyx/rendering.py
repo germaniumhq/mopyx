@@ -164,7 +164,7 @@ def call_registered_renderers():
     try:
         is_rendering_in_progress = RenderMode.COMPUTE
 
-        for i in range(5):
+        for i in range(1000):
             if not registered_renderers[RenderMode.COMPUTE]:
                 break
 
