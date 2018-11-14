@@ -51,7 +51,6 @@ def computed(f: Callable[..., T]) -> T:
     @functools.wraps(f)
     def computed_wrapper(self) -> T:
         context = self._mopyx_get_computed_property(f.__name__)
-        self._mopyx_register_active_renderers(f.__name__)
 
         # @computed properties might get evaluated for the first time
         # when already inside a @render function.
