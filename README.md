@@ -152,3 +152,9 @@ that rendering method, including _all model updates_.
 This is great for onchange events for input edits, or tree updates such as
 selected nodes that otherwise would enter an infinite recursion.
 
+## use_locks(True)
+
+If you want to ensure that all `@action`, `@computed` and `@render` call happen
+on the same thread, you can set the locking to true. This will have a minor
+perfomance hit, but will guard you of strange bugs that might cause you
+segmentation faults.

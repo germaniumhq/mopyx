@@ -108,6 +108,11 @@ top most ``@action`` returns the rendering will be invoked.
 In order to optimize the number of UI updates, only the relevant
 ``@render`` functions will be called, not always the topmost one.
 
+You can also create properties on the model using the ``@computed``
+decorator. This works similarly with a regular python ``@property`` but
+it will be invoked only when one of the other properties it depends on
+(including from other mopyx models) change.
+
 If there is a component that's too difficult to have its own ``@render``
 for updates, you can also call the updates for that specific component
 using ``render_call()`` that will just wrap the given callable into a
@@ -157,3 +162,11 @@ invocations* from that rendering method, including *all model updates*.
 
 This is great for onchange events for input edits, or tree updates such
 as selected nodes that otherwise would enter an infinite recursion.
+
+use\_locks(True)
+----------------
+
+If you want to ensure that all ``@action``, ``@computed`` and
+``@render`` call happen on the same thread, you can set the locking to
+true. This will have a minor perfomance hit, but will guard you of
+strange bugs that might cause you segmentation faults.
