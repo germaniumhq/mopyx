@@ -2,6 +2,7 @@ from typing import List, TypeVar, Callable, Set, Optional, Any, Tuple, Union, Di
 from enum import Enum
 import functools
 import os
+import threading
 
 T = TypeVar('T')
 
@@ -19,6 +20,24 @@ registered_renderers: Dict[RenderMode, Set['RendererFunction']] = dict()
 
 registered_renderers[RenderMode.RENDER] = set()
 registered_renderers[RenderMode.COMPUTE] = set()
+
+lock: Optional[threading.RLock] = None
+
+
+def use_locks(locks: bool) -> None:
+    global lock
+
+    if locks and not lock:
+        lock = threading.RLock()
+        return
+
+    if not locks and lock:
+        lockref = lock
+        try:
+            lockref.acquire()
+            lock = None
+        finally:
+            lockref.release()
 
 
 def indent():
@@ -49,6 +68,11 @@ class RendererFunction:
             if is_debug_mode:
                 print(f"{indent()}renderer: {self} ({self.f})")
 
+            if lock and not self.ignore_updates:
+                if is_debug_mode:
+                    print(f"{indent()}lock.acquire @render")
+                lock.acquire()
+
             active_renderers.append(self)
 
             for dependent in self.dependents:
@@ -62,6 +86,10 @@ class RendererFunction:
                 return self.f()
         finally:
             active_renderers.pop()
+            if lock and not self.ignore_updates:
+                if is_debug_mode:
+                    print(f"{indent()}lock.release @render")
+                lock.release()
 
     def _set_args_kw(self, *args, **kw):
         self.args = args

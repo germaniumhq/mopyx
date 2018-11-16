@@ -100,6 +100,11 @@ rendering will be invoked.
 In order to optimize the number of UI updates, only the relevant `@render`
 functions will be called, not always the topmost one.
 
+You can also create properties on the model using the `@computed` decorator.
+This works similarly with a regular python `@property` but it will be invoked
+only when one of the other properties it depends on (including from other mopyx
+models) change.
+
 If there is a component that's too difficult to have its own `@render` for
 updates, you can also call the updates for that specific component using
 `render_call()` that will just wrap the given callable into a `@render`. For

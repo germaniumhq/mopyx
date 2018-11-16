@@ -14,23 +14,34 @@ def action(f: Callable[..., None]) -> Callable[..., None]:
     """
     @functools.wraps(f)
     def action_wrapper(*args, **kw) -> None:
-        global _update_index
-
-        if rendering.is_active_ignore_updates_renderer():
-            return None
-
         try:
-            _update_index += 1
+            global _update_index
 
-            f(*args, **kw)
-        finally:
-            _update_index -= 1
-
-            if _update_index == 0:
+            if rendering.lock:
                 if rendering.is_debug_mode:
-                    print(f"{rendering.indent()}action: {f}")
+                    print(f"{rendering.indent()}lock.acquire @action")
+                rendering.lock.acquire()
 
-                rendering.call_registered_renderers()
+            if rendering.is_active_ignore_updates_renderer():
+                return None
+
+            try:
+                _update_index += 1
+
+                f(*args, **kw)
+            finally:
+                _update_index -= 1
+
+                if _update_index == 0:
+                    if rendering.is_debug_mode:
+                        print(f"{rendering.indent()}action: {f}")
+
+                    rendering.call_registered_renderers()
+        finally:
+            if rendering.lock:
+                if rendering.is_debug_mode:
+                    print(f"{rendering.indent()}lock.release @action")
+                rendering.lock.release()
 
     return action_wrapper
 
@@ -50,41 +61,63 @@ def computed(f: Callable[..., T]) -> T:
     @property  # type: ignore
     @functools.wraps(f)
     def computed_wrapper(self) -> T:
-        context = self._mopyx_get_computed_property(f.__name__)
+        try:
+            if rendering.lock:
+                if rendering.is_debug_mode:
+                    print(f"{rendering.indent()}lock.acquire @computed")
+                rendering.lock.acquire()
 
-        # @computed properties might get evaluated for the first time
-        # when already inside a @render function.
-        #
-        # This is a problem since when the parent render refreshes,
-        # the computed wrapper will be called again. Since
-        # this is actually a forced rerender that should recreate the
-        # render call, but not invoke the function again.
+            context = self._mopyx_get_computed_property(f.__name__)
 
-        # the renderer will never reload when called from a
-        # different renderer
-        @functools.wraps(f)
-        def update_value():
-            context.value = f(self)
+            # @computed properties might get evaluated for the first time
+            # when already inside a @render function.
+            #
+            # This is a problem since when the parent render refreshes,
+            # the computed wrapper will be called again. Since
+            # this is actually a forced rerender that should recreate the
+            # render call, but not invoke the function again.
 
-            # @computed properties are allowed to be computed first during the rendering
-            # since they should not have side effects. Because of that, they will
-            # not fire the model change on the very first rendering, if we're already
-            # in a rendering stage.
-            if context.initial_render and rendering.is_rendering_in_progress:
-                return
+            # the renderer will never reload when called from a
+            # different renderer
+            @functools.wraps(f)
+            def update_value():
+                try:
+                    if rendering.lock:
+                        if rendering.is_debug_mode:
+                            print(f"{rendering.indent()}lock.acquire @computed")
+                        rendering.lock.acquire()
 
-            self._mopyx_register_refresh(f.__name__)
+                    context.value = f(self)
 
-        if context.initial_render:
-            r = rendering.RendererFunction(
-                parent=None,
-                f=update_value,
-                _mode=rendering.RenderMode.COMPUTE,
-                ignore_updates=False)
+                    # @computed properties are allowed to be computed first during the rendering
+                    # since they should not have side effects. Because of that, they will
+                    # not fire the model change on the very first rendering, if we're already
+                    # in a rendering stage.
+                    if context.initial_render and rendering.is_rendering_in_progress:
+                        return
 
-            r.render()
+                    self._mopyx_register_refresh(f.__name__)
+                finally:
+                    if rendering.lock:
+                        if rendering.is_debug_mode:
+                            print(f"{rendering.indent()}lock.release @computed")
+                        rendering.lock.release()
 
-            context.initial_render = False
+            if context.initial_render:
+                r = rendering.RendererFunction(
+                    parent=None,
+                    f=update_value,
+                    _mode=rendering.RenderMode.COMPUTE,
+                    ignore_updates=False)
+
+                r.render()
+
+                context.initial_render = False
+        finally:
+            if rendering.lock:
+                if rendering.is_debug_mode:
+                    print(f"{rendering.indent()}lock.release @computed")
+                rendering.lock.release()
 
         return context.value
 
