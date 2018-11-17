@@ -2,6 +2,7 @@ from typing import List, TypeVar, Callable, Set, Optional, Any, Tuple, Union, Di
 from enum import Enum
 import functools
 import os
+import threading
 
 T = TypeVar('T')
 
@@ -14,11 +15,14 @@ class RenderMode(Enum):
 active_renderers: List['RendererFunction'] = list()
 is_rendering_in_progress: Optional[RenderMode] = None
 is_debug_mode = 'MOPYX_DEBUG' in os.environ
+is_render_thread_check = 'MOPYX_THREAD_CHECK' in os.environ
 
 registered_renderers: Dict[RenderMode, Set['RendererFunction']] = dict()
 
 registered_renderers[RenderMode.RENDER] = set()
 registered_renderers[RenderMode.COMPUTE] = set()
+
+thread_id: Optional[int] = None
 
 
 def indent():
@@ -45,11 +49,19 @@ class RendererFunction:
             parent.dependents.append(self)
 
     def render(self) -> T:
+        global thread_id
+
         try:
             if is_debug_mode:
                 print(f"{indent()}renderer: {self} ({self.f})")
 
             active_renderers.append(self)
+
+            if is_render_thread_check:
+                if thread_id is None:
+                    thread_id = threading.get_ident()
+                elif thread_id != threading.get_ident():
+                    raise Exception(f"Render thread id: {thread_id}, current thread id: {threading.get_ident()}")
 
             for dependent in self.dependents:
                 dependent.unregister()
