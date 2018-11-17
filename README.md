@@ -190,3 +190,10 @@ that rendering method, including _all model updates_.
 This is great for onchange events for input edits, or tree updates such as
 selected nodes that otherwise would enter an infinite recursion.
 
+## Debugging
+
+To check what goes on, you can export in your environment:
+
+- `MOPYX_DEBUG` - this will print the rendering process on the console.
+- `MOPYX_THREAD_CHECK` - this will throw an exception if the thread for
+  `@render` methods change.
