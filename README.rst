@@ -109,7 +109,7 @@ performance you can wrap multiple model updates into a single
 ``@action``\ s.
 
 When when the top most ``@action`` finishes the rendering will be
-invoked. mopyx will find out what renderers need to be called, and what
+invoked. MoPyX will find out what renderers need to be called, and what
 computed properties should be updated, in order to get the UI into a
 consistent state.
 
@@ -129,7 +129,7 @@ wrapped in ``@action``\ s.
 You can also create properties on the model using the ``@computed``
 decorator. This works similarly with a regular python ``@property`` but
 it will be invoked only when one of the other properties it depends on
-(including from other mopyx models) change. Otherwise calling this
+(including from other MoPyX models) change. Otherwise calling this
 property will return the previously computed value.
 
 This is great for difficult to compute properties. Have a list that must
@@ -204,7 +204,7 @@ ignore\_updates
 If the renderer will call a value that sets something in the UI that
 will make the UI trigger an event, that will in turn might land in an
 action (model updates are also actions), you can disable the rendering
-using the ``ignore_updates`` attribute. This will supress *all action
+using the ``ignore_updates`` attribute. This will suppress *all action
 invocations* from that rendering method, including *all model updates*.
 
 This is great for onchange events for input edits, or tree updates such

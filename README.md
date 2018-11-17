@@ -95,7 +95,7 @@ the property change, a rendering will trigger. To improve performance you can
 wrap multiple model updates into a single `@action`. An action method can call
 other methods, including other `@action`s.
 
-When when the top most `@action` finishes the rendering will be invoked. mopyx
+When when the top most `@action` finishes the rendering will be invoked. MoPyX
 will find out what renderers need to be called, and what computed properties
 should be updated, in order to get the UI into a consistent state.
 
@@ -113,7 +113,7 @@ def change_model(self):
 
 You can also create properties on the model using the `@computed` decorator.
 This works similarly with a regular python `@property` but it will be invoked
-only when one of the other properties it depends on (including from other mopyx
+only when one of the other properties it depends on (including from other MoPyX
 models) change. Otherwise calling this property will return the previously
 computed value.
 
@@ -184,7 +184,7 @@ model.items.append("new item")  # this will trigger the update_ui rerender.
 If the renderer will call a value that sets something in the UI that will make
 the UI trigger an event, that will in turn might land in an action (model
 updates are also actions), you can disable the rendering using the
-`ignore_updates` attribute. This will supress _all action invocations_ from
+`ignore_updates` attribute. This will suppress _all action invocations_ from
 that rendering method, including _all model updates_.
 
 This is great for onchange events for input edits, or tree updates such as
