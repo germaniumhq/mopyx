@@ -1,4 +1,4 @@
-from typing import Any, Set, Dict, TypeVar, Callable, List
+from typing import Any, Set, Dict, TypeVar, Callable, List, Optional, cast
 import functools
 
 import mopyx.rendering as rendering
@@ -7,13 +7,13 @@ T = TypeVar('T')
 _update_index: int = 0
 
 
-def action(f: Callable[..., None]) -> Callable[..., None]:
+def action(f: Callable[..., T]) -> Callable[..., T]:
     """
     Do multiple operations on the model, at the end of which the
     rendering will be updated.
     """
     @functools.wraps(f)
-    def action_wrapper(*args, **kw) -> None:
+    def action_wrapper(*args, **kw) -> Optional[T]:
         global _update_index
 
         if rendering.is_active_ignore_updates_renderer():
@@ -22,7 +22,7 @@ def action(f: Callable[..., None]) -> Callable[..., None]:
         try:
             _update_index += 1
 
-            f(*args, **kw)
+            return f(*args, **kw)
         finally:
             _update_index -= 1
 
@@ -32,7 +32,7 @@ def action(f: Callable[..., None]) -> Callable[..., None]:
 
                 rendering.call_registered_renderers()
 
-    return action_wrapper
+    return cast(Callable[..., T], action_wrapper)
 
 
 class ComputedProperty:
