@@ -14,7 +14,6 @@ class RenderMode(Enum):
 
 class Renderers(threading.local):
     def __init__(self):
-        print("NEW THREAD INITIALIZED")
         self.active: List['RendererFunction'] = list()
         self.registered: Dict[RenderMode, Set['RendererFunction']] = dict()
 
