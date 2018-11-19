@@ -12,21 +12,25 @@ class RenderMode(Enum):
     COMPUTE: str = "compute"
 
 
-active_renderers: List['RendererFunction'] = list()
-is_rendering_in_progress: Optional[RenderMode] = None
+class Renderers(threading.local):
+    def __init__(self):
+        self.active: List['RendererFunction'] = list()
+        self.registered: Dict[RenderMode, Set['RendererFunction']] = dict()
+
+        self.registered[RenderMode.RENDER] = set()
+        self.registered[RenderMode.COMPUTE] = set()
+        self.is_rendering_in_progress: Optional[RenderMode] = None
+
+
 is_debug_mode = 'MOPYX_DEBUG' in os.environ
 is_render_thread_check = 'MOPYX_THREAD_CHECK' in os.environ
 
-registered_renderers: Dict[RenderMode, Set['RendererFunction']] = dict()
-
-registered_renderers[RenderMode.RENDER] = set()
-registered_renderers[RenderMode.COMPUTE] = set()
-
 thread_id: Optional[int] = None
+renderers = Renderers()
 
 
 def indent():
-    return "  " * len(active_renderers)
+    return "  " * len(renderers.active)
 
 
 class RendererFunction:
@@ -55,7 +59,7 @@ class RendererFunction:
             if is_debug_mode:
                 print(f"{indent()}renderer: {self} ({self.f})")
 
-            active_renderers.append(self)
+            renderers.active.append(self)
 
             if is_render_thread_check:
                 if thread_id is None:
@@ -73,7 +77,7 @@ class RendererFunction:
             else:
                 return self.f()
         finally:
-            active_renderers.pop()
+            renderers.active.pop()
 
     def _set_args_kw(self, *args, **kw):
         self.args = args
@@ -125,7 +129,7 @@ def render(*r_args, **r_kw) -> Union[Callable[..., Callable[..., T]], Callable[.
     def wrapper_builder(f: Callable[..., T]) -> Callable[..., T]:
         @functools.wraps(f)
         def render_wrapper(*args, **kw) -> T:
-            parent = active_renderers[-1] if active_renderers else None
+            parent = renderers.active[-1] if renderers.active else None
             renderer = RendererFunction(parent=parent,
                                         f=f,
                                         _mode=_mode,
@@ -155,11 +159,9 @@ def render_call(f: Callable[..., T],
 
 
 def register_render_refresh(renderer: RendererFunction):
-    global is_rendering_in_progress
-
-    if is_rendering_in_progress == RenderMode.RENDER and renderer._mode == RenderMode.RENDER:
+    if renderers.is_rendering_in_progress == RenderMode.RENDER and renderer._mode == RenderMode.RENDER:
         if not is_active_ignore_updates_renderer():
-            active_renderers_names = ", ".join(map(lambda it: str(it.f), active_renderers))
+            active_renderers_names = ", ".join(map(lambda it: str(it.f), renderers.active))
             raise Exception("Rendering is already in progress. Normally you shouldn't call actions inside rendering. "
                             "If you really know what you're doing you can explicitly ignore the model updates in "
                             "rendering (`@render(ignore_updates=True)`) to break circular dependencies. Renderer: "
@@ -167,39 +169,37 @@ def register_render_refresh(renderer: RendererFunction):
 
         return  # we don't add the renderers, because we're ignoring updates
 
-    registered_renderers[renderer._mode].add(renderer)
+    renderers.registered[renderer._mode].add(renderer)
 
 
 def call_registered_renderers():
-    global is_rendering_in_progress
-
     try:
-        is_rendering_in_progress = RenderMode.COMPUTE
+        renderers.is_rendering_in_progress = RenderMode.COMPUTE
 
         for i in range(1000):
-            if not registered_renderers[RenderMode.COMPUTE]:
+            if not renderers.registered[RenderMode.COMPUTE]:
                 break
 
             for compute_renderer in clean_renderers(RenderMode.COMPUTE):
                 compute_renderer.render()
 
-        if registered_renderers[RenderMode.COMPUTE]:
+        if renderers.registered[RenderMode.COMPUTE]:
             raise Exception("After iterating 1000 times, we still have registered renderers for @computed "
                             "values. Assuming an infinite loop.")
 
-        is_rendering_in_progress = RenderMode.RENDER
+        renderers.is_rendering_in_progress = RenderMode.RENDER
 
         for renderer in clean_renderers(RenderMode.RENDER):
             renderer.render()
     finally:
-        is_rendering_in_progress = None
+        renderers.is_rendering_in_progress = None
 
 
 def is_active_ignore_updates_renderer() -> bool:
-    if not active_renderers:
+    if not renderers.active:
         return False
 
-    for renderer in active_renderers:
+    for renderer in renderers.active:
         if renderer.ignore_updates:
             return True
 
@@ -207,14 +207,14 @@ def is_active_ignore_updates_renderer() -> bool:
 
 
 def clean_renderers(render_mode: RenderMode):
-    renderers = registered_renderers[render_mode]
-    for renderer in list(renderers):
-        if renderer.has_parents(renderers):
-            renderers.remove(renderer)
+    registered = renderers.registered[render_mode]
+    for renderer in list(registered):
+        if renderer.has_parents(registered):
+            registered.remove(renderer)
             continue
 
-    renderers_copy = renderers.copy()
-    renderers.clear()
+    renderers_copy = registered.copy()
+    registered.clear()
 
     return renderers_copy
 

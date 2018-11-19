@@ -70,7 +70,7 @@ def computed(f: Callable[..., T]) -> T:
             # since they should not have side effects. Because of that, they will
             # not fire the model change on the very first rendering, if we're already
             # in a rendering stage.
-            if context.initial_render and rendering.is_rendering_in_progress:
+            if context.initial_render and rendering.renderers.is_rendering_in_progress:
                 return
 
             self._mopyx_register_refresh(f.__name__)
@@ -231,8 +231,8 @@ def model(base: Callable[..., T]) -> Callable[..., T]:
             return super().__getattribute__(name)
 
         def _mopyx_register_active_renderers(self, name: str) -> None:
-            if rendering.active_renderers:
-                renderer = rendering.active_renderers[-1]
+            if rendering.renderers.active:
+                renderer = rendering.renderers.active[-1]
 
                 self._mopyx_register_renderer(name, renderer)
 
