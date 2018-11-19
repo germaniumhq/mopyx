@@ -1,70 +1,118 @@
 from typing import TypeVar, Iterable, Optional, Set
 from mopyx import action
+import os
 
 T = TypeVar("T")
+
+debug_merge = True if 'MOPYX_DEBUG_MERGE' in os.environ else False
+
+indent_level = -1
+
+
+def indent() -> str:
+    return "  " * indent_level
 
 
 @action
 def merge_model(destination: T, source: T, already_processed: Optional[Set] = None) -> bool:
-    if not already_processed:
-        already_processed = set()
+    global indent_level
+
+    indent_level += 1
 
     try:
-        if destination in already_processed:
-            return True
+        if not already_processed:
+            already_processed = set()
 
-        already_processed.add(source)  # destination is being mutated
-    except Exception:
-        pass  # we ignore unhashable items
+        try:
+            if source in already_processed:
+                if debug_merge:
+                    print(f"{indent()}{source} already processed")
+                return True
 
-    if isinstance(source, list):
-        return merge_model_lists(destination, source, already_processed)
+            already_processed.add(source)  # destination is being mutated
+            already_processed.add(destination)  # destination is being mutated
+        except Exception:
+            pass  # we ignore unhashable items
 
-    if not is_mopyx_model(destination) or not is_mopyx_model(source):
-        if destination == source:
-            return True
+        if debug_merge:
+            print(f"{indent()}processing {destination}")
 
-        return False
+        if isinstance(source, list):
+            return merge_model_lists(destination, source, already_processed)
 
-    for prop in model_properties(destination):
-        destination_value = getattr(destination, prop)
-        source_value = getattr(source, prop)
+        if not is_mopyx_model(destination) or not is_mopyx_model(source):
+            if destination == source:
+                return True
 
-        if isinstance(source_value, list):
-            if merge_model_lists(destination_value, source_value, already_processed):
+            return False
+
+        for prop in model_properties(destination):
+            destination_value = getattr(destination, prop)
+            source_value = getattr(source, prop)
+
+            try:
+                if source_value in already_processed:
+                    continue
+
+                if destination_value in already_processed:
+                    continue
+            except Exception:
+                pass  # we ignore unhashable items
+
+            if isinstance(source_value, list):
+                if merge_model_lists(destination_value, source_value, already_processed):
+                    continue
+
+                if debug_merge:
+                    print(f"{indent()}{destination}.{prop} = {source_value}")
+
+                setattr(destination, prop, source_value)
                 continue
 
-            setattr(destination, prop, source_value)
-            continue
+            if is_mopyx_model(source_value):
+                if merge_model(destination_value, source_value, already_processed):
+                    continue
 
-        if is_mopyx_model(source_value):
-            if merge_model(destination_value, source_value, already_processed):
+                if debug_merge:
+                    print(f"{indent()}{destination}.{prop} = {source_value}")
+                setattr(destination, prop, source_value)
                 continue
 
+            if destination_value == source_value:
+                continue
+
+            if debug_merge:
+                print(f"{indent()}{destination}.{prop} = {source_value}")
             setattr(destination, prop, source_value)
-            continue
 
-        if destination_value == source_value:
-            continue
-
-        setattr(destination, prop, source_value)
-
-    return True
+        return True
+    finally:
+        indent_level -= 1
 
 
 def merge_model_lists(destination, source, already_processed: Set) -> bool:
-    if destination is None:
-        return False
+    global indent_level
 
-    if len(source) != len(destination):
-        return False
+    indent_level += 1
 
-    for i in range(len(source)):
-        if not merge_model(destination[i], source[i], already_processed):
-            destination[i] = source[i]
-            continue
+    try:
+        if destination is None:
+            return False
 
-    return True
+        if len(source) != len(destination):
+            return False
+
+        for i in range(len(source)):
+            if not merge_model(destination[i], source[i], already_processed):
+                if debug_merge:
+                    print(f"{indent()}{destination}[{i}] = {source[i]}")
+
+                destination[i] = source[i]
+                continue
+
+        return True
+    finally:
+        indent_level -= 1
 
 
 def model_properties(item: T) -> Iterable[str]:
