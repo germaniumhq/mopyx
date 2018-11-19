@@ -1,7 +1,13 @@
 from mopyx.util import merge_model
 from mopyx import model, render_call
+from enum import Enum
 
 import unittest
+
+
+class CustomEnum(Enum):
+    SUCCESS: str = 'success'
+    FAILURE: str = 'failure'
 
 
 @model
@@ -23,6 +29,7 @@ class RootModel:
         self.custom_list_changed = CustomModel(["alc", "blc", "clc"])
         self.custom_nested_list = CustomModel([CustomModel(["cnl"])])
         self.custom_nested_list_changed = CustomModel([CustomModel(["cnlc"])])
+        self.enum_value = CustomEnum.FAILURE
         self.none_property = None
 
 
@@ -88,6 +95,11 @@ class TestMergeModel(unittest.TestCase):
             root_model.none_property
             registered_events.add("none_property")
 
+        @render_call
+        def enum_value():
+            root_model.enum_value
+            registered_events.add("enum_value")
+
         registered_events.clear()
 
         changed_model.list_changed_strings[2] = "D"
@@ -95,6 +107,7 @@ class TestMergeModel(unittest.TestCase):
         changed_model.custom_changed.value = 9
         changed_model.custom_list_changed.value[1] = "3"
         changed_model.custom_nested_list_changed.value[0].value.append("1")
+        changed_model.enum_value = CustomEnum.SUCCESS
 
         merge_model(root_model, changed_model)
 
@@ -104,6 +117,7 @@ class TestMergeModel(unittest.TestCase):
             "custom_changed",
             "custom_list_changed",
             "custom_nested_list_changed",
+            "enum_value"
         }, registered_events)
 
 

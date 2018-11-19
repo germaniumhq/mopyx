@@ -9,10 +9,10 @@ def merge_model(destination: T, source: T, already_processed: Optional[Set] = No
     if not already_processed:
         already_processed = set()
 
-    if destination in already_processed:
-        return True
-
     try:
+        if destination in already_processed:
+            return True
+
         already_processed.add(source)  # destination is being mutated
     except Exception:
         pass  # we ignore unhashable items
