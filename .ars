@@ -1,1 +1,4 @@
-{NAME: py3-lib, arg0: mopyx, mopyx: true}
+arg0: mopyx
+mopyx: true
+templates:
+- py3/lib
