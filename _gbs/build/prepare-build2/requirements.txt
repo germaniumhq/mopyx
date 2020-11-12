@@ -1,0 +1,7 @@
+colorama==0.3.7
+termcolor==1.1.0
+tqdm==4.19.5
+Jinja2==2.9.4
+requests==2.18.4
+# certifi it's not needed since it's bundled in Miniconda
+# certifi==2017.11.5
