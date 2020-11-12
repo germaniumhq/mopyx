@@ -1,0 +1,5 @@
+arg0: oaas_simple
+oaas_simple: true
+templates:
+- py3/lib
+- py3/grpc-protobuf
