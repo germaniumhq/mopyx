@@ -1,0 +1,11 @@
+node_modules
+.idea
+*.pyc
+.mypy_cache
+/germaniumdrivers/binary/
+/germaniumdrivers.egg-info/
+/build/
+/dist/
+__pycache__
+.jenny
+*.egg-info
