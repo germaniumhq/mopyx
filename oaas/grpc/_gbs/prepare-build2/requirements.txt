@@ -1,0 +1,5 @@
+oaas
+oaas_registry_api
+netifaces
+protobuf==3.13.0
+grpcio==1.31.0
