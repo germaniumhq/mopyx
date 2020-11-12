@@ -1,0 +1,12 @@
+user: user
+local: user
+environment: user
+local_list:
+  - "user_local_list_a"
+  - "user_local_list_b"
+environment_list:
+  - user_environment_list_a
+  - user_environment_list_b
+user_list:
+  - user_user_list_a
+  - user_user_list_b

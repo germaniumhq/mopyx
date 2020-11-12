@@ -1,0 +1,44 @@
+name: ActiveEvent
+package: .
+properties:
+  active_event: "'ActiveEvent'"
+states:
+  - NEW
+  - PROCESSING
+  - WAITING
+  - ERROR
+  - RUNNING
+  - ROUTING
+  - DONE_CHECK
+  - DONE_END_TASK
+  - DONE
+transitions:
+  NEW:
+    process: PROCESSING
+    error: DONE
+  PROCESSING:
+    route: ROUTING
+    wait_check: WAITING
+    run: RUNNING
+    done: DONE
+  WAITING:
+    run: RUNNING
+    done: DONE
+    error: ERROR
+  RUNNING:
+    route: ROUTING
+    error: ERROR
+    done_check: DONE_CHECK
+    done: DONE
+  ERROR:
+    route: ROUTING
+    done: DONE
+    done_check: DONE_CHECK
+  ROUTING:
+    done_check: DONE_CHECK
+    done: DONE  # in case of failures in routing, the parent just `dones` the event
+  DONE_CHECK:
+    done: DONE
+    done_end_task: DONE_END_TASK
+  DONE_END_TASK:
+    done: DONE

@@ -1,0 +1,6 @@
+adhesive: true
+arg0: adhesive
+templates:
+- adhesive/sh
+- pyi/setuptools
+- py3/exe
