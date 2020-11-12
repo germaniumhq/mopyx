@@ -1,0 +1,173 @@
+
+= Utility Selectors
+
+Utility selectors are provided so you can use the positional filtering capabilities
+of the selectors. For example:
+
+[source,python]
+-----------------------------------------------------------------------------
+click(Css('.tree-plus-icon').left_of(Text('Item 15')))
+-----------------------------------------------------------------------------
+
+The reason behind it is that you can't use positional filtering directly on the
+string themselves. String objects have to be recast to another object type
+(in this case, `AbstractSelector`) that supports the positional filtering methods.
+
+[source,python]
+-----------------------------------------------------------------------------
+click('.tree-plus-icon'.left_of(Text('Item 15'))) # throws exception
+-----------------------------------------------------------------------------
+
+[plantuml, germanium-utility-selectors, svg]
+------------------------------------------------------------------------------
+class AbstractSelector
+class Css
+class XPath
+class JsSelector
+class AnyOfSelector
+
+AbstractSelector <|-- Css
+AbstractSelector <|-- XPath
+AbstractSelector <|-- JsSelector
+AbstractSelector <|-- AnyOfSelector
+------------------------------------------------------------------------------
+
+== Css(locator)
+
+A selector that finds the given CSS expression.
+
+== XPath(locator)
+
+A selector that finds the given XPath expression.
+
+== JsSelector(code)
+
+A selector that finds an element by evaluating the given JavaScript code. `arguments[0]` is the element used for subtree searches, and can be `null` if searches are made for the full document.
+
+== AnyOfSelector(selectors...)
+
+A container selector that denotes an element that can be represented in
+multiple ways. The selectors passed into the constructor can also have
+filtering.
+
+= Provided Selectors
+
+Provided selectors are just classes that are generally useful for testing, simple things
+such as buttons, links or text.
+
+The most basic of them is called `Element`. There are a lot of more specific selectors
+on top of that, for `Input`s, or `Link`s.
+
+== Element(tag_name=None, ...)
+
+A selector that finds an element by looking at its XPath.
+
+Parameters:
+
+* `tag_name` - the html tag name to find (e.g. `div`, `span`, `li`);
+* `index` - if specified, is the 1 index based result;
+* `id` - If it's specified, is the id attribute of the element;
+* `exact_text` - if specified, the exact text the element must have;
+* `contains_text` - if specified, the exact text the element should contain;
+* `css_classes` - the CSS classes that the element must have (either as a `string`, or `list` of `string`s);
+* `exact_attributes` - attributes with their values that the element must have (`dict`, keys for attribute names, values for expected values);
+* `contains_attributes` - attributes that contain the given values (`dict`, keys for attribute names, values for strings that the attribute values must contain);
+* `extra_xpath` - extra xpath to be added to the expression, to the previously built expressions.
+
+If the `index` is used, the whole expression is wrapped in parenthesis,
+and the index is applied to the whole result. In case you want multiple
+sub-children, use `extra_xpath` to fetch the elements.
+
+[source,python]
+-----------------------------------------------------------------------------
+S(Element('div',
+          contains_text='error has occured',
+          css_classes=['error-message']))
+-----------------------------------------------------------------------------
+
+This will find a div that contains the text `error has occured` and has also
+a CSS class attached to it named `error-message`.
+
+== Button(search_text = None, text = None, name = None)
+
+Just a selector that finds a button by its label or name:
+
+This selector will find simultaneously both `input` elements that have the
+`type="button"`, but also `button` elements.
+
+* some of the text, in either the `value` attribute if it's an `input`, or
+  the text of the `button` (`search_text`)
+* the exact text, either the `value` attribute if it's an input, or its text if
+  it's an actual `button` (`text`)
+* its form name (`name`)
+
+[source,python]
+-----------------------------------------------------------------------------
+germanium.S(Button("Ok"))
+-----------------------------------------------------------------------------
+
+== Input(input_name)
+
+Just a selector that finds an input by its name.
+
+[source,python]
+-----------------------------------------------------------------------------
+germanium.S(Input('q'))
+-----------------------------------------------------------------------------
+
+== InputText(input_name)
+
+Just a selector that finds an input with the type `text` by its name.
+
+[source,python]
+-----------------------------------------------------------------------------
+germanium.S(InputText('q'))
+-----------------------------------------------------------------------------
+
+== Link(search_text, text, search_href, href)
+
+Just a selector that finds a link by either:
+
+* some of its text content (`search_text`)
+* its exact text content(`text`)
+* some of its link location (`search_href`)
+* its exact link location(`href`)
+
+To match the first link that contains the 'test' string, someone can:
+
+[source,python]
+-----------------------------------------------------------------------------
+germanium.S(Link("test"))
+-----------------------------------------------------------------------------
+
+Of course, the text and href search can be combined, so we can do,
+in order to find a link that is on the `ciplogic.com` website containing the
+text `testing`:
+
+[source,python]
+-----------------------------------------------------------------------------
+germanium.S(Link("testing", search_href="http://ciplogic.com"))
+-----------------------------------------------------------------------------
+
+== Text(text, exact=False, trim=False)
+
+Just a selector that finds the element that contains the text in the page.
+
+[source,python]
+-----------------------------------------------------------------------------
+germanium.S(Text("some text"))
+-----------------------------------------------------------------------------
+
+The selector can find the text even in formatted text. For example the previous
+selector would match the parent div in such a DOM structure:
+
+[source,html]
+-----------------------------------------------------------------------------
+<div>
+    some <b>text</b>
+</div>
+-----------------------------------------------------------------------------
+
+The options of `exact` and `trim` can be used to find elements even if they are
+padded, or only the elements that have the exact text that was given for searching.
+

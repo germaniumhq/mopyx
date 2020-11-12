@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" value="width=device-width, scale=initial-scale">
+    <title>alert Page</title>
+</head>
+<body>
+    <div id="promptresult"></div>
+    <script type="text/javascript">
+        var result = prompt("prompt alert");
+        if (result != null) {
+            document.getElementById('promptresult').innerHTML = result;
+        } else {
+            document.getElementById('promptresult').innerHTML = "PROMPT REJECTED";
+        }
+    </script>
+</body>
+</html>

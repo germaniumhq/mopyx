@@ -1,0 +1,778 @@
+= Germanium Static
+
+:toc: left
+:experimental:
+
+The Germanium static package is for creating tests that revolve around
+running a single browser instance at a time, in the whole test process.
+
+
+== open_browser()
+
+*Description*
+
+Opens the given browser instance.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def open_browser(browser="firefox", <1>
+                 wd=None, <2>
+                 iframe_selector=DefaultIFrameSelector(), <3>
+                 screenshot_folder="screenshots", <4>
+                 scripts=list()) <5>
+-----------------------------------------------------------------------------
+<1> _browser_ - The browser is case insensitive and can be one of:
+    1. "ff" or "firefox" - to start Mozilla Firefox
+    2. "chrome" - to start Google Chrome
+    3. "ie" - to start Microsoft Internet Explorer
+<2> _wd_ - A specific already created WebDriver instance can also be given, and
+    then the _browser_ parameter will be ignored.
+<3> _iframe_selector_ - The strategy to use when finding the execution iframe,
+    whenever the active iframe name changes.
+<4> _screenshot_folder_ - Folder under browser screenshots are saved.
+<5> _scripts_ - A list of JavaScript resources to be loaded whenever a page is
+    newly loaded.
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+open_browser("firefox")
+-----------------------------------------------------------------------------
+
+This also allows connecting to remote selenium instances, for example:
+
+[source,python]
+-----------------------------------------------------------------------------
+open_browser("ff:http://10.2.1.1:5555/wd/hub")
+-----------------------------------------------------------------------------
+
+In case you want to pass capabilities into the remote driver instance,
+Germanium allows that by using simple query strings:
+
+[source,python]
+-----------------------------------------------------------------------------
+open_browser("ie?wdurl=http://10.2.1.1:4444/wd/hub&version=9")
+-----------------------------------------------------------------------------
+
+The `wdurl` is the parameter that will specify the WebDriver URL to use when
+connecting to the remote instance.
+
+== close_browser()
+
+*Description*
+
+Close the currently running browser instance that was opened with
+`open_browser()`
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def close_browser()
+-----------------------------------------------------------------------------
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+close_browser()
+-----------------------------------------------------------------------------
+
+== go_to(url)
+
+*Description*
+
+Go to the given URL, and wait for the page to load. After the page will load,
+the scripts provided in the creation of the GermaniumDriver object will be
+automatically loaded.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def go_to(url) <1>
+-----------------------------------------------------------------------------
+<1> _url_ - The URL to load in the browser.
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+go_to("http://google.com/")
+-----------------------------------------------------------------------------
+
+== type_keys(keys, selector, delay)
+
+*Description*
+
+Type the keys specified into the element, or the currently active element.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def type_keys(keys, <1>
+              selector=None, <2>
+              delay=0) <3>
+-----------------------------------------------------------------------------
+<1> _keys_ - the keys to press. _See the *Germanium Keys Support*, to learn
+        about having multiple keypresses, combo key presses, or repetitions._
+<2> _selector_ - _optional_ For what element to send the keys. In case it's
+        missing, sends the keys to the active element. _See the
+        *Germanium Selectors*, to learn about how you can easily locate the
+        element you want your action to be triggered against._
+<3> _delay_ - _optional_ Delay in seconds between each keypress.
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+type_keys('john.doe@example.com', Input('email')) <1>
+type_keys("<tab*2><enter>") <2>
+-----------------------------------------------------------------------------
+<1> Type in the input with the `name` attribute equal to `email`.
+<2> Type in the currently active element in the current iframe.
+
+== click(selector_or_point)
+
+*Description*
+
+Click the element with the given selector, or at the specified point position.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def click(selector_or_point) <1>
+-----------------------------------------------------------------------------
+<1> _selector_or_point_ - What element to click. _See the *Germanium Selectors* and *Point Support*, to learn about how you can easily locate the element you want your action to be triggered against._
+
+*Sample*
+[source,python]
+-----------------------------------------------------------------------------
+click(Button('OK'))
+-----------------------------------------------------------------------------
+
+== hover(selector_or_point)
+
+*Description*
+
+Hovers (sends a mouse over) the element with the given selector, or at the specified point position.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def hover(selector_or_point) <1>
+-----------------------------------------------------------------------------
+<1> _selector_or_point_ - What element to hover. _See the *Germanium Selectors* and *Point Support*, to learn about how you can easily locate the element you want your action to be triggered against._
+
+*Sample*
+[source,python]
+-----------------------------------------------------------------------------
+hover(Element('div', id='menu1'))
+-----------------------------------------------------------------------------
+
+== double_click(selector_or_point)
+
+*Description*
+
+Double clicks the element with the given selector, or at the specified point position.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def double_click(selector_or_point) <1>
+-----------------------------------------------------------------------------
+<1> _selector_or_point_ - What element to double click. _See the *Germanium Selectors* and *Point Support*, to learn about how you can easily locate the element you want your action to be triggered against._
+
+*Sample*
+[source,python]
+-----------------------------------------------------------------------------
+double_click(Element('div', css_classes='table-row'))
+-----------------------------------------------------------------------------
+
+== right_click(selector_or_point)
+
+*Description*
+
+Right clicks the element with the given selector, or at the specified point position.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def right_click(selector_or_point) <1>
+-----------------------------------------------------------------------------
+<1> _selector_or_point_ - What element to right click. _See the *Germanium Selectors* and *Point Support*, to learn about how you can easily locate the element you want your action to be triggered against._
+
+*Sample*
+[source,python]
+-----------------------------------------------------------------------------
+right_click(Element('div', css_classes='table-row'))
+-----------------------------------------------------------------------------
+
+== drag_and_drop(from_selector_or_point, to_selector_or_point)
+
+*Description*
+
+Performs a drag and drop operation from the element matching the `from_selector_or_point`, to the element matching the `to_selector_or_point`.
+
+Both `from_selector_or_point` and `to_selector_or_point` can as the name suggest be either selectors, or point locations, and are not required to have the same type. You can start a drag from a selector, to a point, or vice-versa.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def drag_and_drop(from_selector_or_point, <1>
+                  to_selector_or_point) <2>
+-----------------------------------------------------------------------------
+<1> _from_selector_or_point_ - What element to use for drag start. _See the *Germanium Selectors* and *Point Support*, to learn about how you can easily locate the element you want your action to be triggered against._
+<2> _to_selector_or_point_ - What element to release the mouse over. _See the *Germanium Selectors* and *Point Support*, to learn about how you can easily locate the element you want your action to be triggered against._
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+drag_and_drop(Element("div", css_classes="old-entry", index=2),
+              "#removeContainer")
+-----------------------------------------------------------------------------
+
+== select(selector, text?, index?, value?)
+
+*Description*
+
+Change the value of a `<select>` element by selecting items from the
+available options.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def select(selector, <1>
+           text=None, <2>
+           *argv,
+           index=None, <3>
+           value=None, <4>
+           **kw)
+-----------------------------------------------------------------------------
+<1> _selector_ - What select to change its values. _See the
+        *Germanium Selectors*, to learn about how you can easily locate the
+        element you want your action to be triggered against._
+<2> _text_ - What text(s) (if any) to use for selection.
+<3> _index_ - What index(es) (if any) to use for selection.
+<4> _value_ - What value(s) (if any) to use for selection.
+
+One of `text`, `index` or `value` must be present for the selection to function,
+if none are present an `Exception` will be raised.
+
+`text`, `index` and `value` can also be arrays, or single values.
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+select("#country", "Austria")
+-----------------------------------------------------------------------------
+
+== deselect(selector, text?, index?, value?)
+
+*Description*
+
+Change the value of a `<select>` element by deselecting items from the
+available options.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def deselect(selector, <1>
+             text=None, <2>
+             *argv,
+             index=None, <3>
+             value=None, <4>
+             **kw)
+-----------------------------------------------------------------------------
+<1> _selector_ - What select to change its values. _See the
+        *Germanium Selectors*, to learn about how you can easily locate the
+        element you want your action to be triggered against._
+<2> _text_ - What text(s) (if any) to use for deselection.
+<3> _index_ - What index(es) (if any) to use for deselection.
+<4> _value_ - What value(s) (if any) to use for deselection.
+
+Deselect will deselect all the items from the `text`, `index` and
+`value` parameters. _If all the parameters are unset, it will clear the
+selection._
+
+`text`, `index` and `value` can also be arrays, or single values.
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+deselect("#products", index=[1,3])
+-----------------------------------------------------------------------------
+
+== select_file(selector, file_path, path_check=True)
+
+*Description*
+
+Selects the file into a file input from the disk. The file itself must exist
+on the system where the browser is running.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+select_file(selector, <1>
+            file_path, <2>
+            path_check=True) <3>
+-----------------------------------------------------------------------------
+<1> _selector_ - What file input to select the file for. _See the
+        *Germanium Selectors*, to learn about how you can easily locate the
+        element you want your action to be triggered against._
+<2> _file_path_ - Path to the file that should be selected in the file input.
+<3> _path_check_ - Check if the file exists, and convert it to an absolute path for the upload.
+
+In case the `path_check` is unset, any path will be sent to the driver without
+any validation. This is useful for uploading files on a remote WebDriver browser.
+
+WebDriver requires the path to be absolute. Germanium will convert the path to
+an absolute location only it `path_check` is set to `True`.
+
+*Sample*
+
+Selecting for upload a relative path:
+
+[source,python]
+-----------------------------------------------------------------------------
+select_file(InputFile(),
+            'features/steps/test-data/upload_test_file.txt')
+-----------------------------------------------------------------------------
+
+Selecting for upload a path that is available only remotely:
+
+[source,python]
+-----------------------------------------------------------------------------
+select_file(InputFile(),
+            r"c:\features\steps\test-data\upload_test_file.txt",
+            path_check=False)
+-----------------------------------------------------------------------------
+
+
+== parent_node(selector)
+
+*Description*
+
+Gets the parent node of the given selector.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+parent_node(selector) <1>
+-----------------------------------------------------------------------------
+<1> _selector_ - What element to return the value for. _See the
+        *Germanium Selectors*, to learn about how you can easily locate the
+        element you want your action to be triggered against._
+
+This will return a `WebElement`.
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+e = parent_node('#some_element')
+-----------------------------------------------------------------------------
+
+Will return the parent node for the element with the ID `some_element` that will
+be matched by the CSS locator.
+
+== child_nodes(selector, only_elements=True)
+
+*Description*
+
+Gets the child nodes of the element that is matched by selector.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+child_nodes(selector, <1>
+            only_elements=True) <2>
+-----------------------------------------------------------------------------
+<1> _selector_ - What element to return the value for. _See the
+        *Germanium Selectors*, to learn about how you can easily locate the
+        element you want your action to be triggered against._
+<2> _only_elements_ - If to return only elements, or also other node types (text, comment, etc)
+
+This will return a `list` of the found elements, or an empty list if no element was found.
+
+*Sample*
+
+For example for the given HTML:
+
+[source,html]
+-----------------------------------------------------------------------------
+<div id="parent">
+    <div id="child1">..</div>
+    <div id="child2">..</div>
+</div>
+-----------------------------------------------------------------------------
+
+When calling:
+
+[source,python]
+-----------------------------------------------------------------------------
+items = child_nodes("#parent")
+assert len(items) == 2
+-----------------------------------------------------------------------------
+
+This will return a list of 2 elements, with the child1 and child2, since `only_elements` is
+set by default to true. Otherwise if setting the `only_elements` to `False`, the call will
+return 5 elements, since there are 3 whitespace nodes in the `#parent` div.
+
+[source,python]
+-----------------------------------------------------------------------------
+items = child_nodes('#parent', only_elements=False)
+assert len(items) == 5
+-----------------------------------------------------------------------------
+
+== get_value(selector)
+
+*Description*
+
+Gets the value of an input element. Works for: `<input>` and `<select>`
+elements.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+get_value(selector) <1>
+-----------------------------------------------------------------------------
+<1> _selector_ - What element to return the value for. _See the
+        *Germanium Selectors*, to learn about how you can easily locate the
+        element you want your action to be triggered against._
+
+`get_value` will return the current value of the element.
+
+If the element is a multi-select, it will return an array of the values which
+were selected (the `value` attribute of the `<option>` elements that are
+selected).
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+assert get_value('#country') == 'at'
+-----------------------------------------------------------------------------
+
+== get_text(selector)
+
+*Description*
+
+Gets the text from the element. This is equivalent to the `innerText`, or
+`textContent` element attribute of the browser.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+get_text(selector) <1>
+-----------------------------------------------------------------------------
+<1> _selector_ - What element to return the text for. _See the
+        *Germanium Selectors*, to learn about how you can easily locate the
+        element you want your action to be triggered against._
+
+If the selector is a `WebElement` instance, the filtering of `only_visible`
+will not be used, and the text from the given element will still be returned.
+
+This is in contrast with the default Selenium approach of returning empty
+text for elements that are not visible.
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+get_text(invisible_element)
+-----------------------------------------------------------------------------
+
+or
+
+[source,python]
+-----------------------------------------------------------------------------
+assert 'yay' == get_text('.success-message')  <1>
+-----------------------------------------------------------------------------
+<1> This might throw exceptions if the `.success-message` is an element that
+is invisible, or doesn't exists.
+
+== get_attributes(selector)
+
+Return all the attributes of the element matched by the selector as a dictionary
+object.
+
+For example for this HTML:
+
+[source,html]
+-----------------------------------------------------------------------------
+<body>
+    <div id='editor' class='modal superb' custom-data='simple-code'></div>
+</body>
+-----------------------------------------------------------------------------
+
+To get all the attributes of the editor div, someone can:
+
+[source,python]
+-----------------------------------------------------------------------------
+editor_attributes = get_attributes_g(germanium, '#editor')
+assert editor_attributes['class'] == 'modal superb'
+assert editor_attributes['id'] == 'editor'
+assert editor_attributes['custom-data'] == 'simple-code'
+-----------------------------------------------------------------------------
+
+== get_style(selector, name)
+
+*Description*
+
+Returns a single CSS attribute value for the element that is matched by the
+selector.
+
+*Signature*
+
+-----------------------------------------------------------------------------
+get_style(selector, <1>
+          name) <2>
+-----------------------------------------------------------------------------
+<1> _selector_ - What element to return the CSS property for. _See the
+        *Germanium Selectors*, to learn about how you can easily locate the
+        element you want your action to be triggered against._
+<2> _name_ - The name of the property to return, in camel case.
+
+If the selector is a `WebElement` instance, the filtering of `only_visible`
+will not be used, and the style property from the given element will still
+be returned, even if the element is not visible.
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+get_style('input.red-border', 'borderTopWidth')
+-----------------------------------------------------------------------------
+
+== get_web_driver()
+
+*Description*
+
+Return the WebDriver instance the global Germanium was built around.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def get_web_driver()
+-----------------------------------------------------------------------------
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+wd = get_web_driver()
+-----------------------------------------------------------------------------
+
+== get_germanium()
+
+*Description*
+
+Returns the currently running Germanium instance, or `None` if no instance was
+opened using `open_browser()`.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def get_germanium()
+-----------------------------------------------------------------------------
+
+_Please see the *Germanium API Documentation* to find out what is available on
+the `germanium.driver.GermaniumDriver` instance._
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+g = get_germanium()
+-----------------------------------------------------------------------------
+
+== highlight(selector, show_seconds=2)
+
+*Description*
+
+Highlights by blinking the background of the matched selector with a vivid
+green for debugging purposes.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def highlight_g(selector, <1>
+                show_seconds=2, <2>
+                *args,
+                console=False) <3>
+-----------------------------------------------------------------------------
+<1> _selector_ - What element to alternate the background for. _See the
+        *Germanium Selectors*, to learn about how you can easily locate the
+        element you want your action to be triggered against._
+<2> _show_seconds_ - How many seconds should the element blink.
+<3> _console_ - Should the messages be logged to the browser console.
+
+In case the element that is found doesn't exist, or is not visible, a
+notification alert will pop up, with information of whether the element
+was not found or since it's not visible can't be highlighted.
+
+In case `console` is set to `True` then the alert will not be displayed,
+but instead only the `console.log` (or `console.error`) of the browser will
+be used for notifying elements that are not visible, or that can not be found.
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+highlight('.hard-to-see-item')
+-----------------------------------------------------------------------------
+
+== def S(*argv, **kwargs)
+
+*Description*
+
+Returns a deferred locator, using the `S`uper locator.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def S(selector, strategy='default')
+-----------------------------------------------------------------------------
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+element = S('#editor').element()
+-----------------------------------------------------------------------------
+
+== def iframe(target, keep_new_context = False)
+
+Selects the current working iframe with the `target` name.
+
+[source,python]
+-----------------------------------------------------------------------------
+@iframe("editor")
+def type_keys_into_editor(keys):
+    type_keys(keys)
+
+type_keys_into_editor('hello world') # will switch the iframe to 'editor' and back
+click(Button("Save"))                # iframe is 'default'
+-----------------------------------------------------------------------------
+
+== wait(closure, while_not=None, timeout=10)
+
+*Description*
+
+A function that allows waiting for a condition to happen, monitoring also that
+some other conditions do not happen.
+
+In case the timeout expires, or one of the `while_not` conditions matches until
+the `closure` is not yet matching then throws an exception.
+
+Callables of both `closure` and the `while_not` are recursively resolved until
+a non callable _trueish_ value is returned.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def wait(closure, <1>
+         while_not=None, <2>
+         timeout=10) <3>
+-----------------------------------------------------------------------------
+<1> _closure_ is either a callable, either an array of callables. If any of
+them passes, the wait finished successfuly.
+<2> _while_not_ is either a callable, either an array of callables. If any of
+them fail, the wait throws an exception.
+<3> _timeout_ expressed in seconds.
+
+*Sample*
+
+Since selectors are callables, they can be used as parameters for `wait`.
+
+[source,python]
+-----------------------------------------------------------------------------
+wait(Text("document uploaded successfully"),
+    while_not = Text("an error occurred"))
+-----------------------------------------------------------------------------
+
+Because callables are recursively resolved, they can be used as strategies for
+waiting:
+
+[source,python]
+-----------------------------------------------------------------------------
+def ButtonOrLink():
+    if some_condition:
+        return Link
+
+    return Button
+
+wait(ButtonOrLink)
+-----------------------------------------------------------------------------
+
+This is roughly equivalent to:
+
+[source,python]
+-----------------------------------------------------------------------------
+def ButtonOrLink():
+    if some_condition:
+        return Link().exists()
+
+    return Button().exists()
+
+wait(ButtonOrLink)
+-----------------------------------------------------------------------------
+
+== waited(closure, while_not=None, timeout=10)
+
+*Description*
+
+A function that allows waiting for a condition to happen, monitoring also that
+some other conditions do not happen.
+
+In case the timeout expires, or one of the `while_not` conditions matches, before
+the `closure` matched then it returns `None`.
+
+Otherwise it returns the value that the closure returned.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def waited(closure, <1>
+           while_not=None, <2>
+           timeout=10) <3>
+-----------------------------------------------------------------------------
+<1> _closure_ is either a callable, either an array of callables. If any of
+them passes, the wait finished successfuly.
+<2> _while_not_ is either a callable, either an array of callables. If any of
+them fail, the wait throws an exception.
+<3> _timeout_ expressed in seconds.
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+click(waited(Button("Ok")))
+-----------------------------------------------------------------------------
+

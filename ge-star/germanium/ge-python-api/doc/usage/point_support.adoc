@@ -1,0 +1,99 @@
+= Point Support
+
+WARNING: While Germanium _does_ support IE8+, point support is supported only from IE9+. This is the only Germanium API that is not supported in IE8, and is actually caused by Selenium itself.
+
+In Germanium, point actions are supported for all the mouse actions, and can be used instead of selectors, namely:
+
+1. `click()`
+2. `right_click()`
+3. `double_click()`
+4. `hover()`
+5. `drag_and_drop()`
+
+== Point(x, y)
+
+_Points are not selectors and don't specify an exact element_, but rather as the name implies a location on the screen where we want to interact. The point location is computed from the top/left of the page itself, and is specified with `x` and `y` coordinates.
+
+[plantuml, germanium-point-class-uml, svg]
+------------------------------------------------------------------------------
+class Point {
+    + x : number
+    + y : number
+    + adjust_x(x : number) : Point
+    + adjust_y(y : number) : Point
+}
+------------------------------------------------------------------------------
+
+Points can be adjusted, so you can have the value changed without always summing up values in a one liner.
+
+In order to easily obtain points, a utility class is also provided that can obtain points relative to the bounding box of an element. The corners, middle of the top/left/right/bottom segments, and the center are offered as points. The class is named `Box`, and its constructor accepts a selector as an argument.
+
+== Box(selector)
+
+[plantuml, germanium-box-class-uml, svg]
+------------------------------------------------------------------------------
+class Box {
+    Box(selector)
+    .. points methods ..
+    top_left(adjust_x, adjust_y) : Point
+    top_center(adjust_x, adjust_y) : Point
+    top_right(adjust_x, adjust_y) : Point
+    middle_left(adjust_x, adjust_y) : Point
+    middle_right(adjust_x, adjust_y) : Point
+    bottom_left(adjust_x, adjust_y) : Point
+    bottom_center(adjust_x, adjust_y) : Point
+    bottom_right(adjust_x, adjust_y) : Point
+    center(adjust_x, adjust_y) : Point
+    .. size methods ..
+    width(self) : number
+    height(self) : number
+    left(self) : number
+    right(self) : number
+    top(self) : number
+    bottom(self) : number
+    .. box sizes refresh ..
+    get_box(self) : Box
+}
+
+class Point {
+    + x : number
+    + y : number
+    + adjust_x(x : number) : Point
+    + adjust_y(y : number) : Point
+}
+
+Box ..> Point : <<uses>>
+------------------------------------------------------------------------------
+
+A `Box` instance will keep the sizes the first time it will be called, because we don't want to call it every time. In order to refresh it, the `get_box()` method is offered that will refresh the `Box` coordinates with the new data.
+
+In `wait` conditions you can chain it:
+
+[source,python]
+-----------------------------------------------------------------------------
+box = Box(Css('.resizing-div'))
+wait(lambda: box.get_box().width() == 100))
+-----------------------------------------------------------------------------
+
+Since points are not selectors, you can click two pixels right of an element, without exactly specifying the target element like so:
+
+[source,python]
+-----------------------------------------------------------------------------
+click(Box('span.custom-text').middle_right(2, 0))
+-----------------------------------------------------------------------------
+
+To click two pixels left of an element, we can just adjust with a negative value:
+
+[source,python]
+-----------------------------------------------------------------------------
+click(Box('span.custom-text').middle_left(-2, 0))
+-----------------------------------------------------------------------------
+
+Assuming a canvas is more than 10x10 pixels, we could also do a drag and drop from the top left corner, to the bottom right, keeping a 5 pixel margin:
+
+[source,python]
+-----------------------------------------------------------------------------
+canvas_box = Box('canvas.drawing')
+drag_and_drop(canvas_box.top_left(5, 5),
+        canvas_box.bottom_right(-5, -5))
+-----------------------------------------------------------------------------

@@ -1,0 +1,7 @@
+README.md
+README.rst
+requirements.txt
+setup.py
+doc/usage/index.adoc
+germanium/version.py
+

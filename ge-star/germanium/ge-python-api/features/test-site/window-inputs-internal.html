@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" value="width=device-width, scale=initial-scale">
+        <title>inputs window</title>
+        <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+    </head>
+    <body>
+        <div id="page-content">
+            <span>
+                Name 1:
+            </span>
+            <input id="name1" name="name1" class="name1">
+            <button id="send-data-to-parent">send data to parent</button>
+        </div>
+
+        <script type="text/javascript">
+            $('#send-data-to-parent').on('click', function() {
+                $(window.opener.document.getElementById('name1Target')).text($('#name1')[0].value);
+                window.close();
+            });
+        </script>
+    </body>
+</html>

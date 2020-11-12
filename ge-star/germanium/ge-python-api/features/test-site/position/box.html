@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" value="width=device-width, scale=initial-scale">
+        <title>Box Test</title>
+    </head>
+    <body style="margin: 4px">
+        <style>
+            body {
+                position: absolute;
+            }
+
+            .v-grid-table-wrapper {
+                height: 66px;
+                width: 400px;
+                position: absolute;
+                box-sizing: border-box;
+            }
+
+            .v-grid-body {
+                position: absolute;
+                width: inherit;
+                top: 0;
+                z-index: 0;
+            }
+
+            .v-grid-row {
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: block;
+            }
+
+            .v-grid-cell {
+                display: block;
+                float: left;
+                box-sizing: border-box;
+            }
+        </style>
+        <div class="v-grid-table-wrapper">
+            <table>
+                <tbody style="position: absolute" class="v-grid-body">
+                    <tr class="v-grid-row"
+                        style="width: 200px;
+                               transform: translate3d(0px, 0px, 0px);">
+                        <td class='v-grid-cell'
+                            colspan="1"
+                            style="height: 33px; width: 200px;"
+                            id='row11'>text 1</td>
+                    </tr>
+                    <tr class="v-grid-row"
+                        style="width: 200px;
+                               transform: translate3d(0px, 33px, 0px);">
+                        <td class="v-grid-cell"
+                            colspan="1"
+                            style="height: 33px; width: 200px;"
+                            id='row21'>text 2</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

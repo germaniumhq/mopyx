@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" value="width=device-width, scale=initial-scale">
+        <title>WAIT error</title>
+    </head>
+    <body>
+        <div class='error' id='errordiv'>
+        </div>
+
+        <script type="text/javascript">
+        setTimeout(function() {
+            document.getElementById('errordiv').innerHTML = '<div id="errorContent">Error Content</div>';
+        }, 2000);
+
+        setTimeout(function() {
+            document.getElementById('errordiv').innerHTML = '<div id="successContent">Success Content</div>';
+        }, 4000);
+        </script>
+    </body>
+</html>

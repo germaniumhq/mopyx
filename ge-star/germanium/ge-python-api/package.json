@@ -1,0 +1,11 @@
+{
+  "name": "germanium-grunt-dependencies",
+  "description": "Just the dependencies for Grunt",
+  "version": "0.1.0",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-uglify": "^1.0.1"
+  }
+}

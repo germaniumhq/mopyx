@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" value="width=device-width, scale=initial-scale">
+    <title>alert Page</title>
+</head>
+<body>
+    <div id="confirmresult"></div>
+    <script type="text/javascript">
+        if (confirm("confirm dialog")) {
+            document.getElementById('confirmresult').innerHTML = 'CONFIRM ACCEPTED';
+        } else {
+            document.getElementById('confirmresult').innerHTML = 'CONFIRM REJECTED';
+        }
+    </script>
+</body>
+</html>

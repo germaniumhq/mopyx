@@ -1,0 +1,39 @@
+= Germanium Drivers
+
+Starting with version 1.8 Germanium also packages the WebDriver binary drivers inside, and will unpack them when starting a new browser.
+
+Thus when using Germanium it's not required anymore to have the drivers downloaded.
+
+== GERMANIUM_DRIVERS_FOLDER
+
+Path where to unpack the drivers if they are missing, or if a wrong version
+is detected. If it's not set Germanium will create a folder in the temp
+folder named `germanium-drivers`.
+
+[source,sh]
+-----------------------------------------------------------------------------
+export GERMANIUM_DRIVERS_FOLDER=/opt/germanium-drivers
+-----------------------------------------------------------------------------
+
+== GERMANIUM_USE_PATH_DRIVER
+
+If there is a driver for the current browser in the PATH, even if the version
+of the driver is unsupported, use that one instead the embedded binary driver
+that Germanium ships.
+
+If an unsupported driver is found, Germanium will still use its internal driver.
+
+[source,sh]
+-----------------------------------------------------------------------------
+export GERMANIUM_USE_PATH_DRIVER=1
+-----------------------------------------------------------------------------
+
+== GERMANIUM_USE_IE_DRIVER_FOR_PLATFORM
+
+The IE driver for 64 bit has known issues, so if Germanium needs an IE driver
+will implicitly use the 32 bit version.
+
+[source,sh]
+-----------------------------------------------------------------------------
+export GERMANIUM_USE_IE_DRIVER_FOR_PLATFORM=1
+-----------------------------------------------------------------------------

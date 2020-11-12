@@ -1,0 +1,219 @@
+Germanium Selectors and Locators
+================================
+
+`Selector` objects are similar to `String` values, that describe how an element
+can be found in the current page, while `Locator` objects are the implementation
+of actual aglorithms that find them. A parallel can be made between the string
+`"div.custom-text"`, and the `webdriver.find_element_by_css()` function. Selectors
+specify what you want to find in the page, and locators make sure you find them.
+It's the combination of them, `webdriver.find_element_by_css("div.custom-text")` that
+will return the actual DOM Element to interact with.
+
+Selectors are in the end text strings. Locators evaluate them finding elements in
+the browser.
+
+In all the API calls, where `selector` is specified, the selector is actually one of:
+
+1. a string selector,
+2. an object that inerits from `AbstractSelector` (such as `Text`, `Element`, `Image`, etc.),
+3. a WebDriver WebElement,
+4. a locator,
+5. a list of any of the above.
+
+Since selectors offer Positional and DOM filtering, point 1 and 2 will cover 99% of your test cases.
+
+Locators Overview
+-----------------
+
+Locators are algorithms that are are able to find elements against the current browser.
+They are registered on the Germanium instance, and by default, Germanium comes with
+three locators registered: `"xpath"`, `"css"` and `"js"`. These are implemented in
+`XPathLocator`, `CssLocator` and `JsLocator` respectively, from the `germanium.locators`
+package. Locators use selectors to find web elements. To create a locator you need a
+Germanium instance, and a string specifying the selector passed to the locator itself.
+
+These locators all extend a base class named `DeferredLocator`. This class holds the
+reference to the `Germanium` object, and offers utility methods to actually fetch
+the elements, check if such elements exist, or retrieveing their text.
+
+Note, that the locators don't immediately find the elements. Explicit calls muse be made
+to:
+
+* `element()`
+* `element_list()`
+* the locator itself with `()`, (since the locator is a callable and will return the
+element_list)
+
+[source,python]
+-----------------------------------------------------------------------------
+from germanium.util import wait
+
+label_divs_locator = germanium.S('.label')  # <1>
+wait(label_divs_locator)                    # <2>
+-----------------------------------------------------------------------------
+<1> This will return a `CssLocator`.
+<2> Since the locator is a callable, we can wait on it
+
+
+A locator is always constructed with two things: the `Germanium` instance it will use
+to attept at finding the elements, and a `string` expression that will be used
+for finding. Note that you should never manually instantiate the locator, but
+you should use the super locator (the `S` function). This function will pass both the
+germanium instance, and the selector itself.
+
+You can, and should, use the strategy parameter or the selector prefix when using the
+`S()` builder function:
+
+[source,python]
+-----------------------------------------------------------------------------
+germanium.S('#testDiv', strategy='css')
+-----------------------------------------------------------------------------
+
+or prefixing the string itself with the strategy name:
+
+[source,python]
+-----------------------------------------------------------------------------
+germanium.S('css:#testDiv')
+-----------------------------------------------------------------------------
+
+Optionally a custom locator can be defined that extends the base class
+`DeferredLocator`. `DeferredLocator` contains a reference to a `Germanium`
+object and includes utility methods to get web elements.
+
+[plantuml, germanium-locators-overview, svg]
+------------------------------------------------------------------------------
+class DeferredLocator {
+    +__call__() : list<WebElement>
+    +element(only_visible: boolean) : WebElement
+    +element_list(index: int, only_visible: boolean) : list<WebElement>|WebElement
+    +exists(only_visible: boolean) : boolean
+    +not_exists(only_visible: boolean) : boolean
+    +text(only_visible: boolean) : string
+    {abstract} #_find_element(only_visible: boolean) : WebElement
+    {abstract} #_find_element_list(only_visible: boolean) : list<WebElement>
+}
+
+class CssLocator {
+    #_find_element(only_visible: boolean) : WebElement
+    #_find_element_list(only_visible: boolean) : list<WebElement>
+}
+
+class XPathLocator {
+    #_find_element(only_visible: boolean) : WebElement
+    #_find_element_list(only_visible: boolean) : list<WebElement>
+}
+
+class JsLocator{
+    #_find_element(only_visible: boolean) : WebElement
+    #_find_element_list(only_visible: boolean) : list<WebElement>
+}
+
+DeferredLocator <|-- CssLocator
+DeferredLocator <|-- XPathLocator
+DeferredLocator <|-- JsLocator
+------------------------------------------------------------------------------
+
+String Selectors
+----------------
+
+A string selector is a selector that can specify what locators to be used. Implicitly,
+the selector is either an XPath if it starts with `"//"`, either a CSS
+selector, if there is no identifier prefix (`"name:..."`).
+
+A string selector can also specify its locator strategy, by prefixing the selector
+with the locator strategy name. Currently registered into Germanium are:
+
+*css*
+
+[source,python]
+-----------------------------------------------------------------------------
+selector = "css:div#customID"
+
+# or without the css prefix, since the string it's
+# not starting with //
+selector = "div#customID"
+-----------------------------------------------------------------------------
+
+*xpath*
+
+[source,python]
+-----------------------------------------------------------------------------
+selector = "xpath://div[@id='customID']"
+
+# or without the xpath prefix, since the string it's
+# starting with //
+selector = "//div[@id='customID']"
+-----------------------------------------------------------------------------
+
+*js*
+
+[source,python]
+-----------------------------------------------------------------------------
+selector = "js:return [ document.getElementById('customID') ];"
+-----------------------------------------------------------------------------
+
+
+Selectors Overview
+------------------
+
+All `Selector` objects in Germanium inherit from `germanium.selector.AbstractSelector`, which
+define only a single required method `get_selectors()` that returns a list of string selectors.
+The list item can have different locator strategies:
+
+[source,python]
+-----------------------------------------------------------------------------
+class AbstractSelector(object):
+    # ...
+    def get_selectors(self):
+        raise Exception("Abstract class, not implemented.") # <1>
+
+    # ... positional, and parent-child filtering methods
+-----------------------------------------------------------------------------
+
+All the Selector objects return a list of strings, that define how the element, or the multiple
+elements will be found by the given locator.
+
+Writing Custom Selectors
+------------------------
+
+You can write a new selector by extending the AbstractSelector class and implementing
+the `get_selectors` method, that returns an array of selectors to be searched in the
+document.
+
+[plantuml, germanium-abstract-selector, svg]
+------------------------------------------------------------------------------
+class AbstractSelector {
+    -- method to implement --
+    {abstract} +List<string> get_selectors()
+    -- positional filtering --
+    +PositionalFilterSelector left_of(selector)
+    +PositionalFilterSelector right_of(selector)
+    +PositionalFilterSelector below(selector)
+    +PositionalFilterSelector above(selector)
+    -- parent/child filtering --
+    +InsideFilterSelector inside(selector)
+    +InsideFilterSelector outside(selector)
+    +InsideFilterSelector containing(selector)
+    +InsideFilterSelector containing_all(selector)
+    +InsideFilterSelector without_children()
+}
+
+class PositionalFilterSelector {
+    +PositionalFilterSelector left_of(selector)
+    +PositionalFilterSelector right_of(selector)
+    +PositionalFilterSelector below(selector)
+    +PositionalFilterSelector above(selector)
+}
+
+class InsideFilterSelector {
+    +InsideFilterSelector inside(selector)
+    +InsideFilterSelector outside(selector)
+    +InsideFilterSelector containing(selector)
+    +InsideFilterSelector containing_all(selector)
+    +InsideFilterSelector without_children()
+}
+
+AbstractSelector <|-- PositionalFilterSelector
+AbstractSelector <|-- InsideFilterSelector
+------------------------------------------------------------------------------
+

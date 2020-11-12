@@ -1,0 +1,104 @@
+= Selectors Positional Filtering
+
+Germanium provides the following methods directly on top of `AbstractSelector` to enable
+positional filtering: `left_of(selector)`, `right_of(selector)`, `below(selector)`,
+`above(selector)`, that are from the set of found web elements, by using reference
+elements, and ignoring elements `left_of`, `right_of`, `below` or `above` the references.
+These filters can be used to filter otherwise false positive matches when selecting.
+
+Multiple filters can be chained for the same selector, for example someone can:
+
+[source,python]
+-----------------------------------------------------------------------------
+click(Link("edit")
+        .below(Text("User Edit Panel"))
+        .right_of(Text("User 11")))
+-----------------------------------------------------------------------------
+
+This will find a link that contains the label `edit`, that is positioned below
+the text `User Edit Panel` and is to the right of the text `User 11`.
+
+== selector.left_of(other_selector)
+
+*Description*
+
+Make a selector that will return only the items that are left of all the elements
+returned by the other_selector.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def left_of(self, other_selector)
+-----------------------------------------------------------------------------
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+click(Input().left_of(Text("User")))
+-----------------------------------------------------------------------------
+
+== selector.right_of(other_selector)
+
+*Description*
+
+Make a selector that will return only the items that are right of all the elements
+returned by the other_selector.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def right_of(self, other_selector)
+-----------------------------------------------------------------------------
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+click(Link("edit").right_of(Text("User 11")))
+-----------------------------------------------------------------------------
+
+== selector.above(other_selector)
+
+*Description*
+
+Make a selector that will return only the items that are above all the elements
+returned by the other_selector.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def above(self, other_selector)
+-----------------------------------------------------------------------------
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+click(Link("logout").above("div.toolbar"))
+-----------------------------------------------------------------------------
+
+== selector.below(other_selector)
+
+*Description*
+
+Make a selector that will return only the items that are below all the elements
+returned by the other_selector.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def below(self, other_selector)
+-----------------------------------------------------------------------------
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+click(Button("edit").below(Text("entry 5")))
+-----------------------------------------------------------------------------
+

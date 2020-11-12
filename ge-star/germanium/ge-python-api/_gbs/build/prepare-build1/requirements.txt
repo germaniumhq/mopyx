@@ -1,0 +1,4 @@
+germaniumdrivers==2.0.11
+selenium==3.11.0
+webcolors==1.5
+
