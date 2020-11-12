@@ -2,5 +2,7 @@ adhesive/adhesive:
 - aa75c7cb559273c8b1435bd7fe89c864c312a1b4
 adhesive/yamldict:
 - d0ec8984c173fcc2b80a8dcf8692b390a2cc68e5
+oaas/grpc-compiler:
+- 21c1ddde90b0884e56cf3fff324cc3a75a2c9b91
 oaas/oaas:
 - 3d4e1fc9d95013e1d0c0aa37ee3acebe6c6d0d9b
