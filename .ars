@@ -1,0 +1,4 @@
+arg0: oaas_grpc_compiler
+oaas_grpc_compiler: true
+templates:
+- py3/exe
