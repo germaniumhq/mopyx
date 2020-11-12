@@ -1,0 +1,4 @@
+arg0: oaas_registry
+oaas_registry: true
+templates:
+- py3/grpc-protobuf

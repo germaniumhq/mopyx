@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+message ProcessNameIn {
+}
+
+message ProcessNameOut {
+  string name = 1;
+}
+
+service ProcessName {
+  rpc get_process_name(ProcessNameIn) returns (ProcessNameOut);
+}
