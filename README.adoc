@@ -1,0 +1,13 @@
+= adhesive-lib
+
+Shared build steps for Germanium builds.
+
+
+== gbs - Germanium Build System
+
+Hand crafted docker images that allow for good caching, and are rather painless
+to develop.
+
+== tooling - Docker Packaged Tooling
+
+Standalone programs packaged into docker containers to be used for the builds.
