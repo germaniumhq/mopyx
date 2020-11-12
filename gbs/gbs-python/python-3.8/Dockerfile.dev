@@ -1,0 +1,58 @@
+FROM ubuntu:18.04
+
+ENV LANG="en_US.UTF-8" \
+    LC_ALL="en_US.UTF-8" \
+    LC_LANG="en_US.UTF-8"
+
+ENV PATH="/python/bin:$PATH"
+
+#============================================================================
+# Initial update + upgrade
+#============================================================================
+RUN apt update -y
+RUN apt upgrade -y
+
+#============================================================================
+# Update the locale to the correct one
+#============================================================================
+RUN apt install -y locales && \
+    locale-gen en_US.UTF-8
+
+#============================================================================
+# Add the python repo
+#============================================================================
+RUN apt install -y software-properties-common && \
+    add-apt-repository ppa:deadsnakes/ppa -y && \
+    apt update -y
+
+#============================================================================
+# Install python
+#============================================================================
+RUN apt install -y \
+        python \
+        python3.8-venv \
+        python3.8-dev \
+        binutils \
+        git \
+        build-essential \
+        zlib1g-dev
+
+RUN python3.8 -m ensurepip && \
+    pip3.8 install virtualenv && \
+    rm -rf /var/lib/apt/lists/*
+
+#============================================================================
+# Create the user
+#============================================================================
+RUN useradd -m --home-dir /germanium germanium && \
+    python3.8 -m virtualenv /python && \
+    chown -R germanium:germanium /python
+
+# OpenShift requirement
+RUN chgrp -R 0 /python && \
+    chmod -R g=u /python && \
+    chgrp -R 0 /germanium && \
+    chmod -R g=u /germanium
+
+USER 1000
+
