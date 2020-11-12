@@ -2,6 +2,7 @@ mappings:
   adhesive:
     adhesive: git@github.com:germaniumhq/adhesive.git
     yamldict: git@github.com:bmustiata/yamldict.git
+    adhesive-samples: git@github.com:germaniumhq/adhesive-samples.git
   oaas:
     oaas: git@github.com:germaniumhq/oaas.git
     grpc-compiler: git@github.com:germaniumhq/oaas-grpc-compiler.git
