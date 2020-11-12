@@ -2,6 +2,8 @@ adhesive/adhesive:
 - aa75c7cb559273c8b1435bd7fe89c864c312a1b4
 adhesive/yamldict:
 - d0ec8984c173fcc2b80a8dcf8692b390a2cc68e5
+gbs/gbs-java:
+- f7cc61d1d287548abe54b1ddc8435540f9bd6b48
 ge-star/ge-web:
 - 1b7e135c1238d362240b890f5b231dce533c8339
 ge-star/germanium/ge-get:
