@@ -2,6 +2,8 @@ adhesive/adhesive:
 - aa75c7cb559273c8b1435bd7fe89c864c312a1b4
 adhesive/yamldict:
 - d0ec8984c173fcc2b80a8dcf8692b390a2cc68e5
+ge-star/germanium/ge-get:
+- 062c9dea6c47b8c21e4a5cf0ef936690b96bf351
 ge-star/germanium/ge-python-api:
 - 6734f2f5b1de161082e9ea93b371f04b2708cafa
 ge-star/germanium/ge-python-drivers:
