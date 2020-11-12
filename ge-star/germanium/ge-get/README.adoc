@@ -1,0 +1,37 @@
+= Germanium GET
+
+Easily provision your Selenium Grid infrastructure.
+
+Please read the full article here:
+https://germaniumhq.com/2017/01/31/2017-01-31-Creating-a-Selenium-Grid-with-Germanium/#_provisioning_the_windows_machines
+
+=== Provisioning the Windows Machines
+
+In order to install the Selenium nodes on the Windows machines, Germanium
+offers now a tool that will do that for you. You can find it at
+link:https://germaniumhq.com/get[https://germaniumhq.com/get].
+
+This project is the mentioned tool.
+
+This standalone executable will detect the supported browsers installed on the
+platform, if Java is installed or not, and will download all the Selenium
+dependencies that are required, the binary drivers, install Java if necessary,
+and generate a configuration file so you can just connect the newly provisioned
+node into your Selenium Hub.
+
+That means you just need to run the `germanium-get.exe` file, press `Enter` a bunch of times, type in the IP of your Selenium Hub, and start the node by double clicking the start batch file (you'll even have a shortcut created on your desktop).
+
+From that moment, you can just open browsers against your configured grid using the normal Germanium `open_browser` calls:
+
+[source,python]
+-----------------------------------------------------------------------------
+open_browser("ie:http://IP_OF_HUB:4444/wd/hub")
+-----------------------------------------------------------------------------
+
+Of course, if you have other browsers registered into your hub, you can also use them:
+
+[source,python]
+-----------------------------------------------------------------------------
+open_browser("chrome:http://IP_OF_HUB:4444/wd/hub")
+-----------------------------------------------------------------------------
+

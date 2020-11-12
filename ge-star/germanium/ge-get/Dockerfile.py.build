@@ -1,0 +1,6 @@
+FROM germaniumhq/python:3.6
+
+RUN pip install mypy && \
+    pip install flake8
+
+CMD echo "Type check" && cd /src && mypy . && flake8 .

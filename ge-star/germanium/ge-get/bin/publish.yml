@@ -1,0 +1,15 @@
+- name: Upload the germanium-get.exe
+  hosts: ciplogic
+  become: True
+  tasks:
+    - name: Upload the exe file
+      synchronize:
+        src: ../dist/windows/main.exe
+        dest: /opt/www/germaniumhq_get/germanium-get.exe
+
+    - name: Change the owner to nginx
+      file:
+        path: /opt/www/germaniumhq_get/germanium-get.exe
+        owner: 100
+        group: 101
+
