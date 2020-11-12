@@ -1,0 +1,4 @@
+arg0: arst
+arst: true
+templates:
+- py3/exe
