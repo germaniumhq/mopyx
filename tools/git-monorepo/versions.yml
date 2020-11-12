@@ -1,0 +1,9 @@
+version:
+  version: $(version-manager --tag)
+  files:
+    setup.py: version="**VERSION**",
+requirements:
+  version: $(bin/requires_versions.py)
+  files:
+    setup.py: (install_requires=\[)(.*?)(\],)
+

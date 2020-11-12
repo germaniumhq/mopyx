@@ -1,0 +1,4 @@
+arg0: git_monorepo
+git_monorepo: true
+templates:
+- py3/exe
