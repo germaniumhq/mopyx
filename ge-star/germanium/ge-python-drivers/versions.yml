@@ -1,0 +1,66 @@
+germaniumdrivers:
+  version: $(version-manager --tag)
+  files:
+    README.md: ^(germanium )(.*?)$
+    README.rst: ^(germanium )(.*?)$
+    setup.py: version='**VERSION**',
+
+selenium:
+  version: parent:../germanium-build-system/@selenium
+  files:
+    requirements.txt: selenium==**VERSION$$
+    _gbs/prepare-build3/requirements.txt: selenium==**VERSION$$
+    version_values.yml: "selenium: '**VERSION**'"
+
+#
+# Drivers must be kept in sync across the germanium-build-system.
+#
+firefox:
+  version: parent:../germanium-build-system/@firefox
+  files:
+    _gbs/prepare-build2/driver_versions: ^(FIREFOX_VERSION=)(.*?)$
+    version_values.yml: "firefox: '**VERSION**'"
+
+firefox_driver:
+  version: parent:../germanium-build-system/@firefox_driver
+  files:
+    _gbs/prepare-build2/driver_versions: ^(FIREFOXDRIVER_VERSION=)(.*?)$
+    version_values.yml: "firefox_driver: '**VERSION**'"
+
+chromedriver:
+  version: parent:../germanium-build-system/@chromedriver
+  files:
+    _gbs/prepare-build2/driver_versions: ^(CHROMEDRIVER_VERSION=)(.*?)$
+    version_values.yml: "chromedriver: '**VERSION**'"
+
+iedriver:
+  version: parent:../germanium-build-system/@iedriver
+  files:
+    _gbs/prepare-build2/driver_versions: ^(IEDRIVER_VERSION=)(.*?)$
+    version_values.yml: "iedriver: '**VERSION**'"
+
+iedriver_major:
+  version: parent:../germanium-build-system/@iedriver_major
+  files:
+    _gbs/prepare-build2/driver_versions: ^(IEDRIVER_VERSION_MAJOR=)(.*?)$
+    version_values.yml: "iedriver_major: '**VERSION**'"
+
+edgedriver:
+  version: parent:../germanium-build-system/@edgedriver
+  files:
+    _gbs/prepare-build2/driver_versions: ^(EDGEDRIVER_VERSION=)(.*?)$
+    version_values.yml: "edgedriver: '**VERSION**'"
+
+edgedriver_eula:
+  version: parent:../germanium-build-system/@edgedriver_eula
+  files:
+    _gbs/prepare-build2/driver_versions: EDGEDRIVER_EULA_VERSION=**VERSION$$
+    germaniumdrivers/install_driver.py: '"**VERSION** . If "'
+    version_values.yml: "edgedriver_eula: '**VERSION**'"
+
+edgedriver_url:
+  version: parent:../germanium-build-system/@edgedriver_url
+  files:
+    germaniumdrivers/driver_registry.py: 'return "**VERSION**"  #EDGE'
+    version_values.yml: "edgedriver_url: '**VERSION**'"
+

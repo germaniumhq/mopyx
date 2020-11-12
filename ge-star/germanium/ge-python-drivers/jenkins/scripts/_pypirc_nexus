@@ -1,0 +1,9 @@
+[distutils] # this tells distutils what package indexes you can push to
+index-servers =
+  nexus
+
+[nexus]
+repository: http://nexus:8081/repository/pypi-hosted/
+username: admin
+password: admin123
+
