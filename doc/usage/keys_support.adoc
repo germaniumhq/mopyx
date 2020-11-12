@@ -1,0 +1,80 @@
+Germanium Keys Support
+======================
+
+This section details on how to type keys better, without a headache.
+
+Regular Typing
+--------------
+
+In general when typing keys, for example for form fields, the easiest way of doing it
+is to just type the actual keys to be pressed. For example to type the user name
+into a form field you can:
+
+[source,python]
+-----------------------------------------------------------------------------
+type_keys('John', Input('firstname'))
+-----------------------------------------------------------------------------
+
+This will in turn just type the keys `["J", "o", "h", "n"]` into the input that
+has a `name` attribute equal to `"firstname"`. An email looks equally fascinating:
+
+[source,python]
+-----------------------------------------------------------------------------
+type_keys('john.doe@example.com', Input('email'))
+-----------------------------------------------------------------------------
+
+Let's start the more interesting examples.
+
+Special Keys
+------------
+
+Special keys such as kbd:[ENTER], are available by just escaping them in `<` and `>`
+characters, e.g. `<ENTER>`. For example to send kbd:[TAB] kbd:[TAB] kbd:[ENTER] someone
+could type:
+
+[source,python]
+-----------------------------------------------------------------------------
+type_keys("<tab*2><enter>")
+-----------------------------------------------------------------------------
+
+[TIP]
+Using `*` in special keys or combined macros, allows you to type the same key,
+or key combination multiple times.
+
+Now you might wonder, why is it `<enter>` and not `<ENTER>`? Or `<cr>`? Or its
+bigger brother `<CR>`? Or just `<Enter>`. Actually they all resolve to
+the same key, that is the kbd:[ENTER]. The same holds true for `<del>` vs `<delete>`, or
+`<bs>` vs `<backspace>`, etc. They will resolve to kbd:[DELETE], kbd:[BACKSPACE], etc.
+as expected.
+
+Combo Presses
+-------------
+
+Also, in the typing of the keys, combined macros such as `<ctrl-a>` are
+automatically understood as kbd:[CTRL+A] and translated correctly as an action chain.
+
+Macro keys can be written such as:
+
+- kbd:[SHIFT]: `S`, `SHIFT`
+- kbd:[CONTROL]: `C`, `CTL`, `CTRL`, `CONTROL`
+- kbd:[META]: `M`, `META`
+
+Also germanium is smart enough, so the position of the macro key matters, thus
+`<s-s>` is equivalent to `<shift-s>` and thus interpreted as kbd:[SHIFT+s], and not
+kbd:[s+s] or kbd:[SHIFT+SHIFT].
+
+Press-Release Key
+-----------------
+
+In order to start pressing a key, and release it later, while still typing other
+keys, the `!` and `^` symbols can be used.
+For example to type some keys with kbd:[SHIFT] pressed this can be done:
+
+[source,python]
+-----------------------------------------------------------------------------
+type_keys("<!shift>shift is down<^shift>, and now is up.")
+-----------------------------------------------------------------------------
+
+[TIP]
+The `!` looks like a finger almost pressing the button,
+and the `^` is self explanatory: the finger released the given button.

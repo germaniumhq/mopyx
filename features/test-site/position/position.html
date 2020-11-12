@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" value="width=device-width, scale=initial-scale">
+        <title>Position Test Page</title>
+        <script type="text/javascript" src="../js/jquery-1.12.0.min.js"></script>
+    </head>
+    <body style="margin: 8px; border: 2px; padding: 1px">
+        <div style="margin: 4px; border: 2px; padding: 1px; height: 600px">
+            <span>This is some text</span>
+            <div id='inlineDiv' style="display: inline-block; background-color: gray; width: 300px; height: 200px;"></div>
+            <div id="messagesDiv">no message</div>
+            <div id='absoluteDiv' style="display: inline-block; position: absolute; left : 50px; top: 250px; width: 300px; height: 200px; background-color: red"></div>
+        </div>
+
+        <script type="text/javascript">
+        (function($) {
+            var messageDiv = $('#messagesDiv');
+
+            $('#inlineDiv').click(function(ev) {
+                messageDiv.text("inline x: " + parseInt(ev.offsetX) + " y: " + parseInt(ev.offsetY));
+            });
+
+            $('#absoluteDiv').click(function(ev) {
+                messageDiv.text("absolute x: " + parseInt(ev.offsetX) + " y: " + parseInt(ev.offsetY));
+            });
+        })(jQuery);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,156 @@
+= Germanium Selectors in Static Contexts
+
+Selectors are neat since we can reuse them, and offer a clean separation
+between finding the elements and inspecting them, but they also offer a
+few utility methods to aid you in removing that one extra call to the `S`
+super locator.
+
+For example instead of writing:
+
+[source,python]
+-----------------------------------------------------------------------------
+S(Button('Ok')).element()
+-----------------------------------------------------------------------------
+
+you can write:
+
+[source,python]
+-----------------------------------------------------------------------------
+Button('Ok').element()
+-----------------------------------------------------------------------------
+
+_but you need to have a germanium instance already opened, or manually specify
+it in the element call._
+
+[source,python]
+-----------------------------------------------------------------------------
+Button('Ok').element(germanium=my_custom_ge_instance)
+-----------------------------------------------------------------------------
+
+== selector.element()
+
+*Description*
+
+This function allows fetching the first element from the Germanium instance,
+for which the current selector matches.
+
+In case the germanium instance is not specified it will use the static instance
+from `germanium.static.get_germanium()`.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def element(self, *argv, germanium=None, only_visible=True)
+-----------------------------------------------------------------------------
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+Button('Ok').element()
+-----------------------------------------------------------------------------
+
+== selector.element_list()
+
+*Description*
+
+This function allows fetching the element list from the Germanium instance,
+for which the current selector matches.
+
+In case the germanium instance is not specified it will use the static instance
+from `germanium.static.get_germanium()`.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def element_list(self,
+                 index=None, <1>
+                 *argv,
+                 germanium=None, <2>
+                 only_visible=True) <3>
+-----------------------------------------------------------------------------
+<1> _index_ - When present, the element with the given index will be returned instead of the full list of elements.
+<2> _germanium_ - What instance of germanium to use. If `None` use `germanium.static.get_germanium()`.
+<3> _only_visible_ - If only the visible elements should be selected. Defaults to `True` across Germanium.
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+Element('li').element_list()
+-----------------------------------------------------------------------------
+
+== selector.exists()
+
+*Description*
+
+This function allows checking if there is at least one element matching the
+current selector.
+
+In case the germanium instance is not specified it will use the static instance
+from `germanium.static.get_germanium()`.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def exists(self, *argv, germanium=None, only_visible=True)
+-----------------------------------------------------------------------------
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+wait(Text('data saved successfuly').exists)
+-----------------------------------------------------------------------------
+
+== selector.not_exists()
+
+*Description*
+
+This function allows checking if there is no element matching the
+current selector.
+
+In case the germanium instance is not specified it will use the static instance
+from `germanium.static.get_germanium()`.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def not_exists(self, *argv, germanium=None, only_visible=True)
+-----------------------------------------------------------------------------
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+wait(Text('error occurred').not_exists)
+-----------------------------------------------------------------------------
+
+== selector.text()
+
+*Description*
+
+This function allows returning the text of the first element that matches the
+current selector.
+
+In case the germanium instance is not specified it will use the static instance
+from `germanium.static.get_germanium()`.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def text(self, *argv, germanium=None, only_visible=True)
+-----------------------------------------------------------------------------
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+assert Css('#messages').text() == 'data persisted'
+-----------------------------------------------------------------------------
+

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" value="width=device-width, scale=initial-scale">
+        <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+        <title>Window Page</title>
+    </head>
+    <body>
+        <div id="name1Target">
+            no text sent from internal window.
+        </div>
+        <a href="#" id="open-window-link">Open Window</a>
+
+        <script type="text/javascript">
+            $('#open-window-link').on('click', function(ev) {
+                window.open('window-inputs-internal.html');
+            });
+        </script>
+    </body>
+</html>

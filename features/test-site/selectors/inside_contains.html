@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" value="width=device-width, scale=initial-scale">
+    <title>Page with some elements inside other elements</title>
+</head>
+<body>
+    <div id="decoyDiv"></div>
+    <input id="decoyInput" type="text">
+    <div id="inputTextContainer">
+        <input id="inputText" name="inputText" type="text" placeholder="inputTextPlaceholder">
+    </div>
+    <div id="inputTextWithOtherDivContainer">
+        <input id="inputTextWithDivElementSibling" name="inputText" type="text">
+        <span>only with content</span>
+    </div>
+    <div id="decoyDiv2">
+        <span id="decoyspanl1">
+            <span id="decoyspanl2">
+                <span id="decoyspanl3">
+                    other decoy text
+                </span>
+            </span>
+        </span>
+    </div>
+    <div id="divContainingASpanAndAnotherSpan">
+        <span id="spanInsideADivContainingAnotherSpan">
+            <span id="spanWithTextInsideASpanInsideADiv">
+                text inside divs and spans
+            </span>
+        </span>
+    </div>
+    <span id="justATrailingSpanOutsideDivs">only with content</span>
+    <div id="divWithABr">
+        <br>
+    </div>
+    <br>
+</body>
+</html>

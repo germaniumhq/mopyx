@@ -1,0 +1,136 @@
+= Selectors DOM Filtering
+
+DOM Filtering selectors work by selecting only specific nodes
+in relations with other nodes in the DOM.
+
+== selector.containing(selector..)
+
+*Description*
+
+Matches nodes that contain the other XPath/CSS selectors.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def containing(self, selector..)
+-----------------------------------------------------------------------------
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+row = Element("tr").containing(
+        Element("td", contains_text="User 1"),
+        Element("td", contains_text="User 2")
+      ).element()
+-----------------------------------------------------------------------------
+
+This will match a `<tr>` element that contains any of the `<td>` elements with
+the `"User 1"` or `"User 2"` text.
+
+== selector.containing_all(selector..)
+
+*Description*
+
+Matches nodes that contain all the given selectors inside their tree structure.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def containing_all(selector..)
+-----------------------------------------------------------------------------
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+row = Element("tr").containing_all(
+        Element("td", contains_text="user@sample.com"),
+        Text("User A")
+    ).element()
+-----------------------------------------------------------------------------
+
+This will match a `<tr>` element that contains a `<td>` with the text `user@sample.com` and some other text, named `"User A"`
+
+== selector.inside(selector..)
+
+*Description*
+
+Matches nodes that are inside any of the other selectors.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def inside(self, selector)
+-----------------------------------------------------------------------------
+
+*Sample*
+
+[source,python]
+-----------------------------------------------------------------------------
+error_message = Element("div", css_classes="label") \
+                    .inside(Element("div", css_classes="error-dialog"))
+-----------------------------------------------------------------------------
+
+== selector.outside(selector..)
+
+*Description*
+
+Matches nodes that are outside any of the given selectors (don't have the
+given selectors as a parent.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def outside(self, selector)
+-----------------------------------------------------------------------------
+
+*Sample*
+
+For example to check if all the `p`aragraphs in the page are inside `div`s, we can:
+
+[source,python]
+-----------------------------------------------------------------------------
+assert Element("p").outside("div").not_exists()
+-----------------------------------------------------------------------------
+
+== selector.without_children()
+
+*Description*
+
+Matches nodes that have no children.
+
+*Signature*
+
+[source,python]
+-----------------------------------------------------------------------------
+def without_children(self)
+-----------------------------------------------------------------------------
+
+*Sample*
+
+Given this selector:
+
+[source,python]
+-----------------------------------------------------------------------------
+Element('div', css_classes='test').without_children()
+-----------------------------------------------------------------------------
+
+and HTML:
+
+[source,html]
+-----------------------------------------------------------------------------
+<div>
+    <div class="test">a</div>
+    <div class="test"><node/></div>
+    <div class="test"></div> <!-- only this node will be matched -->
+    <div class="test"><node>mix</node></div>
+<div>
+-----------------------------------------------------------------------------
+
+only the third `<div>` child element will be matched.
+

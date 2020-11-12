@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" value="width=device-width, scale=initial-scale">
+        <title>Waited Button</title>
+        <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+    </head>
+    <body>
+        <button id='button' style="display:none">Click Me</button>
+        <div id='showMessage' style="display:none">button clicked</div>
+
+        <script type="text/javascript">
+            (function($) {
+
+            $('#button').on("click", function(ev) {
+                $('#showMessage').show();
+            });
+
+            setTimeout(function() {
+                $('#button').show();
+            }, 2000);
+
+            })(jQuery);
+        </script>
+    </body>
+</html>

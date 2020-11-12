@@ -1,0 +1,454 @@
+= Germanium API Documentation
+
+:toc: left
+:experimental:
+
+There are three kinds of functions that are provided for easier support
+inside the browsers:
+
+1. decorator:
+    - `@iframe`
+2. germanium instance functions:
+    - `S`, super locator
+    - `js`, `execute_script`
+    - `take_screenshot`
+    - `load_script`
+3. germanium instance attributes:
+    - `iframe_selector`
+4. utility functions:
+    - `type_keys_g`
+    - `click_g`
+    - `double_click_g`
+    - `right_click_g`
+    - `hover_g`
+    - `select_g`
+    - `deselect_g`
+    - `get_attributes_g`
+    - `get_value_g`
+    - `get_text_g`
+    - `highlight_g`
+    - `wait`
+
+== @iframe - germanium iframe decorator
+
+### @iframe(name, keep_new_context=False)
+
+Switch the iframe when executing the code of the function. It will use the
+strategy provided when the Germanium instance was created.
+
+For example if we would have an editor that is embedded in an IFrame, and
+we would want to call the saving of the document, we could implement that
+such as:
+
+[source,python]
+-----------------------------------------------------------------------------
+@iframe("default")
+def close_dialog(germanium):
+    germanium.S(Button("Ok").below(Text("Save dialog"))).element().click()
+
+@iframe("editor")
+def save_document(germanium):
+    germanium.S('#save-button').element().click()
+    close_dialog(germanium)
+-----------------------------------------------------------------------------
+
+The `@iframe` decorator is going to find the current context by scanning the
+parameters of the function for the Germanium instance. If the first parameter
+is an object that contains a property named either: `germanium` or `_germanium`
+then this property will be used.
+
+
+== germanium Instance Functions
+
+The GermaniumDriver is a simple instance that decorates an existing
+WebDriver:
+
+[plantuml, germanium-instance-overview, svg]
+------------------------------------------------------------------------------
+class GermaniumDriver
+class WebDriver
+
+GermaniumDriver *-- "1" WebDriver : "web_driver"
+------------------------------------------------------------------------------
+
+All the attributes that are not defined on the `GermaniumDriver` instance,
+are searched into the `germanium.web_driver` one. For example calling:
+
+[source,python]
+-----------------------------------------------------------------------------
+print(germanium.title)
+-----------------------------------------------------------------------------
+
+Will actually result in fetching the title from the web_driver instance
+that is used by the GermaniumDriver.
+
+=== Constructor GermaniumDriver(web_driver, ..)
+
+Constructs a new GermaniumDriver utility object on top of the given WebDriver
+object.
+
+[source,python]
+-----------------------------------------------------------------------------
+GermaniumDriver(web_driver,
+                iframe_selector=DefaultIFrameSelector(),
+                screenshot_folder="screenshots",
+                scripts=list())
+-----------------------------------------------------------------------------
+
+The only required parameter is the `web_driver` argument, that must be a
+WebDriver instance.
+
+==== iframe_selector
+
+The `iframe_selector` specifies the strategy to use whenever the iframe will
+be changed by the `@iframe` decorator. This class should have a method named
+`select_iframe(self, germanium, iframe_name)`, or a method that has two
+parameters `(germanium, iframe_name)` can be provided and it will be
+wrapped into a decorator class by Germanium itself.
+
+Germanium uses `"default"` for the `switch_to_default_content`.
+
+The default implementation is:
+
+[source,python]
+-----------------------------------------------------------------------------
+class DefaultIFrameSelector(object):
+    """
+    An implementation of the IFrameSelector strategy that does nothing.
+    """
+    def select_iframe(self, germanium, iframe_name):
+        if iframe_name != "default":
+            raise Exception("Unknown iframe name: '%s'. Make sure you create an IFrame Selector "
+                            "that you will pass when creating the GermaniumDriver, e.g.:\n"
+                            "GermaniumDriver(wd, iframe_selector=MyIFrameSelector())")
+
+        germanium.switch_to_default_content()
+        return iframe_name
+-----------------------------------------------------------------------------
+
+This can easily be changed so depending on the `iframe_name` it will
+do a switch_to_frame on the germanium object.
+
+[source,python]
+-----------------------------------------------------------------------------
+class EditorIFrameSelector(object):
+    def select_iframe(self, germanium, iframe_name):
+        if iframe_name == "default":
+            germanium.switch_to_default_content()
+        elif iframe_name == "editor":
+            editor_iframe = germanium.find_element_by_css_selector('iframe')
+            germanium.switch_to_frame(editor_iframe)
+
+        return iframe_name
+-----------------------------------------------------------------------------
+
+In case you don't want a full class, you can pass also a callable that will
+be invoked with two parameters `germanium` and `iframe_name`:
+
+[source,python]
+-----------------------------------------------------------------------------
+def select_iframe(germanium, iframe_name):
+    if iframe_name == "default":
+        germanium.switch_to_default_content()
+    elif iframe_name == "editor":
+        editor_iframe = germanium.find_element_by_css_selector('iframe')
+        germanium.switch_to_frame(editor_iframe)
+
+    return iframe_name
+-----------------------------------------------------------------------------
+
+So when invoking the `GermaniumDriver` someone can:
+
+[source,python]
+-----------------------------------------------------------------------------
+GermaniumDriver(web_driver,
+                iframe_selector=select_iframe)
+-----------------------------------------------------------------------------
+
+==== screenshot_folder
+
+The folder where to save the screenshots, whenever take_screenshot is called.
+It defaults to `"screenshots"`, so basically a local folder named screenshots
+in the current working directory.
+
+==== scripts
+
+A list of files with JavaScript to be automatically loaded into the page,
+whenever either `get()`, `reload_page()` or `wait_for_page_to_load()` is done.
+
+==== germanium.S(selector, strategy?)
+
+`S` stands for the super locator, and returns an object that can execute
+a locator in the current iframe context of germanium. The letter
+`S` was chosen since it is looking very similar to jquery's `$`.
+
+The first parameter, the selector, can be any of the selector objects from the
+link:selectors.adoc[germanium.selectors] package, or a string that will be
+further interpreted on what selector will be used.
+
+For example to find a button you can either:
+
+[source,python]
+-----------------------------------------------------------------------------
+germanium.S(Button('OK'))
+-----------------------------------------------------------------------------
+
+or using a CSS selector:
+
+[source,python]
+-----------------------------------------------------------------------------
+germanium.S("input[value'OK'][type='button']")
+-----------------------------------------------------------------------------
+
+or using a specific locator:
+
+[source,python]
+-----------------------------------------------------------------------------
+# implicit strategy detection, will match XPath, due to // start
+germanium.S("//input[@value='OK'][@type='button']")
+# or explicit in-string strategy:
+germanium.S("xpath://input[@value='OK'][@type='button']")
+# or explicit strategy:
+germanium.S("//input[@value='OK'][@type='button']", "xpath")
+-----------------------------------------------------------------------------
+
+The link:selectors.adoc[selectors approach] is recommended since a selector find will match either
+an html `input` element of type `button`, either a html button `element` that
+has the label OK.
+
+The S locator is not itself a locator but rather a locator strategy.
+Thus the S locator will choose:
+
+1. if the searched expression starts with `//` then the xpath locator
+    will be used.
+
+[source,python]
+-----------------------------------------------------------------------------
+# will find elements by XPath
+germanium.S('//*[contains(@class, "test")]');
+-----------------------------------------------------------------------------
+
+2. else the css locator will be used.
+
+[source,python]
+-----------------------------------------------------------------------------
+# will find elements by CSS
+germanium.S('.test')
+-----------------------------------------------------------------------------
+
+The S function call will return an object that is compatible with the static
+`wait_for` command.
+
+=== germanium.js(code), germanium.execute_script(code)
+
+Execute the given JavaScript, and return its result.
+
+[source,python]
+-----------------------------------------------------------------------------
+germanium.js('return document.title;')
+-----------------------------------------------------------------------------
+
+[TIP]
+The `js` is just an alias for the `execute_script` function
+
+=== germanium.take_screenshot(name)
+
+Takes a screenshot of the browser and saves it in the configured screenshot
+folder.
+
+[source,python]
+-----------------------------------------------------------------------------
+# will save a screenshot as `screenshots/test.png`
+germanium.take_screenshot('test')
+-----------------------------------------------------------------------------
+
+=== germanium.load_script(filename)
+
+Loads the JavaScript code from the file with the given name into the browser.
+
+[source,python]
+-----------------------------------------------------------------------------
+germanium.load_script('jquery.js')
+-----------------------------------------------------------------------------
+
+== germanium Instance Attributes
+
+Currently there is only one attribute, namely the `iframe_selector`, that
+allows changing the current iframe selection strategy for the given instance.
+
+As in the constructor, it supports both the class, or the callable as values
+for assignment.
+
+[source,python]
+-----------------------------------------------------------------------------
+def new_iframe_selector(germanium, iframe_name):
+    # ...
+
+old_ifame_selector = get_germanium().iframe_selector
+get_germanium().iframe_selector = new_iframe_selector
+-----------------------------------------------------------------------------
+
+This is useful for reusing the Germanium instance across tests, without the
+need to recreate it just because you need another `iframe_selector` strategy.
+
+== germanium Utility Functions
+
+Utility functions for Germanium instances.
+
+=== type_keys_g(germanium, keys_typed, element=None, delay=0)
+
+Type the current keys into the browser, optionally specifying the element to
+send the events to, and/or delay between keypresses.
+
+[source,python]
+-----------------------------------------------------------------------------
+type_keys_g(germanium, "send data<cr>but <!shift>not<^shift> now.")
+-----------------------------------------------------------------------------
+
+Special keys such as kbd:[ENTER], are available by just escaping them in `<` and `>`
+characters, e.g. `<ENTER>`. For example to send kbd:[TAB] kbd:[TAB] kbd:[ENTER] someone
+could type:
+
+[source,python]
+-----------------------------------------------------------------------------
+type_keys_g(germanium, "<tab*2><enter>")
+-----------------------------------------------------------------------------
+
+[TIP]
+Using `*` in special keys or combined macros, allows you to type the same key,
+or key combination multiple times.
+
+Also, in the typing of the keys, combined macros such as `<ctrl-a>` are
+automatically understood as kbd:[CTRL+A] and translated correctly as an action chain.
+
+Macro keys can be written such as:
+
+- kbd:[SHIFT]: `S`, `SHIFT`
+- kbd:[CONTROL]: `C`, `CTL`, `CTRL`, `CONTROL`
+- kbd:[META]: `M`, `META`
+
+Also germanium is smart enough, so the position of the macro key matters, thus
+`<s-s>` is equivalent to `<shift-s>` and thus interpreted as kbd:[SHIFT+s], and not
+kbd:[s+s] or kbd:[SHIFT+SHIFT].
+
+In order to start pressing a key, and release it latter, while still typing other
+keys, the `!` and `^` symbols can be used.
+For example to type some keys with kbd:[SHIFT] pressed this can be done:
+
+[source,python]
+-----------------------------------------------------------------------------
+type_keys_g(germanium, "<!shift>shift is down<^shift>, and now is up.")
+-----------------------------------------------------------------------------
+
+[TIP]
+The `!` looks like a finger almost pressing the button,
+and the `^` is self explanatory: the finger released the given button.
+
+=== click_g(germanium, selector)
+
+Perform a single click mouse action.
+
+[source,python]
+-----------------------------------------------------------------------------
+click_g(germanium, Button("Cancel").below(Text("Delete file?")))
+-----------------------------------------------------------------------------
+
+=== double_click_g(germanium, selector)
+
+Perform a double click mouse action.
+
+[source,python]
+-----------------------------------------------------------------------------
+double_click_g(germanium, "a.test-label")
+-----------------------------------------------------------------------------
+
+=== right_click_g(germanium, selector)
+
+Perform a mouse right click. Also known as a context menu click.
+
+[source,python]
+-----------------------------------------------------------------------------
+right_click_g(germanium, webdriver_element)
+-----------------------------------------------------------------------------
+
+=== hover_g(germanium, selector)
+
+Hover the given element.
+
+[source,python]
+-----------------------------------------------------------------------------
+hover_g(germanium, 'a.main-menu')
+-----------------------------------------------------------------------------
+
+=== select_g(germanium, selector, text=None, *argv, value=None, index=None)
+
+Select one or more elements in a HTML `<select>` element. Can select the
+elements by either, text values, actual values inside the `<option>`, or by
+index.
+
+[source,python]
+-----------------------------------------------------------------------------
+select('select#country', value='at')
+select('select#multivalueSelect', index=[1,3,7,8])
+-----------------------------------------------------------------------------
+
+=== deselect_g(germanium, selector, text=None, *argv, value=None, index=None)
+
+Deselects one or more elements in a HTML `<select>` element. Can deselect the
+elements by either, text values, actual values inside the `<option>`, or by
+index.
+
+[source,python]
+-----------------------------------------------------------------------------
+deselect('select#multivalueSelect', index=[7,8])
+-----------------------------------------------------------------------------
+
+=== get_attributes_g(germanium, selector)
+
+Return all the attributes of the element matched by the selector as a dictionary
+object.
+
+For example for this HTML:
+
+[source,html]
+-----------------------------------------------------------------------------
+<body>
+    <div id='editor' class='modal superb' custom-data='simple-code'></div>
+</body>
+-----------------------------------------------------------------------------
+
+To get all the attributes of the editor div, someone can:
+
+[source,python]
+-----------------------------------------------------------------------------
+editor_attributes = get_attributes_g(germanium, '#editor')
+assert editor_attributes['class'] == 'modal superb'
+assert editor_attributes['id'] == 'editor'
+assert editor_attributes['custom-data'] == 'simple-code'
+-----------------------------------------------------------------------------
+
+=== get_value_g(germanium, selector)
+
+Returns the current value of the element matched by the selector. Normally
+for inputs it's just the string value.
+
+In case the selector matches a multiple select, will return an array with the
+values that are currently selected.
+
+[source,python]
+-----------------------------------------------------------------------------
+assert get_value_g(germanium, 'select#multivalueSelect') == [1, 3]
+-----------------------------------------------------------------------------
+
+=== get_text_g(germanium, selector)
+
+Returns the current text of the element matched by the selector. This will
+work also for `WebElement` instances that are passed as `selector` values
+even if they are not visible.
+
+=== highlight_g(germanium, selector)
+
+Highlights the given selector on the germanium instance for debugging purposes.
+This will make the element blink in the actual browser for easy visual
+identification.
+

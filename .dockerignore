@@ -1,0 +1,7 @@
+.git
+.idea
+build
+dist
+doc/out
+node_modules
+Jenkinsfile

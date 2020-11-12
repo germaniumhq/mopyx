@@ -1,0 +1,22 @@
+germanium:
+    version: parent:../germanium-build-system@germanium
+    files:
+      README.md: ^(germanium )(.*)$
+      README.rst: ^(germanium )(.*)$
+      setup.py: version='**VERSION**',
+      doc/usage/index.adoc: = Germanium v**VERSION$$
+      germanium/version.py: current = "**VERSION**"
+      bin/release.sh: VERSION=**VERSION$$
+
+germaniumdrivers:
+    version: parent:../germaniumdrivers@germaniumdrivers
+    files:
+      setup.py: "'germaniumdrivers==**VERSION**',"
+      requirements.txt: germaniumdrivers==**VERSION$$
+
+selenium:
+  version: parent:../germanium-build-system@selenium
+  files:
+    setup.py: "'selenium==**VERSION**',"
+    requirements.txt: selenium==**VERSION$$
+

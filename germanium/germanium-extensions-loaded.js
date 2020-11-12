@@ -1,0 +1,2 @@
+
+window.__GERMANIUM_EXTENSIONS_LOADED = 1;

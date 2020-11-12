@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" value="width=device-width, scale=initial-scale">
+        <title>Mouse</title>
+        <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+    </head>
+    <body>
+        <div style="display:none" class="eventTargetDiv"></div>
+        <div style="height: 100px; width : 500px"
+             id="mouseTargetDiv"
+             class="eventTargetDiv">
+            .eventTargetDiv
+        </div>
+
+        <input id="textInput" value="none" type="text">
+
+        <div style="position: absolute; left: 0; top: 6000px">
+            <button class="buttonAboveFarDownElementInThePage"
+                    aria-label="button above far down element">buttonAboveFarDownElementInThePage</button>
+            <br/>
+            <button class="farDownElementInThePage">farDownElementInThePage</button>
+        </div>
+        <div style="position: absolute; left: 0; top: 10000px" class="bottomDiv">
+            extra vertical space
+        </div>
+
+        <script type="text/javascript">
+            (function() {
+                var clicked = false;
+
+            $('#mouseTargetDiv').contextmenu(function() {
+                clicked = true;
+
+                document.getElementById('textInput').value = 'contextmenu';
+
+                return false;
+            });
+
+            $('#mouseTargetDiv').on('click', function(ev) {
+                clicked = true;
+
+                switch(ev.which) {
+                    case 1:
+                        document.getElementById('textInput').value = 'click';
+                        break;
+                    case 2:
+                        document.getElementById('textInput').value = 'middle';
+                        break;
+                    case 3:
+                        document.getElementById('textInput').value = 'rightclick';
+                        break;
+                    default:
+                        document.getElementById('textInput').value = 'click';
+                }
+
+                return false;
+            });
+
+            $('#mouseTargetDiv').on('dblclick', function(ev) {
+                clicked = true;
+
+            	document.getElementById('textInput').value = 'doubleclick';
+            	return false;
+            });
+
+            $('#mouseTargetDiv').on('mouseover', function(ev) {
+                /*
+                 * IE9 gets spurious mouseover events after clicks.
+                 */
+                if (!clicked) {
+                    document.getElementById('textInput').value = 'mouseover';
+                }
+            });
+
+            $('.buttonAboveFarDownElementInThePage').on('click', function(ev) {
+                clicked = true;
+                document.getElementById('textInput').value = 'click:buttonAboveFarDownElementInThePage';
+
+                return false;
+            });
+
+            $('.buttonAboveFarDownElementInThePage').on('mouseover', function(ev) {
+                /*
+                 * IE9 gets spurious mouseover events after clicks.
+                 */
+                if (!clicked) {
+                    document.getElementById('textInput').value = 'mouseover:buttonAboveFarDownElementInThePage';
+                }
+
+                return false;
+            });
+
+            $('.bottomDiv').contextmenu(function(ev) {
+                return false;
+            });
+
+            $('.buttonAboveFarDownElementInThePage').on('mouseout', function(ev) {
+                if (!clicked) {
+                    document.getElementById('textInput').value = 'mouseout:buttonAboveFarDownElementInThePage';
+                }
+
+                return false;
+            });
+            })();
+        </script>
+    </body>
+</html>

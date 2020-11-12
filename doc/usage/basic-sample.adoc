@@ -1,0 +1,39 @@
+
+Installation
+============
+
+To install it just run:
+
+[source,text]
+-----------------------------------------------------------------------------
+pip install germanium
+-----------------------------------------------------------------------------
+
+You don't need any binary drivers installed, or any other dependencies, since they are bundled (and tested) by Germanium itself.
+
+Writing a test then becomes as easy as:
+
+[source,python]
+-----------------------------------------------------------------------------
+from germanium.static import *
+from time import sleep
+
+open_browser("ff")
+go_to("http://www.google.com")
+type_keys("germanium pypi<enter>", Input("q"))
+wait(Link("Python Package Index"))
+click(Link("Python Package Index"))
+sleep(5)
+close_browser()
+-----------------------------------------------------------------------------
+
+Germanium supports Python 2.7, 3.4 and 3.5, and is already used in
+production tests.
+
+Browsers supported are:
+
+* IE 8+
+* Chrome
+* Firefox
+* Edge
+

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" value="width=device-width, scale=initial-scale">
+        <title>Germanium type_keys support page.</title>
+    </head>
+    <body>
+        <pre id="errorReportingDiv">NO ERROR</pre>
+
+        <pre id="recordedEvents"></pre>
+
+        <script type="text/javascript">
+
+        var errorHappened =false;
+
+        var recordedEvents = [];
+
+        var expectedEvents = [{"eventType":"keydown","keycode":17},{"eventType":"keydown","keycode":65},{"eventType":"keypress","keycode":97},{"eventType":"keyup","keycode":65},{"eventType":"keyup","keycode":17},{"eventType":"keydown","keycode":46},{"eventType":"keypress","keycode":46},{"eventType":"keyup","keycode":46},{"eventType":"keydown","keycode":81},{"eventType":"keypress","keycode":113},{"eventType":"keyup","keycode":81},{"eventType":"keydown","keycode":87},{"eventType":"keypress","keycode":119},{"eventType":"keyup","keycode":87},{"eventType":"keydown","keycode":13},{"eventType":"keypress","keycode":13},{"eventType":"keyup","keycode":13},{"eventType":"keydown","keycode":65},{"eventType":"keypress","keycode":97},{"eventType":"keyup","keycode":65},{"eventType":"keydown","keycode":83},{"eventType":"keypress","keycode":115},{"eventType":"keyup","keycode":83},{"eventType":"keydown","keycode":13},{"eventType":"keypress","keycode":13},{"eventType":"keyup","keycode":13},{"eventType":"keydown","keycode":38},{"eventType":"keypress","keycode":38},{"eventType":"keyup","keycode":38},{"eventType":"keydown","keycode":36},{"eventType":"keypress","keycode":36},{"eventType":"keyup","keycode":36},{"eventType":"keydown","keycode":39},{"eventType":"keypress","keycode":39},{"eventType":"keyup","keycode":39},{"eventType":"keydown","keycode":16},{"eventType":"keydown","keycode":39},{"eventType":"keypress","keycode":39},{"eventType":"keyup","keycode":39},{"eventType":"keydown","keycode":39},{"eventType":"keypress","keycode":39},{"eventType":"keyup","keycode":39},{"eventType":"keyup","keycode":16},{"eventType":"keydown","keycode":17},{"eventType":"keydown","keycode":67},{"eventType":"keypress","keycode":99},{"eventType":"keyup","keycode":67},{"eventType":"keyup","keycode":17},{"eventType":"keydown","keycode":17},{"eventType":"keydown","keycode":35},{"eventType":"keypress","keycode":35},{"eventType":"keyup","keycode":35},{"eventType":"keyup","keycode":17},{"eventType":"keydown","keycode":17},{"eventType":"keydown","keycode":90},{"eventType":"keypress","keycode":122},{"eventType":"keyup","keycode":90},{"eventType":"keyup","keycode":17},{"eventType":"keydown","keycode":17},{"eventType":"keydown","keycode":90},{"eventType":"keypress","keycode":122},{"eventType":"keyup","keycode":90},{"eventType":"keyup","keycode":17}];
+
+        var keyIndex = 0;
+
+        document.body.addEventListener("keydown", function(ev) {
+            recordedEvents.push({
+                eventType: "keydown",
+                keycode: ev.keyCode
+            });
+            checkEventType(recordedEvents[recordedEvents.length - 1]);
+        });
+
+        document.body.addEventListener("keyup", function(ev) {
+            recordedEvents.push({
+                eventType: "keyup",
+                keycode: ev.keyCode
+            });
+            checkEventType(recordedEvents[recordedEvents.length - 1]);
+        });
+
+        document.body.addEventListener("keypress", function(ev) {
+            recordedEvents.push({
+                eventType: "keypress",
+                keycode: ev.keyCode || ev.which
+            });
+            checkEventType(recordedEvents[recordedEvents.length - 1]);
+        });
+
+        function checkEventType(eventObject) {
+            var expectedEvent = expectedEvents[keyIndex++],
+                errorMessage;
+
+            if (errorHappened) {
+                return; // ==> stop processing at the first error
+            }
+
+            if (!expectedEvent) {
+                errorMessage = "Too many events. expected:\n\n" +
+                    JSON.stringify(expectedEvents) +
+                    "\n\ngot instead:\n\n" +
+                    JSON.stringify(recordedEvents);
+            } else if (expectedEvent.eventType != eventObject.eventType) {
+                errorMessage ="Different event type, expected: " +
+                    expectedEvent.eventType + ", got instead: " +
+                    eventObject.eventType + " at index " + keyIndex;
+            } else if (expectedEvent.eventType != eventObject.eventType) {
+                errorMessage = "Different key code, expected: " +
+                    expectedEvent.keycode + ", got instead: " +
+                    eventObject.keycode + " at index " + keyIndex;
+            }
+
+            if (errorMessage) {
+                errorHappened = true;
+                var errorReportingDiv = document.getElementById('errorReportingDiv');
+                errorReportingDiv.innerHTML = errorMessage;
+            }
+        }
+
+        setTimeout(function() {
+            document.getElementById('recordedEvents').innerHTML = JSON.stringify(recordedEvents);
+        }, 5000);
+        </script>
+    </body>
+</html>

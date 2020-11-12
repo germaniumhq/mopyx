@@ -1,0 +1,34 @@
+= Germanium v2.0.11
+Web Testing API that doesn't disappoint
+:toc: left
+:experimental:
+:source-highlighter: pygments
+:pygments-css: style
+:sectanchors:
+
+:leveloffset: +1
+
+include::basic-sample.adoc[]
+
+include::germanium-drivers-environment.adoc[]
+
+include::static.adoc[]
+
+include::selectors.adoc[]
+
+include::selectors_positional.adoc[]
+
+include::selectors_insidecontains.adoc[]
+
+include::selectors_static.adoc[]
+
+include::selectors_provided.adoc[]
+
+include::point_support.adoc[]
+
+include::keys_support.adoc[]
+
+include::api.adoc[]
+
+:leveloffset: -1
+
