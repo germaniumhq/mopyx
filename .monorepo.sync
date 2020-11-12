@@ -14,3 +14,5 @@ oaas/registry-api:
 - dc62912106b4eb39d3cecf17ebfa15fa2071c845
 oaas/simple:
 - 237a0575d550fad91c1da75745d092f27f39588d
+tools/git-monorepo:
+- 575ef563d29cc1e5094531f765978fa6b122fb14
