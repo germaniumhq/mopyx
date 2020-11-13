@@ -22,6 +22,7 @@ mappings:
       ge-python-api: git@github.com:germaniumhq/germanium-python-api.git
       ge-python-drivers: git@github.com:germaniumhq/germaniumhq-drivers-python.git
       ge-get: git@github.com:germaniumhq/germanium-get.git
+      ge-robot: git@github.com:germaniumhq/robotframework-germaniumlibrary.git
     ge-web: git@github.com:germaniumhq/germanium-star.git
   gbs:
     gbs-java: git@github.com:germaniumhq/germaniumhq-java-build-system.git
