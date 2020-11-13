@@ -20,6 +20,8 @@ ge-star/germanium/ge-python-api:
 - 6734f2f5b1de161082e9ea93b371f04b2708cafa
 ge-star/germanium/ge-python-drivers:
 - 981624ae9ed98df4dcc1251fabc2ee69cb8d1756
+ge-star/germanium/ge-robot:
+- ec50979448645736c9af2d99d66c1d3c9fa5ae66
 oaas/grpc:
 - dd1674eaf06ae7c65260f989e5e0ea34418cfaa7
 oaas/grpc-compiler:
