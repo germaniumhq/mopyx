@@ -34,8 +34,8 @@ def _create(t: Type[T], *args, **kw) -> T:
     if t not in method_registrations:
         raise Exception(f"{t} was not registered with @weary.model")
 
-    for method_name, method_impl in method_registrations[t].items():
-        setattr(result, method_name, _context_provider(result, method_impl))
+    # for method_name, method_impl in method_registrations[t].items():
+    #     setattr(result, method_name, _context_provider(result, method_impl))
 
     return result
 
