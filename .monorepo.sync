@@ -23,7 +23,7 @@ ge-star/germanium/ge-python-drivers:
 ge-star/germanium/ge-robot:
 - ec50979448645736c9af2d99d66c1d3c9fa5ae66
 ge-star/weary:
-- e51fb601bfbdb1f0104b36649725625c21a223bd
+- 1c7e98c43825ee47e6889bf8b387c75070fde9e2
 oaas/grpc:
 - dd1674eaf06ae7c65260f989e5e0ea34418cfaa7
 oaas/grpc-compiler:
