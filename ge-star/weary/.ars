@@ -1,0 +1,4 @@
+arg0: weary
+passive: true
+templates:
+- py3/lib

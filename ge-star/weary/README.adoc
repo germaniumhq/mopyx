@@ -1,0 +1,10 @@
+= weary
+
+A python first model definition that resolves on demand.
+
+== Installation
+
+[source,sh]
+-----------------------------------------------------------------------------
+pip install weary
+-----------------------------------------------------------------------------
