@@ -10,6 +10,7 @@ mappings:
     registry: git@github.com:germaniumhq/oaas-registry.git
     grpc: git@github.com:germaniumhq/oaas-grpc.git
     simple: git@github.com:germaniumhq/oaas-simple.git
+    oaas-js: git@github.com:germaniumhq/oaas-js.git
   tools:
     git-monorepo: git@github.com:bmustiata/git-monorepo.git
     version-manager: git@github.com:bmustiata/version-manager-py.git
