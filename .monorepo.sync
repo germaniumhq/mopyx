@@ -13,7 +13,7 @@ gbs/gbs-python:
 gbs/gbs-ubuntu:
 - 296ed23840d7b83aa0c17c88e50f461001e534f2
 ge-star/ge-web:
-- c60e47b70a60974d9e313927b6aff922a7fcccd3
+- ff43e054f09d5c30c377ebe7dd441bd95ec81cd2
 ge-star/germanium/ge-get:
 - 062c9dea6c47b8c21e4a5cf0ef936690b96bf351
 ge-star/germanium/ge-python-api:
