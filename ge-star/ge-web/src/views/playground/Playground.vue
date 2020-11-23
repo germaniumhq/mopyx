@@ -7,39 +7,11 @@
 </template>
 
 <script lang="ts">
-import {EchoClient, ServiceError, UnaryResponse} from './echo_pb_service'
-import { EchoMessage } from './echo_pb'
-import {grpc} from "@improbable-eng/grpc-web";
-import { Vue, Component } from 'vue-property-decorator'
+import {EchoClient} from './echo_pb_service'
+import {EchoMessage} from './echo_pb'
+import {Component, Vue} from 'vue-property-decorator'
+import * as oaas from "@/model/oaas";
 
-function p<S, R>(
-    that: any,
-    fn: (data: S, metadata: grpc.Metadata, callback: (err: ServiceError|null, resp: R|null) => void) => UnaryResponse,
-): (data: S, metadata: grpc.Metadata) => Promise<R> {
-// S=sent, R=response, UR=unary response
-  function _call(data: S, metadata: grpc.Metadata|null): Promise<R> {
-    return new Promise((resolve, reject) => {
-      const args: any = [data]
-
-      if (metadata) {
-        args.push(metadata);
-      }
-
-      args.push((err: Error|null, result: R) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-
-        resolve(result);
-      })
-
-      fn.apply(that, args)
-    });
-  }
-
-  return _call;
-}
 
 @Component({})
 export default class Playground extends Vue {
@@ -48,20 +20,13 @@ export default class Playground extends Vue {
   }
 
   async sendEchoRequest() {
-    const client = new EchoClient("http://localhost:9000")
+    const c = oaas.client(EchoClient, {instance: "custom"})
 
     try {
-      console.log("x");
-      let metadata = new grpc.Metadata({
-        'x-oaas-auth': 'abcd',
-        'x-oaas-route': JSON.stringify({
-          'custom': 'structure',
-          'is': ['here']
-        })
-      });
       let echoMessage = new EchoMessage()
       echoMessage.setMsg("x")
-      const data = await p<EchoMessage, EchoMessage>(client, client.echo)(echoMessage, metadata)
+
+      const data = await oaas.asPromise<EchoMessage, EchoMessage>(c, EchoClient.prototype.echo)(echoMessage);
 
       this.$refs.data.innerHTML = data?.getMsg()
     } catch (err) {
@@ -71,9 +36,10 @@ export default class Playground extends Vue {
   }
 
   sendRepeatRequest() {
-    const client = new EchoClient("http://localhost:9000")
+    const client = oaas.client(EchoClient);
     let message = new EchoMessage();
     message.setMsg("test")
+
     const repeat = client.repeat(message)
 
     repeat.on("data", (message) => {
