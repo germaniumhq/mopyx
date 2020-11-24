@@ -10,6 +10,8 @@ gbs/gbs-node:
 - cb0a9d691f55f5e546222c593c7e6a317a8e4dd1
 gbs/gbs-python:
 - e7e4bb93feb66c0e3979fb8441f8f7314af9bd0a
+gbs/gbs-ubuntu:
+- c08ab60f6dc3dbdff2da6934b20094d7637d1711
 ge-star/ge-web:
 - d961a76f267f7ebf0ab1b7eab041add75be2b4e0
 ge-star/germanium/ge-get:
