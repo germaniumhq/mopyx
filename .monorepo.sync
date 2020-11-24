@@ -6,6 +6,8 @@ adhesive/yamldict:
 - 0e4dd45050e68580f21ab0d3d16a6b6fefb2580a
 ge-star/germanium/ge-python-api:
 - 11ae226eb7ae6595f91f80158fd8bdbfb9976406
+ge-star/germanium/ge-python-drivers:
+- adb581e1ffacf116a9d700e97c062a4e94476ae0
 oaas/envoy-proxy:
 - 89e7381b1db8bbead925ee6ed36379a890dcb3de
 oaas/grpc:
