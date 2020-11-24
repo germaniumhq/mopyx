@@ -14,6 +14,8 @@ ge-star/germanium/ge-python-drivers:
 - adb581e1ffacf116a9d700e97c062a4e94476ae0
 ge-star/germanium/ge-robot:
 - 0159fb8510e8825ffcd35a1ce57ea7cd03bd5eac
+ge-star/weary:
+- e48d73f232b7c80915001eb0995eae2fb705d5cd
 oaas/envoy-proxy:
 - 89e7381b1db8bbead925ee6ed36379a890dcb3de
 oaas/grpc:
