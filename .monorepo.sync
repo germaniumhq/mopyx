@@ -14,3 +14,5 @@ oaas/registry:
 - 852132ea7291551acac335485e3e4d1879d2f6c9
 oaas/registry-api:
 - e9b78a21d70c37b297b7bf8ad936aba69d0ed637
+oaas/simple:
+- dc6fbdd34390be9bba23acaa5a9f866b7f982c72
