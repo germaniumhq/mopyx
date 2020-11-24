@@ -8,3 +8,5 @@ oaas/grpc-compiler:
 - 740ddbfecaf7abbe5f79cb0de10ffa9f677f57a4
 oaas/oaas:
 - f46858cbd7d6d148b42d058a366f7f57953ef45e
+oaas/registry-api:
+- e9b78a21d70c37b297b7bf8ad936aba69d0ed637
