@@ -22,3 +22,5 @@ oaas/simple:
 - dc6fbdd34390be9bba23acaa5a9f866b7f982c72
 tools/git-monorepo:
 - 7ebb7fc1255651f0e5dfb1e4f5a414ca7236eab9
+tools/version-manager:
+- e2cc793c4c9b001ccc99bd3eaed26c0a32814d5b
