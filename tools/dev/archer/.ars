@@ -1,4 +1,0 @@
-arg0: project_archer
-project_archer: true
-templates:
-- py3/exe

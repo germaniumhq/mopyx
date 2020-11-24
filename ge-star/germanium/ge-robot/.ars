@@ -1,4 +1,0 @@
-GermaniumLibrary: true
-arg0: GermaniumLibrary
-templates:
-- py3/lib

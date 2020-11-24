@@ -1,8 +1,0 @@
-.idea
-*.pyc
-.mypy_cache
-__pycache__
-/dist
-/build
-*.egg-info
-Jenkinsfile
