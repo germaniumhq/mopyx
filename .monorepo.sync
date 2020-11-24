@@ -4,6 +4,8 @@ adhesive/adhesive-samples:
 - 746599d85c4c2a592faa7c8d17173f4e1ac590f4
 adhesive/yamldict:
 - 0e4dd45050e68580f21ab0d3d16a6b6fefb2580a
+ge-star/ge-web:
+- d961a76f267f7ebf0ab1b7eab041add75be2b4e0
 ge-star/germanium/ge-get:
 - f9534517d98f095feebacf430ec6f3169a0fdfd2
 ge-star/germanium/ge-python-api:
