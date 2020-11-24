@@ -42,6 +42,8 @@ oaas/simple:
 - 237a0575d550fad91c1da75745d092f27f39588d
 tools/adhesive-lib:
 - 5fb7ddfd36661e3a45b12fa2dd73bf7333360b19
+tools/arsonist:
+- d6e154a30942ba8917b31df61b9f517359c6a774
 tools/dev/archer:
 - 809699837f401e52feb0000453d77cb64f4b0271
 tools/dev/arsonist:
