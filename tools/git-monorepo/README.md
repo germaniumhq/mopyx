@@ -90,8 +90,8 @@ This renames the entry in the synchronized commits, and does the
 equivalent of:
 
     git mv old/path new/path
-    git subtree split --rejoin --prefix=new/path HEAD
-    git subtree pull --squash --prefix=new/path giturl branch
+
+With a special commit so `git-subtree` can find it.
 
 > **Note**
 >

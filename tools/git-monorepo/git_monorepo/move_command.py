@@ -1,6 +1,8 @@
 import os
+import re
 import subprocess
 import sys
+import textwrap
 
 from termcolor_util import red, yellow, cyan
 
@@ -9,8 +11,9 @@ from git_monorepo.git_monorepo_config import (
     MONOREPO_CONFIG_FILE,
     write_synchronized_commits,
     _resolve_in_repo,
+    get_current_commit,
+    GitMonorepoConfig,
 )
-from git_monorepo.git_util import env_extend
 
 
 def move(old_path: str, new_path: str) -> None:
@@ -38,6 +41,19 @@ def move(old_path: str, new_path: str) -> None:
         cyan("moving"), cyan(old_path, bold=True), cyan("->"), cyan(new_path, bold=True)
     )
 
+    current_commit = get_current_commit(project_folder=monorepo.project_folder)
+    remote_commit = get_remote_commit(monorepo=monorepo, old_path=old_path)
+
+    message = textwrap.dedent(
+        f"""\
+        git-monorepo: move {old_path} -> {new_path}
+        
+        git-subtree-dir: {new_path}
+        git-subtree-mainline: {current_commit}
+        git-subtree-split: {remote_commit}
+    """
+    )
+
     # we ensure the path exists
     os.makedirs(os.path.dirname(new_path), exist_ok=True)
 
@@ -46,38 +62,8 @@ def move(old_path: str, new_path: str) -> None:
     )
 
     subprocess.check_call(
-        ["git", "commit", "-m", f"git-monorepo: move {old_path} -> {new_path}"],
+        ["git", "commit", "-m", message],
         cwd=monorepo.project_folder,
-    )
-
-    subprocess.check_call(
-        ["git", "subtree", "split", "--rejoin", f"--prefix={new_path}", "HEAD"],
-        cwd=monorepo.project_folder,
-        env=env_extend(
-            {
-                "EDITOR": "git-monorepo-editor",
-                "GIT_MONOREPO_EDITOR_MESSAGE": f"git-monorepo: Sync {new_path}",
-            }
-        ),
-    )
-
-    subprocess.check_call(
-        [
-            "git",
-            "subtree",
-            "pull",
-            "--squash",
-            f"--prefix={new_path}",
-            giturl,
-            monorepo.current_branch,
-        ],
-        cwd=monorepo.project_folder,
-        env=env_extend(
-            {
-                "EDITOR": "git-monorepo-editor",
-                "GIT_MONOREPO_EDITOR_MESSAGE": f"git-monorepo: Sync {new_path}",
-            }
-        ),
     )
 
     monorepo.repos[new_path] = monorepo.repos[old_path]
@@ -94,3 +80,30 @@ def move(old_path: str, new_path: str) -> None:
         yellow(MONOREPO_CONFIG_FILE, bold=True),
         yellow("with the new location, and remove the old entry"),
     )
+
+
+def get_remote_commit(*, monorepo: GitMonorepoConfig, old_path: str) -> str:
+    log = subprocess.check_output(
+        ["git", "log", "."], cwd=monorepo.project_folder
+    ).decode("utf-8")
+
+    SUBTREE_DIR_RE = re.compile(
+        r"^\s*" + re.escape(f"git-subtree-dir: {old_path}") + "$"
+    )
+    SUBTREE_COMMIT_RE = re.compile(r"^\s*git-subtree-split:\s*([0-9a-f]+)$")
+
+    found_commit = False
+    for line in log.splitlines():
+        if not found_commit:
+            subtree_match = SUBTREE_DIR_RE.match(line)
+            if subtree_match:
+                found_commit = True
+
+            continue
+
+        m = SUBTREE_COMMIT_RE.match(line)
+        if m:
+            return m.group(1)
+
+    print(red(f"Unable to find any subtree commit for", red(old_path, bold=True)))
+    sys.exit(1)
