@@ -6,6 +6,8 @@ adhesive/yamldict:
 - 0e4dd45050e68580f21ab0d3d16a6b6fefb2580a
 gbs/gbs-java:
 - 69833d5cea181fcd389b460a324886ac0bece2e4
+gbs/gbs-node:
+- cb0a9d691f55f5e546222c593c7e6a317a8e4dd1
 gbs/gbs-python:
 - e7e4bb93feb66c0e3979fb8441f8f7314af9bd0a
 ge-star/ge-web:
