@@ -47,6 +47,6 @@ tools/dev/archer:
 tools/dev/arsonist:
 - cbf842163fe1094b0bfa517a2a6c02fd5bca9e6a
 tools/git-monorepo:
-- 575ef563d29cc1e5094531f765978fa6b122fb14
+- a4fa4a4229923be77f8c73b1aaf1a981f43fb497
 tools/version-manager:
 - 864d1dffc776659cfa19f6ba467ac0e3c71fb17f
