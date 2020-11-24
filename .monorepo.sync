@@ -10,6 +10,8 @@ ge-star/germanium/ge-python-api:
 - 11ae226eb7ae6595f91f80158fd8bdbfb9976406
 ge-star/germanium/ge-python-drivers:
 - adb581e1ffacf116a9d700e97c062a4e94476ae0
+ge-star/germanium/ge-robot:
+- 0159fb8510e8825ffcd35a1ce57ea7cd03bd5eac
 oaas/envoy-proxy:
 - 89e7381b1db8bbead925ee6ed36379a890dcb3de
 oaas/grpc:
