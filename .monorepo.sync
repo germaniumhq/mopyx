@@ -22,6 +22,8 @@ oaas/simple:
 - dc6fbdd34390be9bba23acaa5a9f866b7f982c72
 tools/adhesive-lib:
 - 0af15f534ec58c98bd57807649040a3b5fdad5e1
+tools/arsonist:
+- dc68b73795a8c982bb0d2c0b407bae2f460a3834
 tools/git-monorepo:
 - 7ebb7fc1255651f0e5dfb1e4f5a414ca7236eab9
 tools/version-manager:
