@@ -25,7 +25,7 @@ ge-star/germanium/ge-robot:
 ge-star/weary:
 - 37844324a1f15fb98e6251af1e9b5bde3142f492
 oaas/envoy-proxy:
-- fca037726e88af5ce31b2a5d0c52a3cc84466d33
+- f6e18eabdc5ddba87e938efd7128a993b262c45b
 oaas/grpc:
 - dd1674eaf06ae7c65260f989e5e0ea34418cfaa7
 oaas/grpc-compiler:
