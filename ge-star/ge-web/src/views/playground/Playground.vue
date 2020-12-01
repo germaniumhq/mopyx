@@ -1,8 +1,21 @@
 <template>
   <div>
     <div class="data" ref="data"></div>
-    <button @click="sendEchoRequest">send echo request</button>
-    <button @click="sendRepeatRequest">send repeat request</button>
+    <div>content</div>
+    <div>content</div>
+    <div>content</div>
+    <div>content</div>
+    <div>content</div>
+    <div>content</div>
+    <div>content</div>
+    <div>content</div>
+    <div>content</div>
+    <button id="send-echo-request" @click="sendEchoRequest">send echo request</button>
+    <button id="send-repeat-request" @click="sendRepeatRequest">send repeat request</button>
+    <input id="some-text" name="a" type="text"/>
+    <Tooltip for="#send-echo-request" position="top">Send a single request to the server</Tooltip>
+    <Tooltip for="#send-repeat-request" position="bottom">Send a repeated request to the server. Send a repeated request to the server.Send a repeated request to the server.</Tooltip>
+    <Tooltip for="#some-text" position="left">send some data</Tooltip>
   </div>
 </template>
 
@@ -11,9 +24,14 @@ import {EchoClient} from './echo_pb_service'
 import {EchoMessage} from './echo_pb'
 import {Component, Vue} from 'vue-property-decorator'
 import * as oaas from "@/model/oaas";
+import Tooltip from "@/components/patternfly/Tooltip.vue";
 
 
-@Component({})
+@Component({
+  components: {
+    Tooltip: Tooltip,
+  }
+})
 export default class Playground extends Vue {
   $refs!: {
     data: HTMLButtonElement,
