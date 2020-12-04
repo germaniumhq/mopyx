@@ -26,6 +26,10 @@ import {isDomChild} from "@/components/patternfly/domutil";
 
 @Component({})
 export default class Dropdown extends Vue {
+  $refs!: {
+    menu: Element,
+  }
+
   @Prop({default : false}) 
   expanded!: boolean
 
@@ -49,32 +53,48 @@ export default class Dropdown extends Vue {
 
   @Emit("click")
   onClick() {
-    this.expandedState = !this.expandedState
-
-    console.log("on click")
-
-    if (!this.expandedState) {
+    if (this.expandedState) {
+      this.collapse()
       return
     }
 
-    // we add the listeners with a timeout, so we don't get called when
-    // the event bubbles.
+    this.expand()
+  }
+
+  onBodyFocusEvent(e: FocusEvent) {
+    if (!this.expandedState) {
+      console.warn("Context menu not expanded")
+      return
+    }
+
+    if (isDomChild(this.$refs.menu, e.target as Element)) {
+      return;
+    }
+
+    this.collapse()
+  }
+
+  expand() {
+    if (this.expandedState) {
+      return
+    }
+
+    this.expandedState = true
+
     setTimeout(() => {
-      document.body.addEventListener("focus", this.clickFocusChange)
-      document.body.addEventListener("click", this.clickFocusChange)
+      document.body.addEventListener("focus", this.onBodyFocusEvent)
+      document.body.addEventListener("click", this.collapse)
     }, 0)
   }
 
-  clickFocusChange(e: MouseEvent) {
-    // FIXME: implement
-    // if (isDomChild(this.$refs.menu, e.target)) {
-    //   return
-    // }
+  collapse() {
+    if (!this.expandedState) {
+      return;
+    }
 
     this.expandedState = false;
-
-    document.body.removeEventListener("focus", this.clickFocusChange)
-    document.body.removeEventListener("click", this.clickFocusChange)
+    document.body.removeEventListener("focus", this.onBodyFocusEvent)
+    document.body.removeEventListener("click", this.collapse)
   }
 
   get cssClasses() {

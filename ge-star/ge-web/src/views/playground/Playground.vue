@@ -12,16 +12,18 @@
       <Dropdown label="wut 1">
         <Expandable label="uau">
           <Expandable label="uau">
-            <Expandable label="uau">
+            <Expandable>
+              wut
             </Expandable>
           </Expandable>
         </Expandable>
       </Dropdown>
 
       <Dropdown label="wut 2" :ellipsis="true">
-        <Expandable label="uau">
-          <Expandable label="uau">
-            <Expandable label="uau">
+        <Expandable>
+          <Expandable>
+            <Expandable>
+              <a href="#">wut</a>
             </Expandable>
           </Expandable>
         </Expandable>
