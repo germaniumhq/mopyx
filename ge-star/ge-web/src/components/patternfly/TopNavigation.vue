@@ -1,5 +1,6 @@
 <template>
  <div class="pf-c-page__header-nav">
+  <slot name="left-nav"></slot>
   <nav class="pf-c-nav" aria-label="Global">
     <button class="pf-c-nav__scroll-button" aria-label="Scroll left">
       <i class="fas fa-angle-left" aria-hidden="true"></i>
@@ -11,6 +12,7 @@
     <i class="fas fa-angle-right" aria-hidden="true"></i>
     </button>
   </nav>
+  <slot name="right-nav"></slot>
  </div>
 </template>
 

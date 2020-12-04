@@ -16,6 +16,15 @@
             <TopNavigationLink caption="Projects" :active="model.ui.section == 'overview'" route="/"/>
             <TopNavigationLink caption="Data" :active="model.ui.section == 'data'" route="/data"/>
             <TopNavigationLink caption="Reports" :active="model.ui.section == 'reports'" route="/reports"/>
+
+            <!-- projects -->
+            <template v-slot:right-nav>
+              <Dropdown label="<<select project>>">
+                <DropdownEntry>AE</DropdownEntry>
+                <DropdownEntry>Wolverine</DropdownEntry>
+                <DropdownEntry>Wut</DropdownEntry>
+              </Dropdown>
+            </template>
           </TopNavigation>
         </template>
 
@@ -42,8 +51,8 @@ import AppMenu from '@/components/app/AppMenu.vue'
 import AppMenuEntry from '@/components/app/AppMenuEntry.vue'
 import Gravatar from '@/components/app/Gravatar.vue'
 import ToggleNavigation from '@/components/app/ToggleNavigation.vue'
-import TopNavigation from '@/components/app/TopNavigation.vue'
-import TopNavigationLink from '@/components/app/TopNavigationLink.vue'
+import TopNavigation from '@/components/patternfly/TopNavigation.vue'
+import TopNavigationLink from '@/components/patternfly/TopNavigationLink.vue'
 import TreeNodeView from '@/components/app/TreeNodeView.vue'
 
 import hotkeys from 'hotkeys-js'
@@ -52,12 +61,16 @@ import AboutModalBox from '@/components/patternfly/AboutModalBox.vue'
 import Page from '@/components/patternfly/Page.vue'
 import Backdrop from '@/components/patternfly/Backdrop.vue'
 
-import { Vue, Component } from 'vue-property-decorator'
+import {Component, Vue} from 'vue-property-decorator'
 
 import model from '@/model'
+import Dropdown from "@/components/patternfly/Dropdown.vue";
+import DropdownEntry from "@/components/patternfly/DropdownEntry.vue";
 
 @Component({
   components: {
+    DropdownEntry,
+    Dropdown,
     AboutModalBox,
     AppMenu,
     AppMenuEntry,

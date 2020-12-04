@@ -55,3 +55,15 @@ export function box(element: Element): Dimensions {
         middle,
     }
 }
+
+export function isDomChild(parent: Node, child: Node|null): boolean {
+    while (child && child.parentElement != child) {
+        if (child == parent) {
+            return true
+        }
+
+        child = child.parentElement;
+    }
+
+    return false
+}

@@ -1,5 +1,5 @@
 <template>
-    <Dropdown align="right"><slot></slot></Dropdown>
+    <Dropdown align="right" :ellipsis="true"><slot></slot></Dropdown>
 </template>
 
 <script lang="ts">

@@ -8,6 +8,25 @@
     <div>content</div>
     <div>content</div>
     <div>content</div>
+    <div>
+      <Dropdown label="wut 1">
+        <Expandable label="uau">
+          <Expandable label="uau">
+            <Expandable label="uau">
+            </Expandable>
+          </Expandable>
+        </Expandable>
+      </Dropdown>
+
+      <Dropdown label="wut 2" :ellipsis="true">
+        <Expandable label="uau">
+          <Expandable label="uau">
+            <Expandable label="uau">
+            </Expandable>
+          </Expandable>
+        </Expandable>
+      </Dropdown>
+    </div>
     <div>content</div>
     <div>content</div>
     <button id="send-echo-request" @click="sendEchoRequest">send echo request</button>
@@ -25,10 +44,14 @@ import {EchoMessage} from './echo_pb'
 import {Component, Vue} from 'vue-property-decorator'
 import * as oaas from "@/model/oaas";
 import Tooltip from "@/components/patternfly/Tooltip.vue";
+import Dropdown from "@/components/patternfly/Dropdown.vue";
+import Expandable from "@/components/patternfly/Expandable.vue";
 
 
 @Component({
   components: {
+    Expandable,
+    Dropdown,
     Tooltip: Tooltip,
   }
 })
