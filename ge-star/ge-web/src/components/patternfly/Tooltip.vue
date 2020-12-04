@@ -23,8 +23,8 @@ export default class Tooltip extends Vue {
   private mountedElements!: Array<Element> | NodeListOf<Element>;
   private currentTarget!: EventTarget | null;
 
-  private tooltipWidth: int = 100
-  private tooltipHeight: int = 48
+  private tooltipWidth: number = 100
+  private tooltipHeight: number = 48
 
   constructor() {
     super()
@@ -84,7 +84,7 @@ export default class Tooltip extends Vue {
       return {}
     }
 
-    const targetDimensions = box(this.currentTarget)
+    const targetDimensions = box(this.currentTarget as Element)
 
     switch (this.renderPosition) {
       case "bottom":
