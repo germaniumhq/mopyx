@@ -40,7 +40,7 @@
         </Tab>
       </template>
       <div>
-        tabs content
+        <Vega></Vega>
       </div>
     </Tabs>
 
@@ -65,6 +65,7 @@ import Dropdown from "@/components/patternfly/Dropdown.vue";
 import Expandable from "@/components/patternfly/Expandable.vue";
 import Tabs from "@/components/patternfly/Tabs.vue";
 import Tab from "@/components/patternfly/Tab.vue";
+import Vega from "@/components/vega/Vega.vue";
 
 
 @Component({
@@ -72,6 +73,7 @@ import Tab from "@/components/patternfly/Tab.vue";
     Expandable,
     Tabs,
     Tab,
+    Vega,
     Dropdown,
     Tooltip: Tooltip,
   }

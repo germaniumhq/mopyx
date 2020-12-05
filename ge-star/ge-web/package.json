@@ -16,6 +16,9 @@
     "google-protobuf": "^3.14.0",
     "hotkeys-js": "3.7.3",
     "monaco-editor": "0.19.3",
+    "vega": "^5.17.0",
+    "vega-embed": "^6.14.0",
+    "vega-lite": "^4.17.0",
     "vscode-json-languageservice": "3.4.11",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
@@ -42,7 +45,7 @@
     "monaco-editor-webpack-plugin": "1.8.2",
     "node-sass": "^4.12.0",
     "sass-loader": "^8.0.0",
-    "typescript": "~3.7.5",
+    "typescript": "^4.0.0",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
