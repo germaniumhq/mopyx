@@ -47,6 +47,6 @@ tools/archer:
 tools/arsonist:
 - dc68b73795a8c982bb0d2c0b407bae2f460a3834
 tools/git-monorepo:
-- 7ebb7fc1255651f0e5dfb1e4f5a414ca7236eab9
+- dce804bcef74ed91b6704d3a2b46cad5be500ed9
 tools/version-manager:
 - e2cc793c4c9b001ccc99bd3eaed26c0a32814d5b
