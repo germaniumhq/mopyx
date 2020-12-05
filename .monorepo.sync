@@ -43,7 +43,7 @@ oaas/simple:
 tools/adhesive-lib:
 - 0af15f534ec58c98bd57807649040a3b5fdad5e1
 tools/archer:
-- e783d67f2d42fe6d987abe220439dbd686c5c203
+- 78986d2159959b0b1db3b7d39dc36285aef931f5
 tools/arsonist:
 - dc68b73795a8c982bb0d2c0b407bae2f460a3834
 tools/git-monorepo:
