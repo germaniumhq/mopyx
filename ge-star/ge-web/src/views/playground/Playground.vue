@@ -29,6 +29,21 @@
         </Expandable>
       </Dropdown>
     </div>
+
+    <Tabs :secondary="true">
+      <template v-slot:tabs>
+        <Tab label="test" active="true">
+          some test
+        </Tab>
+        <Tab label="test2">
+          some other test
+        </Tab>
+      </template>
+      <div>
+        tabs content
+      </div>
+    </Tabs>
+
     <div>content</div>
     <div>content</div>
     <button id="send-echo-request" @click="sendEchoRequest">send echo request</button>
@@ -48,11 +63,15 @@ import * as oaas from "@/model/oaas";
 import Tooltip from "@/components/patternfly/Tooltip.vue";
 import Dropdown from "@/components/patternfly/Dropdown.vue";
 import Expandable from "@/components/patternfly/Expandable.vue";
+import Tabs from "@/components/patternfly/Tabs.vue";
+import Tab from "@/components/patternfly/Tab.vue";
 
 
 @Component({
   components: {
     Expandable,
+    Tabs,
+    Tab,
     Dropdown,
     Tooltip: Tooltip,
   }
