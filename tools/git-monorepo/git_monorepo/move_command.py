@@ -19,8 +19,6 @@ from git_monorepo.git_monorepo_config import (
 def move(old_path: str, new_path: str) -> None:
     """
     git mv old/path new/path
-    git subtree split --rejoin --prefix=new/path HEAD
-    git subtree pull --squash --prefix=new/path giturl branch
     """
     monorepo = read_monorepo_config()
 
@@ -35,8 +33,6 @@ def move(old_path: str, new_path: str) -> None:
         )
         sys.exit(1)
 
-    giturl = monorepo.repos[old_path]
-
     print(
         cyan("moving"), cyan(old_path, bold=True), cyan("->"), cyan(new_path, bold=True)
     )
@@ -44,15 +40,29 @@ def move(old_path: str, new_path: str) -> None:
     current_commit = get_current_commit(project_folder=monorepo.project_folder)
     remote_commit = get_remote_commit(monorepo=monorepo, old_path=old_path)
 
-    message = textwrap.dedent(
-        f"""\
-        git-monorepo: move {old_path} -> {new_path}
-        
-        git-subtree-dir: {new_path}
-        git-subtree-mainline: {current_commit}
-        git-subtree-split: {remote_commit}
-    """
-    )
+    if monorepo.squash:
+        message = textwrap.dedent(
+            f"""\
+            git-monorepo: move {old_path} -> {new_path}
+            
+            git-subtree-dir: {new_path}
+            git-subtree-split: {remote_commit}
+        """
+        )
+    else:
+        # FIXME: I'm not sure about the mainline thing, it is supposed
+        #        to be the commit in the current tree, presumably for the
+        #        subtree to have an easier time to decide what commits
+        #        get in.
+        message = textwrap.dedent(
+            f"""\
+            git-monorepo: move {old_path} -> {new_path}
+
+            git-subtree-dir: {new_path}
+            git-subtree-mainline: {current_commit}
+            git-subtree-split: {remote_commit}
+        """
+        )
 
     # we ensure the path exists
     os.makedirs(os.path.dirname(new_path), exist_ok=True)
