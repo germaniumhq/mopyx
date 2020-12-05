@@ -1,16 +1,20 @@
 <template>
-<div :class='cssClasses'
-     @blur="onBlur"
-     @click="onClick">
+<div :class='cssClasses'>
   <button class="pf-c-dropdown__toggle pf-m-plain"
           id="dropdown-kebab-expanded-button" 
           :aria-expanded="expanded" 
-          :aria-label="label">
-    <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
+          :aria-label="label"
+          @click="onClick">
+    <span class="pf-c-dropdown__toggle-text" v-if="!ellipsis && label">{{label}}</span>
+    <i class="fas fa-ellipsis-v" aria-hidden="true" v-if="ellipsis"></i>
+    <span class="pf-c-dropdown__toggle-icon" v-else>
+      <i class="fas fa-caret-down" aria-hidden="true"></i>
+    </span>
   </button>
   <ul v-if="expandedState"
       :class="dropdownCssClasses"
-      aria-labelledby="dropdown-kebab-expanded-button">
+      aria-labelledby="dropdown-kebab-expanded-button"
+      ref="menu">
     <slot></slot>
   </ul>
 </div>
@@ -18,14 +22,21 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Emit} from 'vue-property-decorator'
+import {isDomChild} from "@/components/patternfly/domutil";
 
-// FIXME: click outside doesn't closes the context menu
 @Component({})
 export default class Dropdown extends Vue {
+  $refs!: {
+    menu: Element,
+  }
+
   @Prop({default : false}) 
   expanded!: boolean
 
-  @Prop({default: "Action"}) 
+  @Prop({default : false})
+  ellipsis!: boolean
+
+  @Prop({default: ""})
   label!: string
 
   @Prop({default: "left"})
@@ -34,10 +45,56 @@ export default class Dropdown extends Vue {
   @Prop({default: "bottom"})
   valign!: string
 
-  expandedState: boolean = true;
+  expandedState: boolean = false;
 
   beforeMount() {
     this.expandedState = this.expanded
+  }
+
+  @Emit("click")
+  onClick() {
+    if (this.expandedState) {
+      this.collapse()
+      return
+    }
+
+    this.expand()
+  }
+
+  onBodyFocusEvent(e: FocusEvent) {
+    if (!this.expandedState) {
+      console.warn("Context menu not expanded")
+      return
+    }
+
+    if (isDomChild(this.$refs.menu, e.target as Element)) {
+      return;
+    }
+
+    this.collapse()
+  }
+
+  expand() {
+    if (this.expandedState) {
+      return
+    }
+
+    this.expandedState = true
+
+    setTimeout(() => {
+      document.body.addEventListener("focus", this.onBodyFocusEvent)
+      document.body.addEventListener("click", this.collapse)
+    }, 0)
+  }
+
+  collapse() {
+    if (!this.expandedState) {
+      return;
+    }
+
+    this.expandedState = false;
+    document.body.removeEventListener("focus", this.onBodyFocusEvent)
+    document.body.removeEventListener("click", this.collapse)
   }
 
   get cssClasses() {
@@ -63,16 +120,6 @@ export default class Dropdown extends Vue {
     }
 
     return result;
-  }
-
-  @Emit("click")
-  onClick() {
-    this.expandedState = !this.expandedState
-  }
-
-  @Emit("blur")
-  onBlur() {
-    this.expandedState = false
   }
 }
 </script>

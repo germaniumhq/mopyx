@@ -2,7 +2,7 @@
 <Drop>
   <div class="pf-l-stack">
     <div class="pf-l-stack__item">
-      <div class="pf-c-tabs pf-m-start pf-m-start-current pf-m-end">
+      <div :class="cssClasses">
         <button :class="cssScrollLeftButton"
                 @click="onScrollLeft"
                 aria-label="Scroll left">
@@ -42,7 +42,7 @@
 
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator'
+import {Component, Prop, Vue, Watch} from 'vue-property-decorator'
 import { Drop } from 'vue-drag-drop'
 
 @Component({
@@ -54,6 +54,9 @@ export default class Tabs extends Vue {
   tabsScrollLeft: number = 0
   tabsClientWidth: number = 0
   tabsScrollWidth: number = 0
+
+  @Prop({default: false})
+  secondary!: boolean
 
   onScrollTabs() {
     this.recomputeScrollProperties()
@@ -71,6 +74,22 @@ export default class Tabs extends Vue {
     this.tabsScrollLeft = tabList.scrollLeft
     this.tabsClientWidth = tabList.clientWidth
     this.tabsScrollWidth = tabList.scrollWidth
+  }
+
+  get cssClasses() {
+    // pf-c-tabs pf-m-start pf-m-start-current pf-m-end pf-m-tabs-secondary
+    const result: Array<string> = [
+        "pf-c-tabs",
+        "pf-m-start",
+        "pf-m-start-current",
+        "pf-m-end",
+    ]
+
+    if (this.secondary) {
+      result.push("pf-m-tabs-secondary")
+    }
+
+    return result
   }
 
   get cssScrollLeftButton() {

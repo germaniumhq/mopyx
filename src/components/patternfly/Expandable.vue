@@ -3,7 +3,7 @@
   <button type="button"
           class="pf-c-expandable__toggle"
           :aria-expanded="expandedState"
-          @click="onClick">
+          @click.stop="onClick">
     <i class="fas fa-angle-right pf-c-expandable__toggle-icon" aria-hidden="true"></i>
     <span>{{label}}</span>
   </button>
