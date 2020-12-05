@@ -15,7 +15,7 @@ from project_archer.storage.project_data import read_project_yml
 def select_project(args, env):
     zone = current_zone(args.internalRunMode)
 
-    if zone and '/' not in args.project:
+    if zone and "/" not in args.project:
         project_name = os.path.join(zone, args.project)
     else:
         project_name = args.project
@@ -23,19 +23,17 @@ def select_project(args, env):
     if is_no_project_file(project_name, args.internalRunMode) and is_zone_folder(
         project_name, args.internalRunMode
     ):
-        select_zone_str(
-            args=args, env=env, zone=project_name
-        )
+        select_zone_str(args=args, env=env, zone=project_name)
 
         return
 
-    if '/' in args.project:
-        select_zone_str(
-            args=args, env=env, zone="/".join(args.project.split("/")[:-1])
-        )
+    if "/" in args.project:
+        select_zone_str(args=args, env=env, zone="/".join(args.project.split("/")[:-1]))
 
     project_data = read_project_data(project_name, args.internalRunMode)
-    env.log("Loading " + args.internalRunMode + ": " + red(project_data["name"], bold=True))
+    env.log(
+        "Loading " + args.internalRunMode + ": " + red(project_data["name"], bold=True)
+    )
 
     # 1. check if the project can be activated
     required_envvars = project_data["requires"]
@@ -67,6 +65,10 @@ def select_project(args, env):
         unset_envvars(old_project["exports"], env)
 
     # 3. export the environment variables
+    env.set_envvar(
+        "CIPLOGIC_ARCHER_CURRENT_" + args.internalRunMode.upper(), project_name
+    )
+
     for export_name in project_data["exports"]:
         env.set_envvar(export_name, project_data["exports"][export_name])
 
@@ -76,10 +78,9 @@ def select_project(args, env):
     # 5. export the commands
     export_commands(project_data["commands"], env)
 
-    # print(project_data['name'], project_name)
-    env.log(green("Activated " + args.internalRunMode + ": ") + red(project_data["name"], bold=True))
-    env.set_envvar(
-        "CIPLOGIC_ARCHER_CURRENT_" + args.internalRunMode.upper(), project_name
+    env.log(
+        green("Activated " + args.internalRunMode + ": ")
+        + red(project_data["name"], bold=True)
     )
 
 

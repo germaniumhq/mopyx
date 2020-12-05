@@ -19,6 +19,4 @@ def edit_project(args, env):
         if not target_project:
             target_project = "undefined"
 
-    env.execute(
-        "$EDITOR " + os.path.join(folder, target_project + ".yml")
-    )
+    env.execute("$EDITOR " + os.path.join(folder, target_project + ".yml"))

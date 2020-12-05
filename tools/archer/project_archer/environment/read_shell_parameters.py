@@ -65,6 +65,7 @@ def project_folder(args, *, custom_zone: Optional[str] = None):
         return archer_home(args.internalRunMode + "s/layouts")
     else:
         subpath = os.path.join(
-            args.internalRunMode + "s", current_zone(args.internalRunMode, custom_zone=custom_zone)
+            args.internalRunMode + "s",
+            current_zone(args.internalRunMode, custom_zone=custom_zone),
         )
         return archer_home(subpath)
