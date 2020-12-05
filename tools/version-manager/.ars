@@ -1,4 +1,0 @@
-arg0: version_manager
-templates:
-- py3/exe
-version_manager: true

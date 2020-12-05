@@ -1,5 +1,0 @@
-arg0: yamldict
-templates:
-- py3/lib
-- gbs/init
-yamldict: true
