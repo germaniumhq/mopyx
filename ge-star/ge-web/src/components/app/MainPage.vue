@@ -12,8 +12,8 @@
 
         <template v-slot:navigation>
           <TopNavigation>
-            <TopNavigationLink caption="Projects" :active="model.ui.section == 'projects'" route="/projects"/>
-            <TopNavigationLink caption="Data" :active="model.ui.section == 'data'" route="/data"/>
+            <TopNavigationLink caption="Tests" :active="model.ui.section == 'tests'" route="/tests"/>
+<!--            <TopNavigationLink caption="Data" :active="model.ui.section == 'data'" route="/data"/>-->
             <TopNavigationLink caption="Reports" :active="model.ui.section == 'reports'" route="/reports"/>
 
             <!-- projects -->

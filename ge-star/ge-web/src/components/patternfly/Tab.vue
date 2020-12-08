@@ -1,7 +1,7 @@
 <template>
     <div :class="cssClasses" @click="onclick">
       <Drag :transfer-data="{}">
-        <button class="pf-c-tabs__button"><Icon icon="far fa-file" class="tab-icon"/><slot></slot></button>
+        <button class="pf-c-tabs__button"><Icon :icon="'far fa-' + icon" class="tab-icon"/><slot></slot></button>
         <DragContainer slot="image" :model="this"/>
       </Drag>
     </div>
@@ -40,8 +40,7 @@ import DragContainer from '@/components/app/DragContainer.vue'
 })
 export default class Tab extends Vue {
     @Prop() active!: boolean
-    @Prop() icon!: string
-    @Prop() label!: string
+    @Prop({default: ""}) icon!: string
 
     get cssClasses() {
         const result: {[name: string] : boolean} = {

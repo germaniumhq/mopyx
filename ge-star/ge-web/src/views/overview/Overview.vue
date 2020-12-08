@@ -4,7 +4,7 @@
             <TreeNodeView :model="model.projects.ge.files"/>
         </template>
 
-        que?
+        <Vega></Vega>
     </MainPage>
 </template>
 
@@ -16,9 +16,11 @@ import TreeNodeView from '@/components/app/TreeNodeView.vue'
 
 import model from '@/model'
 import GeDocumentEditor from "@/components/app/GeDocumentEditor.vue";
+import Vega from "@/components/vega/Vega.vue";
 
 @Component({
     components: {
+      Vega,
         GeDocumentEditor,
         MainPage,
         TreeNodeView,

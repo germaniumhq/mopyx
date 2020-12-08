@@ -7,27 +7,27 @@ const routes = [
   {
     path: '/',
     name: 'overview',
-    component: () => import(/* webpackChunkName: "about" */ '../views/overview/Overview.vue')
+    component: () => import(/* webpackChunkName: "overview" */ '../views/overview/Overview.vue')
   },
   {
-    path: '/projects',
-    name: 'projects',
-    component: () => import(/* webpackChunkName: "about" */ '../views/projects/Projects.vue')
+    path: '/tests',
+    name: 'tests',
+    component: () => import(/* webpackChunkName: "projects" */ '../views/tests/Tests.vue')
   },
   {
     path: '/data',
     name: 'data',
-    component: () => import(/* webpackChunkName: "about" */ '../views/data/DataPage.vue')
+    component: () => import(/* webpackChunkName: "data" */ '../views/data/DataPage.vue')
   },
   {
     path: '/reports',
     name: 'report',
-    component: () => import(/* webpackChunkName: "about" */ '../views/reports/ReportsPage.vue')
+    component: () => import(/* webpackChunkName: "reports" */ '../views/reports/ReportsPage.vue')
   },
   {
     path: '/playground',
     name: 'playground',
-    component: () => import(/* webpackChunkName: "about" */ '../views/playground/Playground.vue')
+    component: () => import(/* webpackChunkName: "playground" */ '../views/playground/Playground.vue')
   }
 ]
 

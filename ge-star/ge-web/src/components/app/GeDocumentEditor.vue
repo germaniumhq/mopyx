@@ -13,8 +13,7 @@
                         class="close-icon"/></Tab>
         </template>
 
-        <router-view></router-view>
-        {{editor.activeDocument}}
+        <JUnitCollector/>
     </Tabs>
     
     <EmptyState v-else="">
@@ -22,7 +21,7 @@
           No files open
       </template>
 
-      Open or create a file
+      No data exists
 
       <template v-slot:primary><div/></template>
       <template v-slot:secondary><div/></template>
@@ -78,9 +77,11 @@ import EmptyState from '@/components/patternfly/EmptyState.vue'
 
 import { unregisterDocument } from '@/model/actions/editor'
 import {GeStarDocument, GeStarEditor} from "@/model/ui";
+import JUnitCollector from "@/components/app/test/JUnitCollector.vue";
 
 @Component({
     components: {
+      JUnitCollector,
         EmptyState,
         Icon,
         MonacoCodeEditor,

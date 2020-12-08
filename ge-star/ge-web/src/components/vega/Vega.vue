@@ -21,21 +21,21 @@ export default class Vega extends Vue {
       "description": "Basic",
       "data": {
         "values": [
-          {"a": "C", "b": 2},
-          {"a": "C", "b": 7},
-          {"a": "C", "b": 4},
-          {"a": "D", "b": 1},
-          {"a": "D", "b": 2},
-          {"a": "D", "b": 6},
-          {"a": "E", "b": 8},
-          {"a": "E", "b": 4},
-          {"a": "E", "b": 7}
+          {"a": "1", "b": 2, "c": 2},
+          {"a": "2", "b": 7, "c": 2},
+          {"a": "3", "b": 4, "c": 2},
+          {"a": "4", "b": 1, "c": 2},
+          {"a": "5", "b": 2, "c": 2},
+          {"a": "6", "b": 6, "c": 2},
+          {"a": "7", "b": 8, "c": 2},
+          {"a": "8", "b": 4, "c": 2},
+          {"a": "9", "b": 7, "c": 2}
         ]
       },
-      "mark": "point",
+      "mark": "line",
       "encoding": {
-        "x": {"field": "a", "type": "nominal"},
-        "y": {"field": "b", "type": "ordinal"}
+        "x": {"field": "a", "type": "nominal", "title": "Wut"},
+        "y": {"field": "b", "type": "ordinal", "title": "Time"},
       }
     }, {
       actions: false,

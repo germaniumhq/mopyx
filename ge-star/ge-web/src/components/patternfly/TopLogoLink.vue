@@ -34,18 +34,6 @@ export default class TopLogoLink extends Vue {
 
 @import "~@patternfly/patternfly/patternfly-variables";
 
-// Links
-//--pf-global--link--Color: #{$pf-global--link--Color};
-//--pf-global--link--Color--hover: #{$pf-global--link--Color--hover};
-//--pf-global--link--Color--light: #{$pf-global--link--Color--light};
-//--pf-global--link--Color--light--hover: #{$pf-global--link--Color--light--hover};
-//--pf-global--link--Color--dark: #{$pf-global--link--Color--dark};
-//--pf-global--link--Color--dark--hover: #{$pf-global--link--Color--dark--hover};
-//--pf-global--link--FontWeight: #{$pf-global--link--FontWeight};
-//--pf-global--link--TextDecoration: #{$pf-global--link--TextDecoration};
-//--pf-global--link--TextDecoration--hover: #{$pf-global--link--TextDecoration--hover};
-
-
 .logo-overview-link {
   display: inline-block;
   vertical-align: middle;

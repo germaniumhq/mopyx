@@ -11,7 +11,7 @@
         <div class="pf-c-tabs__list"
             ref="tabList"
             @scroll="onScrollTabs">
-            <slot name="tabs">slot-tabs</slot>
+            <slot name="tabs"></slot>
         </div>
         <button :class="cssScrollRightButton"
                 @click="onScrollRight"
@@ -24,21 +24,6 @@
   </div>
 </Drop>
 </template>
-
-<style scoped>
-.pf-c-tabs {
-  background-color: #efefef;
-}
-
-.hidden {
-  display: none !important;
-}
-
-.pf-m-fill {
-  position: relative;
-}
-
-</style>
 
 
 <script lang="ts">
@@ -141,3 +126,23 @@ export default class Tabs extends Vue {
   }
 }
 </script>
+
+
+<style type="scss">
+.pf-c-tabs {
+  background-color: #efefef;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.pf-m-fill {
+  position: relative;
+}
+
+.pf-m-tabs-secondary {
+  border-top: white solid 1px;
+  border-bottom: #aaaaaa solid 1px;
+}
+</style>

@@ -24,7 +24,7 @@ import GeDocumentEditor from "@/components/app/GeDocumentEditor.vue";
         TreeNodeView,
     }
 })
-export default class Projects extends Vue {
+export default class Tests extends Vue {
     model: any = model
 
     editors = model.open_editors
