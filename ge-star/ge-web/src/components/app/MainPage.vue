@@ -18,16 +18,16 @@
 
             <!-- projects -->
             <template v-slot:right-nav>
-              <Dropdown label="<<select project>>">
-                <DropdownEntry>AE</DropdownEntry>
-                <DropdownEntry>Wolverine</DropdownEntry>
-                <DropdownEntry>Wut</DropdownEntry>
-              </Dropdown>
             </template>
           </TopNavigation>
         </template>
 
         <template v-slot:tools>
+          <Dropdown label="<<select project>>">
+            <DropdownEntry>AE</DropdownEntry>
+            <DropdownEntry>Wolverine</DropdownEntry>
+            <DropdownEntry>Wut</DropdownEntry>
+          </Dropdown>
           <Gravatar email="bogdan.mustiata@gmail.com"/>
           <AppMenu>
             <AppMenuEntry @click="onShowAbout">About</AppMenuEntry>

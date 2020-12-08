@@ -52,8 +52,8 @@ class UiModel {
             return "data"
         } else if (router.currentRoute.path.startsWith("/reports")) {
             return "reports"
-        } else if (router.currentRoute.path.startsWith("/projects")) {
-            return "projects"
+        } else if (router.currentRoute.path.startsWith("/tests")) {
+            return "tests"
         }
 
         return "overview"

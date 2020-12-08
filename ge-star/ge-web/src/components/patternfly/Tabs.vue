@@ -139,6 +139,7 @@ export default class Tabs extends Vue {
 
 .pf-m-fill {
   position: relative;
+  background-color: #ffffff;
 }
 
 .pf-m-tabs-secondary {
