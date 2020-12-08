@@ -27,3 +27,19 @@ export interface CodeEditor {
     activeDocument: string
     documents: Array<CodeDocument>
 }
+
+/**
+ * An object from the document that can contain sub-sheets.
+ */
+export interface GeStarDocument extends TabItem {
+    panels: Array<string>
+}
+
+/**
+ * The editor is the full editor
+ */
+export interface GeStarEditor {
+    key: string,
+    activeDocument: string
+    documents: Array<GeStarDocument>
+}

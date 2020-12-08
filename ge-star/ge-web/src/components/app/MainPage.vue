@@ -3,17 +3,16 @@
       <AboutModalBox @close="onCloseAboutBox" v-if="aboutModalBox"/>
       <Page :show-left-navigation="model.ui.left_navigation">
         <template v-slot:brand>
-          <ToggleNavigation @click="onToggleLeftNavigation">
-            <img src="../../assets/logo-onlysvg.svg"
-                  width="32"
-                  height="32"/>
-            ge*
-          </ToggleNavigation>
+          <ToggleNavigation @click="onToggleLeftNavigation"/>
+          <TopLogoLink route="/"
+                       caption="ge*"
+                       :logo="require('../../assets/logo-onlysvg.svg')"
+                       :active="model.ui.section == 'overview'" />
         </template>
 
         <template v-slot:navigation>
           <TopNavigation>
-            <TopNavigationLink caption="Projects" :active="model.ui.section == 'overview'" route="/"/>
+            <TopNavigationLink caption="Projects" :active="model.ui.section == 'projects'" route="/projects"/>
             <TopNavigationLink caption="Data" :active="model.ui.section == 'data'" route="/data"/>
             <TopNavigationLink caption="Reports" :active="model.ui.section == 'reports'" route="/reports"/>
 
@@ -66,6 +65,7 @@ import {Component, Vue} from 'vue-property-decorator'
 import model from '@/model'
 import Dropdown from "@/components/patternfly/Dropdown.vue";
 import DropdownEntry from "@/components/patternfly/DropdownEntry.vue";
+import TopLogoLink from "@/components/patternfly/TopLogoLink.vue";
 
 @Component({
   components: {
@@ -78,6 +78,7 @@ import DropdownEntry from "@/components/patternfly/DropdownEntry.vue";
     Gravatar,
     Page,
     ToggleNavigation,
+    TopLogoLink,
     TopNavigation,
     TopNavigationLink,
     TreeNodeView,
@@ -120,18 +121,5 @@ export default class MainPage extends Vue {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
 }
 </style>

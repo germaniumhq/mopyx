@@ -1,3 +1,4 @@
+<script src="../main.ts"></script>
 <template>
   <div class="content">
     <img alt="Vue logo" src="../assets/logo.png">

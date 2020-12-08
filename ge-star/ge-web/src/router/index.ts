@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Overview from '../views/overview/Overview.vue'
 
 Vue.use(VueRouter)
 
@@ -8,7 +7,12 @@ const routes = [
   {
     path: '/',
     name: 'overview',
-    component: Overview
+    component: () => import(/* webpackChunkName: "about" */ '../views/overview/Overview.vue')
+  },
+  {
+    path: '/projects',
+    name: 'projects',
+    component: () => import(/* webpackChunkName: "about" */ '../views/projects/Projects.vue')
   },
   {
     path: '/data',

@@ -4,7 +4,7 @@
             <TreeNodeView :model="model.projects.ge.files"/>
         </template>
 
-        que?
+        <GeDocumentEditor :editor="editors[0]"/>
     </MainPage>
 </template>
 
@@ -24,7 +24,7 @@ import GeDocumentEditor from "@/components/app/GeDocumentEditor.vue";
         TreeNodeView,
     }
 })
-export default class Overview extends Vue {
+export default class Projects extends Vue {
     model: any = model
 
     editors = model.open_editors

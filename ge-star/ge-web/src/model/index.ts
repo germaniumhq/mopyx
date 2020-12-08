@@ -1,5 +1,5 @@
-import { TreeNode, TabItem, CodeEditor } from "./ui"
-import { selection } from './selection'
+import {GeStarEditor, TreeNode} from "./ui"
+import {selection} from './selection'
 
 import router from '@/router'
 
@@ -34,7 +34,7 @@ const germaniumTreeNode: TreeNode = {
     ]
 }
 
-const open_editors: Array<CodeEditor> = [
+const open_editors: Array<GeStarEditor> = [
     {
         key: "editor1",
         activeDocument: "a",
@@ -52,6 +52,8 @@ class UiModel {
             return "data"
         } else if (router.currentRoute.path.startsWith("/reports")) {
             return "reports"
+        } else if (router.currentRoute.path.startsWith("/projects")) {
+            return "projects"
         }
 
         return "overview"
