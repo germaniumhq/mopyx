@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@improbable-eng/grpc-web": "^0.13.0",
-    "@patternfly/patternfly": "^2.46.1",
+    "@patternfly/patternfly": "^4.65.6",
     "@types/crypto-js": "^3.1.43",
     "core-js": "^3.4.4",
     "google-protobuf": "^3.14.0",

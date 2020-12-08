@@ -1,26 +1,24 @@
 <template>
 <Drop>
-  <div class="pf-l-stack">
-    <div class="pf-l-stack__item">
-      <div :class="cssClasses">
-        <button :class="cssScrollLeftButton"
-                @click="onScrollLeft"
-                aria-label="Scroll left">
-          <i class="fas fa-angle-left" aria-hidden="true"></i>
-        </button>
-        <div class="pf-c-tabs__list"
-            ref="tabList"
-            @scroll="onScrollTabs">
-            <slot name="tabs"></slot>
-        </div>
-        <button :class="cssScrollRightButton"
-                @click="onScrollRight"
-                aria-label="Scroll right">
-          <i class="fas fa-angle-right" aria-hidden="true"></i>
-        </button>
-      </div>
-    </div>
-    <div class="pf-l-stack__item pf-m-fill"><slot></slot></div>
+  <div :class="cssClasses">
+    <button :class="cssScrollLeftButton"
+            @click="onScrollLeft"
+            aria-label="Scroll left">
+      <i class="fas fa-angle-left" aria-hidden="true"></i>
+    </button>
+    <ul class="pf-c-tabs__list"
+        ref="tabList"
+        @scroll="onScrollTabs">
+      <slot name="tabs"></slot>
+    </ul>
+    <button :class="cssScrollRightButton"
+            @click="onScrollRight"
+            aria-label="Scroll right">
+      <i class="fas fa-angle-right" aria-hidden="true"></i>
+    </button>
+  </div>
+  <div class="pf-m-fill">
+    <slot></slot>
   </div>
 </Drop>
 </template>
@@ -65,13 +63,13 @@ export default class Tabs extends Vue {
     // pf-c-tabs pf-m-start pf-m-start-current pf-m-end pf-m-tabs-secondary
     const result: Array<string> = [
         "pf-c-tabs",
-        "pf-m-start",
-        "pf-m-start-current",
-        "pf-m-end",
+        "pf-m-scrollable",
     ]
 
     if (this.secondary) {
-      result.push("pf-m-tabs-secondary")
+      result.push("pf-m-secondary")
+    } else {
+      result.push("pf-m-box")
     }
 
     return result
@@ -129,21 +127,11 @@ export default class Tabs extends Vue {
 
 
 <style type="scss">
-.pf-c-tabs {
-  background-color: #efefef;
+.pf-m-secondary {
+  background-color: white;
 }
 
 .hidden {
   display: none !important;
-}
-
-.pf-m-fill {
-  position: relative;
-  background-color: #ffffff;
-}
-
-.pf-m-tabs-secondary {
-  border-top: white solid 1px;
-  border-bottom: #aaaaaa solid 1px;
 }
 </style>

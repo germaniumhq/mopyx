@@ -32,8 +32,6 @@ export default class TopLogoLink extends Vue {
 
 <style lang="scss">
 
-@import "~@patternfly/patternfly/patternfly-variables";
-
 .logo-overview-link {
   display: inline-block;
   vertical-align: middle;

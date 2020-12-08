@@ -1,5 +1,5 @@
 <template>
-    <i :class="cssClasses" @click="onClick"></i>
+    <i v-if="icon" :class="cssClasses" @click="onClick"></i>
 </template>
 
 <style scoped>

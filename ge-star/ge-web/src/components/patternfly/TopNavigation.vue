@@ -1,19 +1,16 @@
 <template>
- <div class="pf-c-page__header-nav">
-  <slot name="left-nav"></slot>
-  <nav class="pf-c-nav" aria-label="Global">
-    <button class="pf-c-nav__scroll-button" aria-label="Scroll left">
-      <i class="fas fa-angle-left" aria-hidden="true"></i>
-    </button>
-    <ul class="pf-c-nav__horizontal-list">
+  <nav class="pf-c-nav pf-m-horizontal" aria-label="Global">
+<!--    <button class="pf-c-nav__scroll-button" disabled aria-label="Scroll left">-->
+<!--      <i class="fas fa-angle-left" aria-hidden="true"></i>-->
+<!--    </button>-->
+    <ul class="pf-c-nav__list">
       <slot></slot>
     </ul>
-    <button class="pf-c-nav__scroll-button" aria-label="Scroll right">
-    <i class="fas fa-angle-right" aria-hidden="true"></i>
-    </button>
+<!--    <button class="pf-c-nav__scroll-button" disabled aria-label="Scroll right">-->
+<!--      <i class="fas fa-angle-right" aria-hidden="true"></i>-->
+<!--    </button>-->
   </nav>
-  <slot name="right-nav"></slot>
- </div>
+
 </template>
 
 <style scoped>

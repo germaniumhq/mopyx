@@ -32,6 +32,7 @@
 <style scoped>
 
 .fill-parent {
+    background-color: white;
     position: absolute;
     left: 0;
     right: 0;
@@ -57,10 +58,6 @@
 
 .pf-m-current .close-icon {
     visibility: visible;
-}
-
-.pf-m-current {
-    background-color: white;
 }
 </style>
 

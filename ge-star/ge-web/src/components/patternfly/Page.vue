@@ -1,5 +1,6 @@
 <template>
-     <div class="pf-c-page">
+  <div class="pf-c-page">
+<!--    <a class="pf-c-skip-to-content pf-c-button pf-m-primary" href="#main-content-page-layout-horizontal-nav">Skip to content</a>-->
     <header role="banner" class="pf-c-page__header">
       <div class="pf-c-page__header-brand">
         <slot name="brand">
@@ -7,17 +8,23 @@
         </slot>
       </div>
 
-      <slot name="navigation">slot-navigation</slot>
+      <div class="pf-c-page__header-nav">
+        <slot name="navigation">slot-navigation</slot>
+      </div>
 
       <div class="pf-c-page__header-tools">
         <slot name="tools">slot-tools</slot>
       </div>
     </header>
-    <div class="pf-c-page__sidebar pf-m-dark" :hidden="!showLeftNavigation">
+
+    <div class="pf-c-page__sidebar"
+         :hidden="!showLeftNavigation"
+         v-if="$slots['left-navigation']">
       <div class="pf-c-page__sidebar-body">
         <slot name="left-navigation">slot-left-navigation</slot>
       </div>
     </div>
+
     <main role="main" class="pf-c-page__main" tabindex="-1">
       <slot></slot>
     </main>
@@ -31,7 +38,6 @@ import { Component, Vue, Prop } from 'vue-property-decorator'
 export default class Page extends Vue {
     @Prop() showLeftNavigation!: boolean
 }
-
 </script>
 
 <style scoped>
