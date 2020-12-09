@@ -19,9 +19,9 @@
 
     <div class="pf-c-page__sidebar"
          :hidden="!showLeftNavigation"
-         v-if="$slots['left-navigation']">
+         v-if="$slots.left_navigation">
       <div class="pf-c-page__sidebar-body">
-        <slot name="left-navigation">slot-left-navigation</slot>
+        <slot name="left_navigation"></slot>
       </div>
     </div>
 

@@ -1,7 +1,7 @@
 <template>
     <MainPage>
-        <template slot="left-navigation">
-            this is wut
+        <template slot="left_navigation">
+            data navigation
         </template>
 
         <div>data</div>

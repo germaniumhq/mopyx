@@ -1,6 +1,6 @@
 <template>
     <MainPage>
-        <template slot="left-navigation">
+        <template slot="left_navigation">
             <TreeNodeView :model="model.projects.ge.files"/>
         </template>
 
@@ -16,9 +16,13 @@ import TreeNodeView from '@/components/app/TreeNodeView.vue'
 
 import model from '@/model'
 import GeDocumentEditor from "@/components/app/GeDocumentEditor.vue";
+import Flex from "@/components/patternfly/Flex.vue";
+import FlexItem from "@/components/patternfly/FlexItem.vue";
 
 @Component({
     components: {
+      FlexItem,
+      Flex,
         GeDocumentEditor,
         MainPage,
         TreeNodeView,

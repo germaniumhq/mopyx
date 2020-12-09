@@ -29,38 +29,6 @@
   </div>
 </template>
 
-<style scoped>
-
-.fill-parent {
-    background-color: white;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-}
-
-.close-icon {
-    color: #cccccc;
-    visibility: hidden;
-    text-shadow: 1px 1px 2px #eeeeee;
-    font-size: 0.6em;
-    position: absolute;
-    z-index: 1;
-    padding: 2px;
-    right: 4px;
-    top: 13px;
-}
-
-.pf-c-tabs__button:hover .close-icon {
-    visibility: visible;
-}
-
-.pf-m-current .close-icon {
-    visibility: visible;
-}
-</style>
-
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 
@@ -109,3 +77,34 @@ export default class GeDocumentEditor extends Vue {
     }
 }
 </script>
+
+<style scoped>
+.fill-parent {
+  background-color: white;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.close-icon {
+  color: #cccccc;
+  visibility: hidden;
+  text-shadow: 1px 1px 2px #eeeeee;
+  font-size: 0.6em;
+  position: absolute;
+  z-index: 1;
+  padding: 2px;
+  right: 4px;
+  top: 13px;
+}
+
+.pf-c-tabs__button:hover .close-icon {
+  visibility: visible;
+}
+
+.pf-m-current .close-icon {
+  visibility: visible;
+}
+</style>

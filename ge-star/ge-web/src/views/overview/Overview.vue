@@ -72,6 +72,18 @@
             <Vega></Vega>
           </Card>
         </FlexItem>
+
+        <FlexItem>
+          <Card>
+            <template v-slot:title>Test Results</template>
+            <template v-slot:actions>
+              <Dropdown :ellipsis="true">
+                <DropdownEntry>wut</DropdownEntry>
+              </Dropdown>
+            </template>
+            <Vega></Vega>
+          </Card>
+        </FlexItem>
       </Flex>
     </MainPage>
 </template>

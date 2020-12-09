@@ -1,6 +1,6 @@
 <template>
     <MainPage>
-        <template v-slot:left-navigation>
+        <template v-slot:left_navigation>
           Reports
         </template>
 

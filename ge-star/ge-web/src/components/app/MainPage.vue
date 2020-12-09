@@ -30,8 +30,8 @@
           </AppMenu>
         </template>
 
-        <template v-slot:left-navigation v-if="$slots.leftNavigation">
-          <slot name="left-navigation">slot-left-navigation</slot>
+        <template v-slot:left_navigation v-if="$slots.left_navigation">
+          <slot name="left_navigation"></slot>
         </template>
 
         <section class="pf-c-page__main-section">
