@@ -4,16 +4,16 @@
     <header role="banner" class="pf-c-page__header">
       <div class="pf-c-page__header-brand">
         <slot name="brand">
-          <a class="pf-c-page__header-brand-link">slot-brand</a>
+          <a class="pf-c-page__header-brand-link"></a>
         </slot>
       </div>
 
       <div class="pf-c-page__header-nav">
-        <slot name="navigation">slot-navigation</slot>
+        <slot name="navigation"></slot>
       </div>
 
       <div class="pf-c-page__header-tools">
-        <slot name="tools">slot-tools</slot>
+        <slot name="tools"></slot>
       </div>
     </header>
 

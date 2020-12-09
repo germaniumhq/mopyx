@@ -1,12 +1,78 @@
 <template>
     <MainPage>
-        <template slot="left-navigation">
-            <TreeNodeView :model="model.projects.ge.files"/>
-        </template>
-
-      <Vega></Vega>
+      <Flex>
+        <FlexItem>
         <Card>
+          <template v-slot:title>Test Results</template>
+          <template v-slot:actions>
+            <Dropdown :ellipsis="true">
+              <DropdownEntry>wut</DropdownEntry>
+            </Dropdown>
+          </template>
+          <Vega></Vega>
         </Card>
+        </FlexItem>
+
+        <FlexItem>
+        <Card>
+          <template v-slot:title>Test Results</template>
+          <template v-slot:actions>
+            <Dropdown :ellipsis="true">
+              <DropdownEntry>wut</DropdownEntry>
+            </Dropdown>
+          </template>
+          <Vega></Vega>
+        </Card>
+        </FlexItem>
+
+        <FlexItem>
+          <Card>
+            <template v-slot:title>Test Results</template>
+            <template v-slot:actions>
+              <Dropdown :ellipsis="true">
+                <DropdownEntry>wut</DropdownEntry>
+              </Dropdown>
+            </template>
+            <Vega></Vega>
+          </Card>
+        </FlexItem>
+
+        <FlexItem>
+          <Card>
+            <template v-slot:title>Test Results</template>
+            <template v-slot:actions>
+              <Dropdown :ellipsis="true">
+                <DropdownEntry>wut</DropdownEntry>
+              </Dropdown>
+            </template>
+            <Vega></Vega>
+          </Card>
+        </FlexItem>
+
+        <FlexItem>
+          <Card>
+            <template v-slot:title>Test Results</template>
+            <template v-slot:actions>
+              <Dropdown :ellipsis="true">
+                <DropdownEntry>wut</DropdownEntry>
+              </Dropdown>
+            </template>
+            <Vega></Vega>
+          </Card>
+        </FlexItem>
+
+        <FlexItem>
+          <Card>
+            <template v-slot:title>Test Results</template>
+            <template v-slot:actions>
+              <Dropdown :ellipsis="true">
+                <DropdownEntry>wut</DropdownEntry>
+              </Dropdown>
+            </template>
+            <Vega></Vega>
+          </Card>
+        </FlexItem>
+      </Flex>
     </MainPage>
 </template>
 
@@ -22,9 +88,13 @@ import Vega from "@/components/vega/Vega.vue";
 import Card from "@/components/patternfly/Card.vue";
 import Dropdown from "@/components/patternfly/Dropdown.vue";
 import DropdownEntry from "@/components/patternfly/DropdownEntry.vue";
+import Flex from "@/components/patternfly/Flex.vue";
+import FlexItem from "@/components/patternfly/FlexItem.vue";
 
 @Component({
     components: {
+      FlexItem,
+      Flex,
       DropdownEntry,
       Dropdown,
       Vega,

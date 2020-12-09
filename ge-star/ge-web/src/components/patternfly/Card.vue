@@ -1,36 +1,15 @@
 <template>
-  <div class="pf-c-card" id="card-action-example-2">
-    <div class="pf-c-card__header">
-      <div class="pf-c-card__actions">
-        <div class="pf-c-dropdown">
-          <button class="pf-c-dropdown__toggle pf-m-plain" type="button" id="card-action-example-2-dropdown-kebab-right-aligned-button" aria-expanded="false" aria-label="Actions">
-            <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
-          </button>
-          <ul class="pf-c-dropdown__menu" aria-labelledby="card-action-example-2-dropdown-kebab-right-aligned-button" hidden>
-            <li>
-              <a class="pf-c-dropdown__menu-item" href="#">Link</a>
-            </li>
-            <li>
-              <button class="pf-c-dropdown__menu-item" type="button">Action</button>
-            </li>
-            <li>
-              <a class="pf-c-dropdown__menu-item pf-m-disabled" href="#" aria-disabled="true" tabindex="-1">Disabled link</a>
-            </li>
-            <li>
-              <button class="pf-c-dropdown__menu-item" type="button" disabled>Disabled action</button>
-            </li>
-            <li class="pf-c-divider" role="separator"></li>
-            <li>
-              <a class="pf-c-dropdown__menu-item" href="#">Separated link</a>
-            </li>
-          </ul>
-        </div>
-        <input type="checkbox" id="card-action-example-2-check" name="card-action-example-2-check" aria-labelledby="card-action-example-2-check-label" />
+  <div class="pf-c-card">
+    <div class="pf-c-card__header" v-if="$slots.actions || $slots.title">
+      <div class="pf-c-card__actions" v-if="$slots.actions">
+        <slot name="actions"></slot>
       </div>
-      <div class="pf-c-card__title" id="card-action-example-2-check-label">This is a really really really really really really really really really really long title</div>
+      <div class="pf-c-card__title" v-if="$slots.title">
+        <slot name="title"></slot>
+      </div>
     </div>
-    <div class="pf-c-card__body">Body</div>
-    <div class="pf-c-card__footer">Footer</div>
+    <div class="pf-c-card__body"><slot></slot></div>
+    <div class="pf-c-card__footer" v-if="$slots.footer"><slot name="footer"></slot></div>
   </div>
 </template>
 

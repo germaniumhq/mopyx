@@ -30,7 +30,7 @@
           </AppMenu>
         </template>
 
-        <template v-slot:left-navigation>
+        <template v-slot:left-navigation v-if="$slots.leftNavigation">
           <slot name="left-navigation">slot-left-navigation</slot>
         </template>
 
