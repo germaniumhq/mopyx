@@ -48,6 +48,8 @@ tools/arsonist:
 - dc68b73795a8c982bb0d2c0b407bae2f460a3834
 tools/git-monorepo:
 - dce804bcef74ed91b6704d3a2b46cad5be500ed9
+tools/pyui/felix:
+- 8a41f72843ac3f1692da42c3da70e7c906fc3839
 tools/pyui/mopyx:
 - 13cdc5013d42e4ce1282c4b10f4138cd0d77c8a0
 tools/version-manager:
