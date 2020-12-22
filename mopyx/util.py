@@ -4,7 +4,7 @@ import os
 
 T = TypeVar("T")
 
-debug_merge = True if 'MOPYX_DEBUG_MERGE' in os.environ else False
+debug_merge = True if "MOPYX_DEBUG_MERGE" in os.environ else False
 
 indent_level = -1
 
@@ -14,7 +14,9 @@ def indent() -> str:
 
 
 @action
-def merge_model(destination: T, source: T, already_processed: Optional[Set] = None) -> bool:
+def merge_model(
+    destination: T, source: T, already_processed: Optional[Set] = None
+) -> bool:
     global indent_level
 
     indent_level += 1
@@ -60,7 +62,9 @@ def merge_model(destination: T, source: T, already_processed: Optional[Set] = No
                 pass  # we ignore unhashable items
 
             if isinstance(source_value, list):
-                if merge_model_lists(destination_value, source_value, already_processed):
+                if merge_model_lists(
+                    destination_value, source_value, already_processed
+                ):
                     continue
 
                 if debug_merge:

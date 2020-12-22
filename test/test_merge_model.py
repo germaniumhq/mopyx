@@ -6,8 +6,8 @@ import unittest
 
 
 class CustomEnum(Enum):
-    SUCCESS: str = 'success'
-    FAILURE: str = 'failure'
+    SUCCESS: str = "success"
+    FAILURE: str = "failure"
 
 
 @model
@@ -111,15 +111,18 @@ class TestMergeModel(unittest.TestCase):
 
         merge_model(root_model, changed_model)
 
-        self.assertEqual({
-            "list_changed_strings",
-            "changed_value",
-            "custom_changed",
-            "custom_list_changed",
-            "custom_nested_list_changed",
-            "enum_value"
-        }, registered_events)
+        self.assertEqual(
+            {
+                "list_changed_strings",
+                "changed_value",
+                "custom_changed",
+                "custom_list_changed",
+                "custom_nested_list_changed",
+                "enum_value",
+            },
+            registered_events,
+        )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

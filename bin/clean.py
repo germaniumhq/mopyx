@@ -6,7 +6,7 @@ import re
 
 
 EXTENSION_EXTRACTOR_RE = re.compile(r"^(.*\/)?(.+?)(\.([^\.]+))?$")
-PROJECT_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), '..'))
+PROJECT_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), ".."))
 
 
 def extension(filename: str) -> str:
@@ -28,15 +28,15 @@ def remove_single_file(path):
     os.remove(path)
 
 
-project_remove('dist')
-project_remove('build')
-project_remove('mopyx.egg-info')
+project_remove("dist")
+project_remove("build")
+project_remove("mopyx.egg-info")
 
-for f, folders, files in os.walk('.'):
-    if os.path.basename(f) in ['__pycache__', '.mypy_cache']:
+for f, folders, files in os.walk("."):
+    if os.path.basename(f) in ["__pycache__", ".mypy_cache"]:
         project_remove(f)
         continue
 
     for file_name in files:
-        if extension(file_name) in ['.orig', '.pyc']:
+        if extension(file_name) in [".orig", ".pyc"]:
             remove_single_file(os.path.join(f, file_name))
