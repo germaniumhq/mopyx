@@ -24,10 +24,10 @@ class TestListRender(unittest.TestCase):
 
         @render_call
         def update_length():
-            registered_events.append('update_length')
+            registered_events.append("update_length")
             list_length[0] = len(root_model.items)
 
-        self.assertEqual(['update_length'], registered_events)
+        self.assertEqual(["update_length"], registered_events)
         registered_events.clear()
 
         root_model.items.clear()  # clearing an empty list shouldn't trigger events
@@ -49,5 +49,5 @@ class TestListRender(unittest.TestCase):
         self.assertEqual(2, list_length[0])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
