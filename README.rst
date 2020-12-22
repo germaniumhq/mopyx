@@ -1,6 +1,3 @@
-MoPyX
-=====
-
 MoPyX is a MobX/Vue inspired reactive model driven UI library. UI
 Toolkit independent.
 
@@ -11,25 +8,22 @@ keeping track of what parts of the model affect what parts of the
 application..
 
 Demo
-----
+====
 
-.. figure:: https://raw.githubusercontent.com/germaniumhq/mopyx-sample/master/demo.gif
-   :alt: PySide2 MoPyX Demo
-
-   PySide2 MoPyX Demo
+`PiSide2 MoPyX Demo`_
 
 Full demo project source is here:
-https://github.com/germaniumhq/mopyx-sample
+https://github.com/germaniumhq/mopyx-sample.
 
 @model
-------
+======
 
 You decorate your model classes with ``@model``. All the properties of
 that class will be monitored for changes. Whenever one of those
 properties will change, the affected renderers (only the renderer
 functions that used that property) will be re-invoked on model changes.
 
-.. code:: py
+.. code:: python
 
     @model
     class FormModel:
@@ -38,14 +32,14 @@ functions that used that property) will be re-invoked on model changes.
             self.last_name "Doe"
 
 @render
--------
+=======
 
 You decorate your UI rendering functions with ``@render``, or invoke
 them with ``render_call``. MoPyX will map what render method used what
 properties in the model. The parameters for the function will be also
 recorded and sent to the renderer function.
 
-.. code:: py
+.. code:: python
 
     class UiForm:
         def __init__(self):
@@ -66,7 +60,7 @@ In order to optimize the number of UI updates, only the relevant
 So you could break down the previous ``@render`` method into two
 methods:
 
-.. code:: py
+.. code:: python
 
     @render
     def render_things(self):
@@ -88,7 +82,7 @@ only the needed renderers will be invoked.
 To type less, ``render_call()`` will just wrap the given callable into a
 ``@render``. For example we can rewrite our renderer to be shorter:
 
-.. code:: py
+.. code:: python
 
     @render
     def render_things(self):
@@ -100,13 +94,13 @@ If setting an UI value will trigger a model change, read the
 ``ignore_updates`` section.
 
 @action
--------
+=======
 
-If they're not wrapped in an action, every property is also an action,
+If they’re not wrapped in an action, every property is also an action,
 so after the property change, a rendering will trigger. To improve
 performance you can wrap multiple model updates into a single
 ``@action``. An action method can call other methods, including other
-``@action``\ s.
+\`@action\`s.
 
 When when the top most ``@action`` finishes the rendering will be
 invoked. MoPyX will find out what renderers need to be called, and what
@@ -114,17 +108,17 @@ computed properties should be updated, in order to get the UI into a
 consistent state.
 
 Internally all the properties setters in the ``@model`` classes are
-wrapped in ``@action``\ s.
+wrapped in \`@action\`s.
 
-.. code:: py
+.. code:: python
 
-    @action  # withonut this would trigger a render after each assignment
+    @action  # without this we'd trigger a render after each assignment
     def change_model(self):
         self.first_name = "Jane"
         self.last_name = "Mary"
 
 @computed
----------
+=========
 
 You can also create properties on the model using the ``@computed``
 decorator. This works similarly with a regular python ``@property`` but
@@ -171,7 +165,7 @@ that ``@computed`` method will change:
 object.
 
 List
-----
+====
 
 If one of the properties is a list, the list will be replaced with a
 special implementation, that will also notify its changes on the top
@@ -199,7 +193,7 @@ property.
     model.items.append("new item")  # this will trigger the update_ui rerender.
 
 ignore\_updates
----------------
+===============
 
 If the renderer will call a value that sets something in the UI that
 will make the UI trigger an event, that will in turn might land in an
@@ -211,11 +205,14 @@ This is great for onchange events for input edits, or tree updates such
 as selected nodes that otherwise would enter an infinite recursion.
 
 Debugging
----------
+=========
 
 To check what goes on, you can export in your environment:
 
 -  ``MOPYX_DEBUG`` - this will print the rendering process on the
    console.
+
 -  ``MOPYX_THREAD_CHECK`` - this will throw an exception if the thread
    for ``@render`` methods change.
+
+.. _PiSide2 MoPyX Demo: https://raw.githubusercontent.com/germaniumhq/mopyx-sample/master/demo.gif
