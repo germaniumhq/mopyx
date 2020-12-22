@@ -1,0 +1,67 @@
+[
+  {
+    "_class": "org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject",
+    "fullname": "jenkins-demo",
+    "jobs": [
+      {
+        "_class": "org.jenkinsci.plugins.workflow.job.WorkflowJob",
+        "color": "red",
+        "fullname": "jenkins-demo/feature%2Fwut",
+        "name": "feature%2Fwut",
+        "url": "http://localhost:8080/job/jenkins-demo/job/feature%252Fwut/"
+      },
+      {
+        "_class": "org.jenkinsci.plugins.workflow.job.WorkflowJob",
+        "color": "blue",
+        "fullname": "jenkins-demo/master",
+        "name": "master",
+        "url": "http://localhost:8080/job/jenkins-demo/job/master/"
+      }
+    ],
+    "name": "jenkins-demo",
+    "url": "http://localhost:8080/job/jenkins-demo/"
+  },
+  {
+    "_class": "org.jenkinsci.plugins.workflow.job.WorkflowJob",
+    "color": "blue",
+    "fullname": "ww",
+    "name": "ww",
+    "url": "http://localhost:8080/job/ww/"
+  },
+  {
+    "_class": "org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject",
+    "fullname": "x",
+    "jobs": [
+      {
+        "_class": "org.jenkinsci.plugins.workflow.job.WorkflowJob",
+        "color": "blue",
+        "fullname": "x/master",
+        "name": "master",
+        "url": "http://localhost:8080/job/x/job/master/"
+      }
+    ],
+    "name": "x",
+    "url": "http://localhost:8080/job/x/"
+  },
+  {
+    "_class": "org.jenkinsci.plugins.workflow.job.WorkflowJob",
+    "color": "red",
+    "fullname": "jenkins-demo/feature%2Fwut",
+    "name": "feature%2Fwut",
+    "url": "http://localhost:8080/job/jenkins-demo/job/feature%252Fwut/"
+  },
+  {
+    "_class": "org.jenkinsci.plugins.workflow.job.WorkflowJob",
+    "color": "blue",
+    "fullname": "jenkins-demo/master",
+    "name": "master",
+    "url": "http://localhost:8080/job/jenkins-demo/job/master/"
+  },
+  {
+    "_class": "org.jenkinsci.plugins.workflow.job.WorkflowJob",
+    "color": "blue",
+    "fullname": "x/master",
+    "name": "master",
+    "url": "http://localhost:8080/job/x/job/master/"
+  }
+]
