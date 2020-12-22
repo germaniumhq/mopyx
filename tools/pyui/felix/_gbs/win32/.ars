@@ -1,0 +1,2 @@
+{NAME: gbs-win32, arg0: pyside=true, arg1: gbsPrefix=/_gbs/win32/, gbsPrefix: /_gbs/win32/,
+  pyside: 'true'}

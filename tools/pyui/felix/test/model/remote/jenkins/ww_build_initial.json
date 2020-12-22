@@ -1,0 +1,3352 @@
+{
+  "_class": "org.jenkinsci.plugins.workflow.job.WorkflowJob",
+  "actions": [
+    {},
+    {},
+    {},
+    {},
+    {
+      "_class": "hudson.plugins.jobConfigHistory.JobConfigHistoryProjectAction",
+      "jobConfigHistory": [
+        {
+          "currentName": "",
+          "date": "2018-10-29_19-10-41",
+          "hasConfig": true,
+          "job": "ww",
+          "oldName": "",
+          "operation": "Changed",
+          "user": "SYSTEM",
+          "userID": "SYSTEM"
+        },
+        {
+          "currentName": "",
+          "date": "2018-10-29_19-10-26",
+          "hasConfig": true,
+          "job": "ww",
+          "oldName": "",
+          "operation": "Changed",
+          "user": "SYSTEM",
+          "userID": "SYSTEM"
+        },
+        {
+          "currentName": "",
+          "date": "2018-10-29_19-10-23",
+          "hasConfig": true,
+          "job": "ww",
+          "oldName": "",
+          "operation": "Changed",
+          "user": "Bogdan Mustiata",
+          "userID": "raptor"
+        },
+        {
+          "currentName": "",
+          "date": "2018-10-29_19-09-49",
+          "hasConfig": true,
+          "job": "ww",
+          "oldName": "",
+          "operation": "Changed",
+          "user": "Bogdan Mustiata",
+          "userID": "raptor"
+        },
+        {
+          "currentName": "",
+          "date": "2018-10-29_19-08-28",
+          "hasConfig": true,
+          "job": "ww",
+          "oldName": "",
+          "operation": "Created",
+          "user": "Bogdan Mustiata",
+          "userID": "raptor"
+        },
+        {
+          "currentName": "",
+          "date": "2018-10-29_19-08-27",
+          "hasConfig": true,
+          "job": "ww",
+          "oldName": "",
+          "operation": "Changed",
+          "user": "Bogdan Mustiata",
+          "userID": "raptor"
+        }
+      ]
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "_class": "com.cloudbees.plugins.credentials.ViewCredentialsAction",
+      "stores": {}
+    }
+  ],
+  "buildable": true,
+  "builds": [
+    {
+      "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+      "actions": [
+        {
+          "_class": "hudson.model.ParametersAction",
+          "parameters": [
+            {
+              "_class": "hudson.model.BooleanParameterValue",
+              "name": "RUN_STATIC_CHECKS",
+              "value": true
+            }
+          ]
+        },
+        {
+          "_class": "hudson.model.CauseAction",
+          "causes": [
+            {
+              "_class": "hudson.model.Cause$UserIdCause",
+              "shortDescription": "Started by user Bogdan Mustiata",
+              "userId": "raptor",
+              "userName": "Bogdan Mustiata"
+            }
+          ]
+        },
+        {},
+        {},
+        {
+          "_class": "hudson.plugins.git.util.BuildData",
+          "buildsByBranchName": {
+            "master": {
+              "_class": "hudson.plugins.git.util.Build",
+              "buildNumber": 3,
+              "buildResult": null,
+              "marked": {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "branch": [
+                  {
+                    "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                    "name": "master"
+                  }
+                ]
+              },
+              "revision": {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "branch": [
+                  {
+                    "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                    "name": "master"
+                  }
+                ]
+              }
+            }
+          },
+          "lastBuiltRevision": {
+            "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+            "branch": [
+              {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "name": "master"
+              }
+            ]
+          },
+          "remoteUrls": [
+            "http://gogs:3000/raptor/jenkins-library"
+          ],
+          "scmName": ""
+        },
+        {
+          "_class": "hudson.plugins.git.GitTagAction",
+          "tags": []
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.cps.EnvActionImpl",
+          "environment": {}
+        },
+        {
+          "_class": "hudson.plugins.git.util.BuildData",
+          "buildsByBranchName": {
+            "refs/remotes/origin/master": {
+              "_class": "hudson.plugins.git.util.Build",
+              "buildNumber": 3,
+              "buildResult": null,
+              "marked": {
+                "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                "branch": [
+                  {
+                    "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                    "name": "refs/remotes/origin/master"
+                  }
+                ]
+              },
+              "revision": {
+                "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                "branch": [
+                  {
+                    "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                    "name": "refs/remotes/origin/master"
+                  }
+                ]
+              }
+            }
+          },
+          "lastBuiltRevision": {
+            "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+            "branch": [
+              {
+                "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                "name": "refs/remotes/origin/master"
+              }
+            ]
+          },
+          "remoteUrls": [
+            "http://gogs:3000/raptor/jenkins-demo.git"
+          ],
+          "scmName": ""
+        },
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction",
+          "nodes": [
+            {
+              "_class": "org.jenkinsci.plugins.workflow.graph.FlowStartNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.graph.FlowEndNode"
+            }
+          ]
+        },
+        {},
+        {}
+      ],
+      "artifacts": [
+        {
+          "displayPath": "jenkins_demo",
+          "fileName": "jenkins_demo",
+          "relativePath": "dist/jenkins_demo"
+        }
+      ],
+      "building": false,
+      "changeSets": [],
+      "culprits": [],
+      "description": null,
+      "displayName": "#3",
+      "duration": 27838,
+      "estimatedDuration": 9522,
+      "executor": null,
+      "fullDisplayName": "ww #3",
+      "id": "3",
+      "keepLog": false,
+      "nextBuild": null,
+      "number": 3,
+      "previousBuild": {
+        "actions": [
+          {
+            "_class": "hudson.model.CauseAction",
+            "causes": [
+              {
+                "_class": "hudson.model.Cause$UserIdCause",
+                "shortDescription": "Started by user Bogdan Mustiata",
+                "userId": "raptor",
+                "userName": "Bogdan Mustiata"
+              }
+            ]
+          },
+          {},
+          {},
+          {
+            "_class": "hudson.plugins.git.util.BuildData",
+            "buildsByBranchName": {
+              "master": {
+                "_class": "hudson.plugins.git.util.Build",
+                "buildNumber": 2,
+                "buildResult": null,
+                "marked": {
+                  "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                  "branch": [
+                    {
+                      "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                      "name": "master"
+                    }
+                  ]
+                },
+                "revision": {
+                  "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                  "branch": [
+                    {
+                      "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                      "name": "master"
+                    }
+                  ]
+                }
+              }
+            },
+            "lastBuiltRevision": {
+              "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+              "branch": [
+                {
+                  "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                  "name": "master"
+                }
+              ]
+            },
+            "remoteUrls": [
+              "http://gogs:3000/raptor/jenkins-library"
+            ],
+            "scmName": ""
+          },
+          {
+            "_class": "hudson.plugins.git.GitTagAction"
+          },
+          {},
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.EnvActionImpl"
+          },
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {
+            "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
+          },
+          {},
+          {}
+        ],
+        "artifacts": [],
+        "building": false,
+        "changeSets": [],
+        "culprits": [],
+        "description": null,
+        "displayName": "#2",
+        "duration": 703,
+        "estimatedDuration": 9522,
+        "executor": null,
+        "fullDisplayName": "ww #2",
+        "id": "2",
+        "keepLog": false,
+        "nextBuild": {
+          "number": 3,
+          "url": "http://localhost:8080/job/ww/3/"
+        },
+        "number": 2,
+        "previousBuild": {
+          "number": 1,
+          "url": "http://localhost:8080/job/ww/1/"
+        },
+        "queueId": 77,
+        "result": "FAILURE",
+        "timestamp": 1540840225604,
+        "url": "http://localhost:8080/job/ww/2/"
+      },
+      "queueId": 78,
+      "result": "SUCCESS",
+      "timestamp": 1540840241565,
+      "url": "http://localhost:8080/job/ww/3/"
+    },
+    {
+      "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+      "actions": [
+        {
+          "_class": "hudson.model.CauseAction",
+          "causes": [
+            {
+              "_class": "hudson.model.Cause$UserIdCause",
+              "shortDescription": "Started by user Bogdan Mustiata",
+              "userId": "raptor",
+              "userName": "Bogdan Mustiata"
+            }
+          ]
+        },
+        {},
+        {},
+        {
+          "_class": "hudson.plugins.git.util.BuildData",
+          "buildsByBranchName": {
+            "master": {
+              "_class": "hudson.plugins.git.util.Build",
+              "buildNumber": 2,
+              "buildResult": null,
+              "marked": {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "branch": [
+                  {
+                    "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                    "name": "master"
+                  }
+                ]
+              },
+              "revision": {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "branch": [
+                  {
+                    "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                    "name": "master"
+                  }
+                ]
+              }
+            }
+          },
+          "lastBuiltRevision": {
+            "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+            "branch": [
+              {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "name": "master"
+              }
+            ]
+          },
+          "remoteUrls": [
+            "http://gogs:3000/raptor/jenkins-library"
+          ],
+          "scmName": ""
+        },
+        {
+          "_class": "hudson.plugins.git.GitTagAction",
+          "tags": []
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.cps.EnvActionImpl",
+          "environment": {}
+        },
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction",
+          "nodes": [
+            {
+              "_class": "org.jenkinsci.plugins.workflow.graph.FlowStartNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+            },
+            {
+              "_class": "org.jenkinsci.plugins.workflow.graph.FlowEndNode"
+            }
+          ]
+        },
+        {},
+        {}
+      ],
+      "artifacts": [],
+      "building": false,
+      "changeSets": [],
+      "culprits": [],
+      "description": null,
+      "displayName": "#2",
+      "duration": 703,
+      "estimatedDuration": 9522,
+      "executor": null,
+      "fullDisplayName": "ww #2",
+      "id": "2",
+      "keepLog": false,
+      "nextBuild": {
+        "actions": [
+          {
+            "_class": "hudson.model.ParametersAction",
+            "parameters": [
+              {
+                "_class": "hudson.model.BooleanParameterValue",
+                "name": "RUN_STATIC_CHECKS",
+                "value": true
+              }
+            ]
+          },
+          {
+            "_class": "hudson.model.CauseAction",
+            "causes": [
+              {
+                "_class": "hudson.model.Cause$UserIdCause",
+                "shortDescription": "Started by user Bogdan Mustiata",
+                "userId": "raptor",
+                "userName": "Bogdan Mustiata"
+              }
+            ]
+          },
+          {},
+          {},
+          {
+            "_class": "hudson.plugins.git.util.BuildData",
+            "buildsByBranchName": {
+              "master": {
+                "_class": "hudson.plugins.git.util.Build",
+                "buildNumber": 3,
+                "buildResult": null,
+                "marked": {
+                  "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                  "branch": [
+                    {
+                      "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                      "name": "master"
+                    }
+                  ]
+                },
+                "revision": {
+                  "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                  "branch": [
+                    {
+                      "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                      "name": "master"
+                    }
+                  ]
+                }
+              }
+            },
+            "lastBuiltRevision": {
+              "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+              "branch": [
+                {
+                  "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                  "name": "master"
+                }
+              ]
+            },
+            "remoteUrls": [
+              "http://gogs:3000/raptor/jenkins-library"
+            ],
+            "scmName": ""
+          },
+          {
+            "_class": "hudson.plugins.git.GitTagAction"
+          },
+          {},
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.EnvActionImpl"
+          },
+          {
+            "_class": "hudson.plugins.git.util.BuildData",
+            "buildsByBranchName": {
+              "refs/remotes/origin/master": {
+                "_class": "hudson.plugins.git.util.Build",
+                "buildNumber": 3,
+                "buildResult": null,
+                "marked": {
+                  "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                  "branch": [
+                    {
+                      "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                      "name": "refs/remotes/origin/master"
+                    }
+                  ]
+                },
+                "revision": {
+                  "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                  "branch": [
+                    {
+                      "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                      "name": "refs/remotes/origin/master"
+                    }
+                  ]
+                }
+              }
+            },
+            "lastBuiltRevision": {
+              "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+              "branch": [
+                {
+                  "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                  "name": "refs/remotes/origin/master"
+                }
+              ]
+            },
+            "remoteUrls": [
+              "http://gogs:3000/raptor/jenkins-demo.git"
+            ],
+            "scmName": ""
+          },
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {
+            "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
+          },
+          {},
+          {}
+        ],
+        "artifacts": [
+          {
+            "displayPath": "jenkins_demo",
+            "fileName": "jenkins_demo",
+            "relativePath": "dist/jenkins_demo"
+          }
+        ],
+        "building": false,
+        "changeSets": [],
+        "culprits": [],
+        "description": null,
+        "displayName": "#3",
+        "duration": 27838,
+        "estimatedDuration": 9522,
+        "executor": null,
+        "fullDisplayName": "ww #3",
+        "id": "3",
+        "keepLog": false,
+        "nextBuild": null,
+        "number": 3,
+        "previousBuild": {
+          "number": 2,
+          "url": "http://localhost:8080/job/ww/2/"
+        },
+        "queueId": 78,
+        "result": "SUCCESS",
+        "timestamp": 1540840241565,
+        "url": "http://localhost:8080/job/ww/3/"
+      },
+      "number": 2,
+      "previousBuild": {
+        "actions": [
+          {
+            "_class": "hudson.model.CauseAction",
+            "causes": [
+              {
+                "_class": "hudson.model.Cause$UserIdCause",
+                "shortDescription": "Started by user Bogdan Mustiata",
+                "userId": "raptor",
+                "userName": "Bogdan Mustiata"
+              }
+            ]
+          },
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {
+            "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
+          },
+          {},
+          {}
+        ],
+        "artifacts": [],
+        "building": false,
+        "changeSets": [],
+        "culprits": [],
+        "description": null,
+        "displayName": "#1",
+        "duration": 25,
+        "estimatedDuration": 9522,
+        "executor": null,
+        "fullDisplayName": "ww #1",
+        "id": "1",
+        "keepLog": false,
+        "nextBuild": {
+          "number": 2,
+          "url": "http://localhost:8080/job/ww/2/"
+        },
+        "number": 1,
+        "previousBuild": null,
+        "queueId": 76,
+        "result": "FAILURE",
+        "timestamp": 1540840195422,
+        "url": "http://localhost:8080/job/ww/1/"
+      },
+      "queueId": 77,
+      "result": "FAILURE",
+      "timestamp": 1540840225604,
+      "url": "http://localhost:8080/job/ww/2/"
+    },
+    {
+      "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+      "actions": [
+        {
+          "_class": "hudson.model.CauseAction",
+          "causes": [
+            {
+              "_class": "hudson.model.Cause$UserIdCause",
+              "shortDescription": "Started by user Bogdan Mustiata",
+              "userId": "raptor",
+              "userName": "Bogdan Mustiata"
+            }
+          ]
+        },
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction",
+          "nodes": []
+        },
+        {},
+        {}
+      ],
+      "artifacts": [],
+      "building": false,
+      "changeSets": [],
+      "culprits": [],
+      "description": null,
+      "displayName": "#1",
+      "duration": 25,
+      "estimatedDuration": 9522,
+      "executor": null,
+      "fullDisplayName": "ww #1",
+      "id": "1",
+      "keepLog": false,
+      "nextBuild": {
+        "actions": [
+          {
+            "_class": "hudson.model.CauseAction",
+            "causes": [
+              {
+                "_class": "hudson.model.Cause$UserIdCause",
+                "shortDescription": "Started by user Bogdan Mustiata",
+                "userId": "raptor",
+                "userName": "Bogdan Mustiata"
+              }
+            ]
+          },
+          {},
+          {},
+          {
+            "_class": "hudson.plugins.git.util.BuildData",
+            "buildsByBranchName": {
+              "master": {
+                "_class": "hudson.plugins.git.util.Build",
+                "buildNumber": 2,
+                "buildResult": null,
+                "marked": {
+                  "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                  "branch": [
+                    {
+                      "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                      "name": "master"
+                    }
+                  ]
+                },
+                "revision": {
+                  "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                  "branch": [
+                    {
+                      "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                      "name": "master"
+                    }
+                  ]
+                }
+              }
+            },
+            "lastBuiltRevision": {
+              "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+              "branch": [
+                {
+                  "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                  "name": "master"
+                }
+              ]
+            },
+            "remoteUrls": [
+              "http://gogs:3000/raptor/jenkins-library"
+            ],
+            "scmName": ""
+          },
+          {
+            "_class": "hudson.plugins.git.GitTagAction"
+          },
+          {},
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.EnvActionImpl"
+          },
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {
+            "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
+          },
+          {},
+          {}
+        ],
+        "artifacts": [],
+        "building": false,
+        "changeSets": [],
+        "culprits": [],
+        "description": null,
+        "displayName": "#2",
+        "duration": 703,
+        "estimatedDuration": 9522,
+        "executor": null,
+        "fullDisplayName": "ww #2",
+        "id": "2",
+        "keepLog": false,
+        "nextBuild": {
+          "number": 3,
+          "url": "http://localhost:8080/job/ww/3/"
+        },
+        "number": 2,
+        "previousBuild": {
+          "number": 1,
+          "url": "http://localhost:8080/job/ww/1/"
+        },
+        "queueId": 77,
+        "result": "FAILURE",
+        "timestamp": 1540840225604,
+        "url": "http://localhost:8080/job/ww/2/"
+      },
+      "number": 1,
+      "previousBuild": null,
+      "queueId": 76,
+      "result": "FAILURE",
+      "timestamp": 1540840195422,
+      "url": "http://localhost:8080/job/ww/1/"
+    }
+  ],
+  "color": "blue",
+  "concurrentBuild": true,
+  "description": "",
+  "displayName": "ww",
+  "displayNameOrNull": null,
+  "firstBuild": {
+    "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+    "actions": [
+      {
+        "_class": "hudson.model.CauseAction",
+        "causes": [
+          {
+            "_class": "hudson.model.Cause$UserIdCause",
+            "shortDescription": "Started by user Bogdan Mustiata",
+            "userId": "raptor",
+            "userName": "Bogdan Mustiata"
+          }
+        ]
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {
+        "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction",
+        "nodes": []
+      },
+      {},
+      {}
+    ],
+    "artifacts": [],
+    "building": false,
+    "changeSets": [],
+    "culprits": [],
+    "description": null,
+    "displayName": "#1",
+    "duration": 25,
+    "estimatedDuration": 9522,
+    "executor": null,
+    "fullDisplayName": "ww #1",
+    "id": "1",
+    "keepLog": false,
+    "nextBuild": {
+      "actions": [
+        {
+          "_class": "hudson.model.CauseAction",
+          "causes": [
+            {
+              "_class": "hudson.model.Cause$UserIdCause",
+              "shortDescription": "Started by user Bogdan Mustiata",
+              "userId": "raptor",
+              "userName": "Bogdan Mustiata"
+            }
+          ]
+        },
+        {},
+        {},
+        {
+          "_class": "hudson.plugins.git.util.BuildData",
+          "buildsByBranchName": {
+            "master": {
+              "_class": "hudson.plugins.git.util.Build",
+              "buildNumber": 2,
+              "buildResult": null,
+              "marked": {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "branch": [
+                  {
+                    "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                    "name": "master"
+                  }
+                ]
+              },
+              "revision": {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "branch": [
+                  {
+                    "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                    "name": "master"
+                  }
+                ]
+              }
+            }
+          },
+          "lastBuiltRevision": {
+            "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+            "branch": [
+              {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "name": "master"
+              }
+            ]
+          },
+          "remoteUrls": [
+            "http://gogs:3000/raptor/jenkins-library"
+          ],
+          "scmName": ""
+        },
+        {
+          "_class": "hudson.plugins.git.GitTagAction"
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.cps.EnvActionImpl"
+        },
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
+        },
+        {},
+        {}
+      ],
+      "artifacts": [],
+      "building": false,
+      "changeSets": [],
+      "culprits": [],
+      "description": null,
+      "displayName": "#2",
+      "duration": 703,
+      "estimatedDuration": 9522,
+      "executor": null,
+      "fullDisplayName": "ww #2",
+      "id": "2",
+      "keepLog": false,
+      "nextBuild": {
+        "number": 3,
+        "url": "http://localhost:8080/job/ww/3/"
+      },
+      "number": 2,
+      "previousBuild": {
+        "number": 1,
+        "url": "http://localhost:8080/job/ww/1/"
+      },
+      "queueId": 77,
+      "result": "FAILURE",
+      "timestamp": 1540840225604,
+      "url": "http://localhost:8080/job/ww/2/"
+    },
+    "number": 1,
+    "previousBuild": null,
+    "queueId": 76,
+    "result": "FAILURE",
+    "timestamp": 1540840195422,
+    "url": "http://localhost:8080/job/ww/1/"
+  },
+  "fullDisplayName": "ww",
+  "fullName": "ww",
+  "healthReport": [
+    {
+      "description": "Build stability: 2 out of the last 3 builds failed.",
+      "iconClassName": "icon-health-20to39",
+      "iconUrl": "health-20to39.png",
+      "score": 33
+    }
+  ],
+  "inQueue": false,
+  "keepDependencies": false,
+  "lastBuild": {
+    "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+    "actions": [
+      {
+        "_class": "hudson.model.ParametersAction",
+        "parameters": [
+          {
+            "_class": "hudson.model.BooleanParameterValue",
+            "name": "RUN_STATIC_CHECKS",
+            "value": true
+          }
+        ]
+      },
+      {
+        "_class": "hudson.model.CauseAction",
+        "causes": [
+          {
+            "_class": "hudson.model.Cause$UserIdCause",
+            "shortDescription": "Started by user Bogdan Mustiata",
+            "userId": "raptor",
+            "userName": "Bogdan Mustiata"
+          }
+        ]
+      },
+      {},
+      {},
+      {
+        "_class": "hudson.plugins.git.util.BuildData",
+        "buildsByBranchName": {
+          "master": {
+            "_class": "hudson.plugins.git.util.Build",
+            "buildNumber": 3,
+            "buildResult": null,
+            "marked": {
+              "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+              "branch": [
+                {
+                  "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                  "name": "master"
+                }
+              ]
+            },
+            "revision": {
+              "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+              "branch": [
+                {
+                  "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                  "name": "master"
+                }
+              ]
+            }
+          }
+        },
+        "lastBuiltRevision": {
+          "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+          "branch": [
+            {
+              "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+              "name": "master"
+            }
+          ]
+        },
+        "remoteUrls": [
+          "http://gogs:3000/raptor/jenkins-library"
+        ],
+        "scmName": ""
+      },
+      {
+        "_class": "hudson.plugins.git.GitTagAction",
+        "tags": []
+      },
+      {},
+      {
+        "_class": "org.jenkinsci.plugins.workflow.cps.EnvActionImpl",
+        "environment": {}
+      },
+      {
+        "_class": "hudson.plugins.git.util.BuildData",
+        "buildsByBranchName": {
+          "refs/remotes/origin/master": {
+            "_class": "hudson.plugins.git.util.Build",
+            "buildNumber": 3,
+            "buildResult": null,
+            "marked": {
+              "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+              "branch": [
+                {
+                  "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                  "name": "refs/remotes/origin/master"
+                }
+              ]
+            },
+            "revision": {
+              "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+              "branch": [
+                {
+                  "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                  "name": "refs/remotes/origin/master"
+                }
+              ]
+            }
+          }
+        },
+        "lastBuiltRevision": {
+          "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+          "branch": [
+            {
+              "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+              "name": "refs/remotes/origin/master"
+            }
+          ]
+        },
+        "remoteUrls": [
+          "http://gogs:3000/raptor/jenkins-demo.git"
+        ],
+        "scmName": ""
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {
+        "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction",
+        "nodes": [
+          {
+            "_class": "org.jenkinsci.plugins.workflow.graph.FlowStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.graph.FlowEndNode"
+          }
+        ]
+      },
+      {},
+      {}
+    ],
+    "artifacts": [
+      {
+        "displayPath": "jenkins_demo",
+        "fileName": "jenkins_demo",
+        "relativePath": "dist/jenkins_demo"
+      }
+    ],
+    "building": false,
+    "changeSets": [],
+    "culprits": [],
+    "description": null,
+    "displayName": "#3",
+    "duration": 27838,
+    "estimatedDuration": 9522,
+    "executor": null,
+    "fullDisplayName": "ww #3",
+    "id": "3",
+    "keepLog": false,
+    "nextBuild": null,
+    "number": 3,
+    "previousBuild": {
+      "actions": [
+        {
+          "_class": "hudson.model.CauseAction",
+          "causes": [
+            {
+              "_class": "hudson.model.Cause$UserIdCause",
+              "shortDescription": "Started by user Bogdan Mustiata",
+              "userId": "raptor",
+              "userName": "Bogdan Mustiata"
+            }
+          ]
+        },
+        {},
+        {},
+        {
+          "_class": "hudson.plugins.git.util.BuildData",
+          "buildsByBranchName": {
+            "master": {
+              "_class": "hudson.plugins.git.util.Build",
+              "buildNumber": 2,
+              "buildResult": null,
+              "marked": {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "branch": [
+                  {
+                    "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                    "name": "master"
+                  }
+                ]
+              },
+              "revision": {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "branch": [
+                  {
+                    "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                    "name": "master"
+                  }
+                ]
+              }
+            }
+          },
+          "lastBuiltRevision": {
+            "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+            "branch": [
+              {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "name": "master"
+              }
+            ]
+          },
+          "remoteUrls": [
+            "http://gogs:3000/raptor/jenkins-library"
+          ],
+          "scmName": ""
+        },
+        {
+          "_class": "hudson.plugins.git.GitTagAction"
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.cps.EnvActionImpl"
+        },
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
+        },
+        {},
+        {}
+      ],
+      "artifacts": [],
+      "building": false,
+      "changeSets": [],
+      "culprits": [],
+      "description": null,
+      "displayName": "#2",
+      "duration": 703,
+      "estimatedDuration": 9522,
+      "executor": null,
+      "fullDisplayName": "ww #2",
+      "id": "2",
+      "keepLog": false,
+      "nextBuild": {
+        "number": 3,
+        "url": "http://localhost:8080/job/ww/3/"
+      },
+      "number": 2,
+      "previousBuild": {
+        "number": 1,
+        "url": "http://localhost:8080/job/ww/1/"
+      },
+      "queueId": 77,
+      "result": "FAILURE",
+      "timestamp": 1540840225604,
+      "url": "http://localhost:8080/job/ww/2/"
+    },
+    "queueId": 78,
+    "result": "SUCCESS",
+    "timestamp": 1540840241565,
+    "url": "http://localhost:8080/job/ww/3/"
+  },
+  "lastCompletedBuild": {
+    "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+    "actions": [
+      {
+        "_class": "hudson.model.ParametersAction",
+        "parameters": [
+          {
+            "_class": "hudson.model.BooleanParameterValue",
+            "name": "RUN_STATIC_CHECKS",
+            "value": true
+          }
+        ]
+      },
+      {
+        "_class": "hudson.model.CauseAction",
+        "causes": [
+          {
+            "_class": "hudson.model.Cause$UserIdCause",
+            "shortDescription": "Started by user Bogdan Mustiata",
+            "userId": "raptor",
+            "userName": "Bogdan Mustiata"
+          }
+        ]
+      },
+      {},
+      {},
+      {
+        "_class": "hudson.plugins.git.util.BuildData",
+        "buildsByBranchName": {
+          "master": {
+            "_class": "hudson.plugins.git.util.Build",
+            "buildNumber": 3,
+            "buildResult": null,
+            "marked": {
+              "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+              "branch": [
+                {
+                  "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                  "name": "master"
+                }
+              ]
+            },
+            "revision": {
+              "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+              "branch": [
+                {
+                  "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                  "name": "master"
+                }
+              ]
+            }
+          }
+        },
+        "lastBuiltRevision": {
+          "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+          "branch": [
+            {
+              "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+              "name": "master"
+            }
+          ]
+        },
+        "remoteUrls": [
+          "http://gogs:3000/raptor/jenkins-library"
+        ],
+        "scmName": ""
+      },
+      {
+        "_class": "hudson.plugins.git.GitTagAction",
+        "tags": []
+      },
+      {},
+      {
+        "_class": "org.jenkinsci.plugins.workflow.cps.EnvActionImpl",
+        "environment": {}
+      },
+      {
+        "_class": "hudson.plugins.git.util.BuildData",
+        "buildsByBranchName": {
+          "refs/remotes/origin/master": {
+            "_class": "hudson.plugins.git.util.Build",
+            "buildNumber": 3,
+            "buildResult": null,
+            "marked": {
+              "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+              "branch": [
+                {
+                  "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                  "name": "refs/remotes/origin/master"
+                }
+              ]
+            },
+            "revision": {
+              "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+              "branch": [
+                {
+                  "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                  "name": "refs/remotes/origin/master"
+                }
+              ]
+            }
+          }
+        },
+        "lastBuiltRevision": {
+          "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+          "branch": [
+            {
+              "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+              "name": "refs/remotes/origin/master"
+            }
+          ]
+        },
+        "remoteUrls": [
+          "http://gogs:3000/raptor/jenkins-demo.git"
+        ],
+        "scmName": ""
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {
+        "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction",
+        "nodes": [
+          {
+            "_class": "org.jenkinsci.plugins.workflow.graph.FlowStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.graph.FlowEndNode"
+          }
+        ]
+      },
+      {},
+      {}
+    ],
+    "artifacts": [
+      {
+        "displayPath": "jenkins_demo",
+        "fileName": "jenkins_demo",
+        "relativePath": "dist/jenkins_demo"
+      }
+    ],
+    "building": false,
+    "changeSets": [],
+    "culprits": [],
+    "description": null,
+    "displayName": "#3",
+    "duration": 27838,
+    "estimatedDuration": 9522,
+    "executor": null,
+    "fullDisplayName": "ww #3",
+    "id": "3",
+    "keepLog": false,
+    "nextBuild": null,
+    "number": 3,
+    "previousBuild": {
+      "actions": [
+        {
+          "_class": "hudson.model.CauseAction",
+          "causes": [
+            {
+              "_class": "hudson.model.Cause$UserIdCause",
+              "shortDescription": "Started by user Bogdan Mustiata",
+              "userId": "raptor",
+              "userName": "Bogdan Mustiata"
+            }
+          ]
+        },
+        {},
+        {},
+        {
+          "_class": "hudson.plugins.git.util.BuildData",
+          "buildsByBranchName": {
+            "master": {
+              "_class": "hudson.plugins.git.util.Build",
+              "buildNumber": 2,
+              "buildResult": null,
+              "marked": {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "branch": [
+                  {
+                    "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                    "name": "master"
+                  }
+                ]
+              },
+              "revision": {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "branch": [
+                  {
+                    "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                    "name": "master"
+                  }
+                ]
+              }
+            }
+          },
+          "lastBuiltRevision": {
+            "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+            "branch": [
+              {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "name": "master"
+              }
+            ]
+          },
+          "remoteUrls": [
+            "http://gogs:3000/raptor/jenkins-library"
+          ],
+          "scmName": ""
+        },
+        {
+          "_class": "hudson.plugins.git.GitTagAction"
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.cps.EnvActionImpl"
+        },
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
+        },
+        {},
+        {}
+      ],
+      "artifacts": [],
+      "building": false,
+      "changeSets": [],
+      "culprits": [],
+      "description": null,
+      "displayName": "#2",
+      "duration": 703,
+      "estimatedDuration": 9522,
+      "executor": null,
+      "fullDisplayName": "ww #2",
+      "id": "2",
+      "keepLog": false,
+      "nextBuild": {
+        "number": 3,
+        "url": "http://localhost:8080/job/ww/3/"
+      },
+      "number": 2,
+      "previousBuild": {
+        "number": 1,
+        "url": "http://localhost:8080/job/ww/1/"
+      },
+      "queueId": 77,
+      "result": "FAILURE",
+      "timestamp": 1540840225604,
+      "url": "http://localhost:8080/job/ww/2/"
+    },
+    "queueId": 78,
+    "result": "SUCCESS",
+    "timestamp": 1540840241565,
+    "url": "http://localhost:8080/job/ww/3/"
+  },
+  "lastFailedBuild": {
+    "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+    "actions": [
+      {
+        "_class": "hudson.model.CauseAction",
+        "causes": [
+          {
+            "_class": "hudson.model.Cause$UserIdCause",
+            "shortDescription": "Started by user Bogdan Mustiata",
+            "userId": "raptor",
+            "userName": "Bogdan Mustiata"
+          }
+        ]
+      },
+      {},
+      {},
+      {
+        "_class": "hudson.plugins.git.util.BuildData",
+        "buildsByBranchName": {
+          "master": {
+            "_class": "hudson.plugins.git.util.Build",
+            "buildNumber": 2,
+            "buildResult": null,
+            "marked": {
+              "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+              "branch": [
+                {
+                  "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                  "name": "master"
+                }
+              ]
+            },
+            "revision": {
+              "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+              "branch": [
+                {
+                  "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                  "name": "master"
+                }
+              ]
+            }
+          }
+        },
+        "lastBuiltRevision": {
+          "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+          "branch": [
+            {
+              "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+              "name": "master"
+            }
+          ]
+        },
+        "remoteUrls": [
+          "http://gogs:3000/raptor/jenkins-library"
+        ],
+        "scmName": ""
+      },
+      {
+        "_class": "hudson.plugins.git.GitTagAction",
+        "tags": []
+      },
+      {},
+      {
+        "_class": "org.jenkinsci.plugins.workflow.cps.EnvActionImpl",
+        "environment": {}
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {
+        "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction",
+        "nodes": [
+          {
+            "_class": "org.jenkinsci.plugins.workflow.graph.FlowStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.graph.FlowEndNode"
+          }
+        ]
+      },
+      {},
+      {}
+    ],
+    "artifacts": [],
+    "building": false,
+    "changeSets": [],
+    "culprits": [],
+    "description": null,
+    "displayName": "#2",
+    "duration": 703,
+    "estimatedDuration": 9522,
+    "executor": null,
+    "fullDisplayName": "ww #2",
+    "id": "2",
+    "keepLog": false,
+    "nextBuild": {
+      "actions": [
+        {
+          "_class": "hudson.model.ParametersAction",
+          "parameters": [
+            {
+              "_class": "hudson.model.BooleanParameterValue",
+              "name": "RUN_STATIC_CHECKS",
+              "value": true
+            }
+          ]
+        },
+        {
+          "_class": "hudson.model.CauseAction",
+          "causes": [
+            {
+              "_class": "hudson.model.Cause$UserIdCause",
+              "shortDescription": "Started by user Bogdan Mustiata",
+              "userId": "raptor",
+              "userName": "Bogdan Mustiata"
+            }
+          ]
+        },
+        {},
+        {},
+        {
+          "_class": "hudson.plugins.git.util.BuildData",
+          "buildsByBranchName": {
+            "master": {
+              "_class": "hudson.plugins.git.util.Build",
+              "buildNumber": 3,
+              "buildResult": null,
+              "marked": {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "branch": [
+                  {
+                    "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                    "name": "master"
+                  }
+                ]
+              },
+              "revision": {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "branch": [
+                  {
+                    "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                    "name": "master"
+                  }
+                ]
+              }
+            }
+          },
+          "lastBuiltRevision": {
+            "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+            "branch": [
+              {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "name": "master"
+              }
+            ]
+          },
+          "remoteUrls": [
+            "http://gogs:3000/raptor/jenkins-library"
+          ],
+          "scmName": ""
+        },
+        {
+          "_class": "hudson.plugins.git.GitTagAction"
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.cps.EnvActionImpl"
+        },
+        {
+          "_class": "hudson.plugins.git.util.BuildData",
+          "buildsByBranchName": {
+            "refs/remotes/origin/master": {
+              "_class": "hudson.plugins.git.util.Build",
+              "buildNumber": 3,
+              "buildResult": null,
+              "marked": {
+                "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                "branch": [
+                  {
+                    "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                    "name": "refs/remotes/origin/master"
+                  }
+                ]
+              },
+              "revision": {
+                "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                "branch": [
+                  {
+                    "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                    "name": "refs/remotes/origin/master"
+                  }
+                ]
+              }
+            }
+          },
+          "lastBuiltRevision": {
+            "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+            "branch": [
+              {
+                "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                "name": "refs/remotes/origin/master"
+              }
+            ]
+          },
+          "remoteUrls": [
+            "http://gogs:3000/raptor/jenkins-demo.git"
+          ],
+          "scmName": ""
+        },
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
+        },
+        {},
+        {}
+      ],
+      "artifacts": [
+        {
+          "displayPath": "jenkins_demo",
+          "fileName": "jenkins_demo",
+          "relativePath": "dist/jenkins_demo"
+        }
+      ],
+      "building": false,
+      "changeSets": [],
+      "culprits": [],
+      "description": null,
+      "displayName": "#3",
+      "duration": 27838,
+      "estimatedDuration": 9522,
+      "executor": null,
+      "fullDisplayName": "ww #3",
+      "id": "3",
+      "keepLog": false,
+      "nextBuild": null,
+      "number": 3,
+      "previousBuild": {
+        "number": 2,
+        "url": "http://localhost:8080/job/ww/2/"
+      },
+      "queueId": 78,
+      "result": "SUCCESS",
+      "timestamp": 1540840241565,
+      "url": "http://localhost:8080/job/ww/3/"
+    },
+    "number": 2,
+    "previousBuild": {
+      "actions": [
+        {
+          "_class": "hudson.model.CauseAction",
+          "causes": [
+            {
+              "_class": "hudson.model.Cause$UserIdCause",
+              "shortDescription": "Started by user Bogdan Mustiata",
+              "userId": "raptor",
+              "userName": "Bogdan Mustiata"
+            }
+          ]
+        },
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
+        },
+        {},
+        {}
+      ],
+      "artifacts": [],
+      "building": false,
+      "changeSets": [],
+      "culprits": [],
+      "description": null,
+      "displayName": "#1",
+      "duration": 25,
+      "estimatedDuration": 9522,
+      "executor": null,
+      "fullDisplayName": "ww #1",
+      "id": "1",
+      "keepLog": false,
+      "nextBuild": {
+        "number": 2,
+        "url": "http://localhost:8080/job/ww/2/"
+      },
+      "number": 1,
+      "previousBuild": null,
+      "queueId": 76,
+      "result": "FAILURE",
+      "timestamp": 1540840195422,
+      "url": "http://localhost:8080/job/ww/1/"
+    },
+    "queueId": 77,
+    "result": "FAILURE",
+    "timestamp": 1540840225604,
+    "url": "http://localhost:8080/job/ww/2/"
+  },
+  "lastStableBuild": {
+    "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+    "actions": [
+      {
+        "_class": "hudson.model.ParametersAction",
+        "parameters": [
+          {
+            "_class": "hudson.model.BooleanParameterValue",
+            "name": "RUN_STATIC_CHECKS",
+            "value": true
+          }
+        ]
+      },
+      {
+        "_class": "hudson.model.CauseAction",
+        "causes": [
+          {
+            "_class": "hudson.model.Cause$UserIdCause",
+            "shortDescription": "Started by user Bogdan Mustiata",
+            "userId": "raptor",
+            "userName": "Bogdan Mustiata"
+          }
+        ]
+      },
+      {},
+      {},
+      {
+        "_class": "hudson.plugins.git.util.BuildData",
+        "buildsByBranchName": {
+          "master": {
+            "_class": "hudson.plugins.git.util.Build",
+            "buildNumber": 3,
+            "buildResult": null,
+            "marked": {
+              "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+              "branch": [
+                {
+                  "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                  "name": "master"
+                }
+              ]
+            },
+            "revision": {
+              "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+              "branch": [
+                {
+                  "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                  "name": "master"
+                }
+              ]
+            }
+          }
+        },
+        "lastBuiltRevision": {
+          "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+          "branch": [
+            {
+              "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+              "name": "master"
+            }
+          ]
+        },
+        "remoteUrls": [
+          "http://gogs:3000/raptor/jenkins-library"
+        ],
+        "scmName": ""
+      },
+      {
+        "_class": "hudson.plugins.git.GitTagAction",
+        "tags": []
+      },
+      {},
+      {
+        "_class": "org.jenkinsci.plugins.workflow.cps.EnvActionImpl",
+        "environment": {}
+      },
+      {
+        "_class": "hudson.plugins.git.util.BuildData",
+        "buildsByBranchName": {
+          "refs/remotes/origin/master": {
+            "_class": "hudson.plugins.git.util.Build",
+            "buildNumber": 3,
+            "buildResult": null,
+            "marked": {
+              "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+              "branch": [
+                {
+                  "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                  "name": "refs/remotes/origin/master"
+                }
+              ]
+            },
+            "revision": {
+              "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+              "branch": [
+                {
+                  "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                  "name": "refs/remotes/origin/master"
+                }
+              ]
+            }
+          }
+        },
+        "lastBuiltRevision": {
+          "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+          "branch": [
+            {
+              "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+              "name": "refs/remotes/origin/master"
+            }
+          ]
+        },
+        "remoteUrls": [
+          "http://gogs:3000/raptor/jenkins-demo.git"
+        ],
+        "scmName": ""
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {
+        "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction",
+        "nodes": [
+          {
+            "_class": "org.jenkinsci.plugins.workflow.graph.FlowStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.graph.FlowEndNode"
+          }
+        ]
+      },
+      {},
+      {}
+    ],
+    "artifacts": [
+      {
+        "displayPath": "jenkins_demo",
+        "fileName": "jenkins_demo",
+        "relativePath": "dist/jenkins_demo"
+      }
+    ],
+    "building": false,
+    "changeSets": [],
+    "culprits": [],
+    "description": null,
+    "displayName": "#3",
+    "duration": 27838,
+    "estimatedDuration": 9522,
+    "executor": null,
+    "fullDisplayName": "ww #3",
+    "id": "3",
+    "keepLog": false,
+    "nextBuild": null,
+    "number": 3,
+    "previousBuild": {
+      "actions": [
+        {
+          "_class": "hudson.model.CauseAction",
+          "causes": [
+            {
+              "_class": "hudson.model.Cause$UserIdCause",
+              "shortDescription": "Started by user Bogdan Mustiata",
+              "userId": "raptor",
+              "userName": "Bogdan Mustiata"
+            }
+          ]
+        },
+        {},
+        {},
+        {
+          "_class": "hudson.plugins.git.util.BuildData",
+          "buildsByBranchName": {
+            "master": {
+              "_class": "hudson.plugins.git.util.Build",
+              "buildNumber": 2,
+              "buildResult": null,
+              "marked": {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "branch": [
+                  {
+                    "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                    "name": "master"
+                  }
+                ]
+              },
+              "revision": {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "branch": [
+                  {
+                    "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                    "name": "master"
+                  }
+                ]
+              }
+            }
+          },
+          "lastBuiltRevision": {
+            "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+            "branch": [
+              {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "name": "master"
+              }
+            ]
+          },
+          "remoteUrls": [
+            "http://gogs:3000/raptor/jenkins-library"
+          ],
+          "scmName": ""
+        },
+        {
+          "_class": "hudson.plugins.git.GitTagAction"
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.cps.EnvActionImpl"
+        },
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
+        },
+        {},
+        {}
+      ],
+      "artifacts": [],
+      "building": false,
+      "changeSets": [],
+      "culprits": [],
+      "description": null,
+      "displayName": "#2",
+      "duration": 703,
+      "estimatedDuration": 9522,
+      "executor": null,
+      "fullDisplayName": "ww #2",
+      "id": "2",
+      "keepLog": false,
+      "nextBuild": {
+        "number": 3,
+        "url": "http://localhost:8080/job/ww/3/"
+      },
+      "number": 2,
+      "previousBuild": {
+        "number": 1,
+        "url": "http://localhost:8080/job/ww/1/"
+      },
+      "queueId": 77,
+      "result": "FAILURE",
+      "timestamp": 1540840225604,
+      "url": "http://localhost:8080/job/ww/2/"
+    },
+    "queueId": 78,
+    "result": "SUCCESS",
+    "timestamp": 1540840241565,
+    "url": "http://localhost:8080/job/ww/3/"
+  },
+  "lastSuccessfulBuild": {
+    "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+    "actions": [
+      {
+        "_class": "hudson.model.ParametersAction",
+        "parameters": [
+          {
+            "_class": "hudson.model.BooleanParameterValue",
+            "name": "RUN_STATIC_CHECKS",
+            "value": true
+          }
+        ]
+      },
+      {
+        "_class": "hudson.model.CauseAction",
+        "causes": [
+          {
+            "_class": "hudson.model.Cause$UserIdCause",
+            "shortDescription": "Started by user Bogdan Mustiata",
+            "userId": "raptor",
+            "userName": "Bogdan Mustiata"
+          }
+        ]
+      },
+      {},
+      {},
+      {
+        "_class": "hudson.plugins.git.util.BuildData",
+        "buildsByBranchName": {
+          "master": {
+            "_class": "hudson.plugins.git.util.Build",
+            "buildNumber": 3,
+            "buildResult": null,
+            "marked": {
+              "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+              "branch": [
+                {
+                  "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                  "name": "master"
+                }
+              ]
+            },
+            "revision": {
+              "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+              "branch": [
+                {
+                  "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                  "name": "master"
+                }
+              ]
+            }
+          }
+        },
+        "lastBuiltRevision": {
+          "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+          "branch": [
+            {
+              "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+              "name": "master"
+            }
+          ]
+        },
+        "remoteUrls": [
+          "http://gogs:3000/raptor/jenkins-library"
+        ],
+        "scmName": ""
+      },
+      {
+        "_class": "hudson.plugins.git.GitTagAction",
+        "tags": []
+      },
+      {},
+      {
+        "_class": "org.jenkinsci.plugins.workflow.cps.EnvActionImpl",
+        "environment": {}
+      },
+      {
+        "_class": "hudson.plugins.git.util.BuildData",
+        "buildsByBranchName": {
+          "refs/remotes/origin/master": {
+            "_class": "hudson.plugins.git.util.Build",
+            "buildNumber": 3,
+            "buildResult": null,
+            "marked": {
+              "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+              "branch": [
+                {
+                  "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                  "name": "refs/remotes/origin/master"
+                }
+              ]
+            },
+            "revision": {
+              "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+              "branch": [
+                {
+                  "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                  "name": "refs/remotes/origin/master"
+                }
+              ]
+            }
+          }
+        },
+        "lastBuiltRevision": {
+          "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+          "branch": [
+            {
+              "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+              "name": "refs/remotes/origin/master"
+            }
+          ]
+        },
+        "remoteUrls": [
+          "http://gogs:3000/raptor/jenkins-demo.git"
+        ],
+        "scmName": ""
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {
+        "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction",
+        "nodes": [
+          {
+            "_class": "org.jenkinsci.plugins.workflow.graph.FlowStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepEndNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.graph.FlowEndNode"
+          }
+        ]
+      },
+      {},
+      {}
+    ],
+    "artifacts": [
+      {
+        "displayPath": "jenkins_demo",
+        "fileName": "jenkins_demo",
+        "relativePath": "dist/jenkins_demo"
+      }
+    ],
+    "building": false,
+    "changeSets": [],
+    "culprits": [],
+    "description": null,
+    "displayName": "#3",
+    "duration": 27838,
+    "estimatedDuration": 9522,
+    "executor": null,
+    "fullDisplayName": "ww #3",
+    "id": "3",
+    "keepLog": false,
+    "nextBuild": null,
+    "number": 3,
+    "previousBuild": {
+      "actions": [
+        {
+          "_class": "hudson.model.CauseAction",
+          "causes": [
+            {
+              "_class": "hudson.model.Cause$UserIdCause",
+              "shortDescription": "Started by user Bogdan Mustiata",
+              "userId": "raptor",
+              "userName": "Bogdan Mustiata"
+            }
+          ]
+        },
+        {},
+        {},
+        {
+          "_class": "hudson.plugins.git.util.BuildData",
+          "buildsByBranchName": {
+            "master": {
+              "_class": "hudson.plugins.git.util.Build",
+              "buildNumber": 2,
+              "buildResult": null,
+              "marked": {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "branch": [
+                  {
+                    "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                    "name": "master"
+                  }
+                ]
+              },
+              "revision": {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "branch": [
+                  {
+                    "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                    "name": "master"
+                  }
+                ]
+              }
+            }
+          },
+          "lastBuiltRevision": {
+            "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+            "branch": [
+              {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "name": "master"
+              }
+            ]
+          },
+          "remoteUrls": [
+            "http://gogs:3000/raptor/jenkins-library"
+          ],
+          "scmName": ""
+        },
+        {
+          "_class": "hudson.plugins.git.GitTagAction"
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.cps.EnvActionImpl"
+        },
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
+        },
+        {},
+        {}
+      ],
+      "artifacts": [],
+      "building": false,
+      "changeSets": [],
+      "culprits": [],
+      "description": null,
+      "displayName": "#2",
+      "duration": 703,
+      "estimatedDuration": 9522,
+      "executor": null,
+      "fullDisplayName": "ww #2",
+      "id": "2",
+      "keepLog": false,
+      "nextBuild": {
+        "number": 3,
+        "url": "http://localhost:8080/job/ww/3/"
+      },
+      "number": 2,
+      "previousBuild": {
+        "number": 1,
+        "url": "http://localhost:8080/job/ww/1/"
+      },
+      "queueId": 77,
+      "result": "FAILURE",
+      "timestamp": 1540840225604,
+      "url": "http://localhost:8080/job/ww/2/"
+    },
+    "queueId": 78,
+    "result": "SUCCESS",
+    "timestamp": 1540840241565,
+    "url": "http://localhost:8080/job/ww/3/"
+  },
+  "lastUnstableBuild": null,
+  "lastUnsuccessfulBuild": {
+    "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+    "actions": [
+      {
+        "_class": "hudson.model.CauseAction",
+        "causes": [
+          {
+            "_class": "hudson.model.Cause$UserIdCause",
+            "shortDescription": "Started by user Bogdan Mustiata",
+            "userId": "raptor",
+            "userName": "Bogdan Mustiata"
+          }
+        ]
+      },
+      {},
+      {},
+      {
+        "_class": "hudson.plugins.git.util.BuildData",
+        "buildsByBranchName": {
+          "master": {
+            "_class": "hudson.plugins.git.util.Build",
+            "buildNumber": 2,
+            "buildResult": null,
+            "marked": {
+              "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+              "branch": [
+                {
+                  "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                  "name": "master"
+                }
+              ]
+            },
+            "revision": {
+              "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+              "branch": [
+                {
+                  "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                  "name": "master"
+                }
+              ]
+            }
+          }
+        },
+        "lastBuiltRevision": {
+          "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+          "branch": [
+            {
+              "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+              "name": "master"
+            }
+          ]
+        },
+        "remoteUrls": [
+          "http://gogs:3000/raptor/jenkins-library"
+        ],
+        "scmName": ""
+      },
+      {
+        "_class": "hudson.plugins.git.GitTagAction",
+        "tags": []
+      },
+      {},
+      {
+        "_class": "org.jenkinsci.plugins.workflow.cps.EnvActionImpl",
+        "environment": {}
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {
+        "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction",
+        "nodes": [
+          {
+            "_class": "org.jenkinsci.plugins.workflow.graph.FlowStartNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.cps.nodes.StepAtomNode"
+          },
+          {
+            "_class": "org.jenkinsci.plugins.workflow.graph.FlowEndNode"
+          }
+        ]
+      },
+      {},
+      {}
+    ],
+    "artifacts": [],
+    "building": false,
+    "changeSets": [],
+    "culprits": [],
+    "description": null,
+    "displayName": "#2",
+    "duration": 703,
+    "estimatedDuration": 9522,
+    "executor": null,
+    "fullDisplayName": "ww #2",
+    "id": "2",
+    "keepLog": false,
+    "nextBuild": {
+      "actions": [
+        {
+          "_class": "hudson.model.ParametersAction",
+          "parameters": [
+            {
+              "_class": "hudson.model.BooleanParameterValue",
+              "name": "RUN_STATIC_CHECKS",
+              "value": true
+            }
+          ]
+        },
+        {
+          "_class": "hudson.model.CauseAction",
+          "causes": [
+            {
+              "_class": "hudson.model.Cause$UserIdCause",
+              "shortDescription": "Started by user Bogdan Mustiata",
+              "userId": "raptor",
+              "userName": "Bogdan Mustiata"
+            }
+          ]
+        },
+        {},
+        {},
+        {
+          "_class": "hudson.plugins.git.util.BuildData",
+          "buildsByBranchName": {
+            "master": {
+              "_class": "hudson.plugins.git.util.Build",
+              "buildNumber": 3,
+              "buildResult": null,
+              "marked": {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "branch": [
+                  {
+                    "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                    "name": "master"
+                  }
+                ]
+              },
+              "revision": {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "branch": [
+                  {
+                    "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                    "name": "master"
+                  }
+                ]
+              }
+            }
+          },
+          "lastBuiltRevision": {
+            "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+            "branch": [
+              {
+                "SHA1": "550e2e5761e78758e60d72974c47ce9e92fd6999",
+                "name": "master"
+              }
+            ]
+          },
+          "remoteUrls": [
+            "http://gogs:3000/raptor/jenkins-library"
+          ],
+          "scmName": ""
+        },
+        {
+          "_class": "hudson.plugins.git.GitTagAction"
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.cps.EnvActionImpl"
+        },
+        {
+          "_class": "hudson.plugins.git.util.BuildData",
+          "buildsByBranchName": {
+            "refs/remotes/origin/master": {
+              "_class": "hudson.plugins.git.util.Build",
+              "buildNumber": 3,
+              "buildResult": null,
+              "marked": {
+                "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                "branch": [
+                  {
+                    "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                    "name": "refs/remotes/origin/master"
+                  }
+                ]
+              },
+              "revision": {
+                "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                "branch": [
+                  {
+                    "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                    "name": "refs/remotes/origin/master"
+                  }
+                ]
+              }
+            }
+          },
+          "lastBuiltRevision": {
+            "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+            "branch": [
+              {
+                "SHA1": "434ac23c1a6ee8622d2cd0e627d55bc33b585286",
+                "name": "refs/remotes/origin/master"
+              }
+            ]
+          },
+          "remoteUrls": [
+            "http://gogs:3000/raptor/jenkins-demo.git"
+          ],
+          "scmName": ""
+        },
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
+        },
+        {},
+        {}
+      ],
+      "artifacts": [
+        {
+          "displayPath": "jenkins_demo",
+          "fileName": "jenkins_demo",
+          "relativePath": "dist/jenkins_demo"
+        }
+      ],
+      "building": false,
+      "changeSets": [],
+      "culprits": [],
+      "description": null,
+      "displayName": "#3",
+      "duration": 27838,
+      "estimatedDuration": 9522,
+      "executor": null,
+      "fullDisplayName": "ww #3",
+      "id": "3",
+      "keepLog": false,
+      "nextBuild": null,
+      "number": 3,
+      "previousBuild": {
+        "number": 2,
+        "url": "http://localhost:8080/job/ww/2/"
+      },
+      "queueId": 78,
+      "result": "SUCCESS",
+      "timestamp": 1540840241565,
+      "url": "http://localhost:8080/job/ww/3/"
+    },
+    "number": 2,
+    "previousBuild": {
+      "actions": [
+        {
+          "_class": "hudson.model.CauseAction",
+          "causes": [
+            {
+              "_class": "hudson.model.Cause$UserIdCause",
+              "shortDescription": "Started by user Bogdan Mustiata",
+              "userId": "raptor",
+              "userName": "Bogdan Mustiata"
+            }
+          ]
+        },
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
+        },
+        {},
+        {}
+      ],
+      "artifacts": [],
+      "building": false,
+      "changeSets": [],
+      "culprits": [],
+      "description": null,
+      "displayName": "#1",
+      "duration": 25,
+      "estimatedDuration": 9522,
+      "executor": null,
+      "fullDisplayName": "ww #1",
+      "id": "1",
+      "keepLog": false,
+      "nextBuild": {
+        "number": 2,
+        "url": "http://localhost:8080/job/ww/2/"
+      },
+      "number": 1,
+      "previousBuild": null,
+      "queueId": 76,
+      "result": "FAILURE",
+      "timestamp": 1540840195422,
+      "url": "http://localhost:8080/job/ww/1/"
+    },
+    "queueId": 77,
+    "result": "FAILURE",
+    "timestamp": 1540840225604,
+    "url": "http://localhost:8080/job/ww/2/"
+  },
+  "name": "ww",
+  "nextBuildNumber": 4,
+  "property": [
+    {
+      "_class": "com.dabsquared.gitlabjenkins.connection.GitLabConnectionProperty"
+    },
+    {
+      "_class": "com.sonyericsson.rebuild.RebuildSettings"
+    },
+    {
+      "_class": "hudson.plugins.throttleconcurrents.ThrottleJobProperty"
+    },
+    {
+      "_class": "hudson.model.ParametersDefinitionProperty",
+      "parameterDefinitions": [
+        {
+          "_class": "hudson.model.BooleanParameterDefinition",
+          "defaultParameterValue": {
+            "_class": "hudson.model.BooleanParameterValue",
+            "name": "RUN_STATIC_CHECKS",
+            "value": true
+          },
+          "description": "Should run the static checks",
+          "name": "RUN_STATIC_CHECKS",
+          "type": "BooleanParameterDefinition"
+        }
+      ]
+    }
+  ],
+  "queueItem": null,
+  "resumeBlocked": false,
+  "url": "http://localhost:8080/job/ww/"
+}

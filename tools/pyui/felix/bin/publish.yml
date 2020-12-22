@@ -1,0 +1,30 @@
+- name: Publish the Lastest Felix Build Monitor
+  gather_facts: False
+  hosts: ciplogic
+  tasks:
+    - name: Create the felixbm release folder
+      become: True
+      file:
+        state: directory
+        path: /opt/www/germaniumhq_get/felixbm
+
+    - name: Upload the linux binary file.
+      become: True
+      synchronize:
+        src: ../_archive/felixbm
+        dest: /opt/www/germaniumhq_get/felixbm/felixbm_upload
+
+    - name: Upload the windows binary file.
+      become: True
+      synchronize:
+        src: ../_archive/felixbm.exe
+        dest: /opt/www/germaniumhq_get/felixbm/felixbm_upload.exe
+
+    - name: Rename the binaries.
+      become: True
+      shell: |
+        mv -f /opt/www/germaniumhq_get/felixbm/felixbm_upload /opt/www/germaniumhq_get/felixbm/felixbm
+        mv -f /opt/www/germaniumhq_get/felixbm/felixbm_upload.exe /opt/www/germaniumhq_get/felixbm/felixbm.exe
+        chmod 660 /opt/www/germaniumhq_get/felixbm/felixbm
+        chown -R 100:101 /opt/www/germaniumhq_get/felixbm/
+
