@@ -98,5 +98,5 @@ class TestComputedDecorator(unittest.TestCase):
         self.assertEqual(label_update_events, registered_events)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

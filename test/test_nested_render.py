@@ -6,23 +6,21 @@ import unittest
 
 @model
 class TreeItem:
-    def __init__(self, parent: Optional['TreeItem'], name: str) -> None:
+    def __init__(self, parent: Optional["TreeItem"], name: str) -> None:
         self.selected = True
         self.name = name
         self.parent = parent
-        self.children: List['TreeItem'] = []
+        self.children: List["TreeItem"] = []
 
         if parent:
             parent.children.append(self)
 
 
 class TreeWidgetNode:
-    def __init__(self,
-                 parent_node: Optional['TreeWidgetNode'],
-                 item: TreeItem):
+    def __init__(self, parent_node: Optional["TreeWidgetNode"], item: TreeItem):
         self.label: str = ""
         self.checked = True
-        self.children: List['TreeWidgetNode'] = []
+        self.children: List["TreeWidgetNode"] = []
         self.item = item
 
         if parent_node:
@@ -101,5 +99,5 @@ class TestNestedRender(unittest.TestCase):
         self.assertFalse(root_node.children[1].checked)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

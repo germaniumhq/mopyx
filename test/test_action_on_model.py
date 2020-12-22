@@ -13,7 +13,6 @@ class Model:
 
 
 class TestActionOnModel(unittest.TestCase):
-
     def test_action_on_model(self):
         root_model = Model()
 
@@ -25,5 +24,5 @@ class TestActionOnModel(unittest.TestCase):
         self.assertEqual(1, root_model.count)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

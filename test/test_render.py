@@ -92,12 +92,12 @@ class TestRender(unittest.TestCase):
         self.assertEqual(model.desc, ui.description.label)
 
         basic_rerender = [
-            'UiComponent.update_data',
-            'UiLabel.set_label',
-            'UiLabel.set_label',
-            'UiComponent.update_table',
-            'UiLabel.set_label',
-            'UiLabel.set_label',
+            "UiComponent.update_data",
+            "UiLabel.set_label",
+            "UiLabel.set_label",
+            "UiComponent.update_table",
+            "UiLabel.set_label",
+            "UiLabel.set_label",
         ]
         self.assertEqual(basic_rerender, registered_events)
 
@@ -111,10 +111,10 @@ class TestRender(unittest.TestCase):
         custom_action()
 
         main_rerender = [
-            'UiComponent.update_data',
-            'UiLabel.set_label',
-            'UiLabel.set_label',
-            'UiComponent.update_table'
+            "UiComponent.update_data",
+            "UiLabel.set_label",
+            "UiLabel.set_label",
+            "UiComponent.update_table",
         ]
         self.assertEqual(main_rerender, registered_events)
 
@@ -131,11 +131,10 @@ class TestRender(unittest.TestCase):
         self.assertEqual(model.items, ui.items_table.table_items)
 
         table_renderer = [
-            'UiComponent.update_table',
+            "UiComponent.update_table",
         ]
         self.assertEqual(table_renderer, registered_events)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
-
