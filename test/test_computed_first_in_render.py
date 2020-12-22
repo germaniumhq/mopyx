@@ -16,8 +16,7 @@ root_model = RootModel()
 
 
 class Ui:
-    def __init__(self,
-                 root_model: RootModel):
+    def __init__(self, root_model: RootModel):
         self.root_model = root_model
         self.render_ui()
 
@@ -39,5 +38,5 @@ class TestComputedFirstRender(unittest.TestCase):
         root_model.access_computed = True
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

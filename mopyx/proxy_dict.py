@@ -1,0 +1,2 @@
+class DictModelProxy(dict):
+    pass

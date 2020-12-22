@@ -50,18 +50,22 @@ class TestNestedListsRender(unittest.TestCase):
         @render_call
         def render_servers() -> None:
             for server in root_model.servers:
+
                 @render_call
                 def render_server() -> None:
                     events.append("server")
                     for job in server.jobs:
+
                         @render_call
                         def render_job() -> None:
                             events.append("job")
                             for branch in job.branches:
+
                                 @render_call
                                 def render_branch() -> None:
                                     events.append("branch")
                                     for build in branch.builds:
+
                                         @render_call
                                         def render_build() -> None:
                                             events.append(f"build {build.name}")
@@ -77,11 +81,11 @@ class TestNestedListsRender(unittest.TestCase):
 
         root_model.servers.append(server)
 
-        self.assertEqual(['server', 'job', 'branch', 'build 1'], events)
+        self.assertEqual(["server", "job", "branch", "build 1"], events)
         events = []
 
         server.jobs[0].branches[0].builds[0].name = "2"
-        self.assertEqual(['build 2'], events)
+        self.assertEqual(["build 2"], events)
 
         events = []
 
@@ -94,8 +98,8 @@ class TestNestedListsRender(unittest.TestCase):
             server.jobs[0].branches = [branch]
 
         action_call()
-        self.assertEqual(['job', 'branch', 'build 1', 'build 1'], events)
+        self.assertEqual(["job", "branch", "build 1", "build 1"], events)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

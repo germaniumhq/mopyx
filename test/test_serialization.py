@@ -28,9 +28,11 @@ class TestSerialization(unittest.TestCase):
         Checks if a model being serialized will also yield the
         mopyx properties.
         """
-        self.assertEqual(json.dumps(NonDecoratedModel().__dict__, sort_keys=True),
-                         json.dumps(Model().__dict__, sort_keys=True))
+        self.assertEqual(
+            json.dumps(NonDecoratedModel().__dict__, sort_keys=True),
+            json.dumps(Model().__dict__, sort_keys=True),
+        )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

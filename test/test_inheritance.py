@@ -30,5 +30,5 @@ class TestIfModelInheritanceWorks(unittest.TestCase):
         self.assertTrue(isinstance(folder, File))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
