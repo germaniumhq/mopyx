@@ -49,6 +49,6 @@ tools/arsonist:
 tools/git-monorepo:
 - dce804bcef74ed91b6704d3a2b46cad5be500ed9
 tools/pyui/mopyx:
-- 14d20e53786edff2abe065a2307b9dfe7fca4473
+- 507c05d2ceeace650319bef29db41687ae142fa4
 tools/version-manager:
 - e2cc793c4c9b001ccc99bd3eaed26c0a32814d5b
