@@ -18,6 +18,8 @@ mappings:
     adhesive-lib: git@github.com:germaniumhq/adhesive-lib.git
     arsonist: git@github.com:bmustiata/ars-py.git
     archer: git@github.com:bmustiata/archer-py.git
+    pyui:
+      mopyx: git@github.com:germaniumhq/mopyx.git
   ge-star:
     germanium:
       ge-python-api: git@github.com:germaniumhq/germanium-python-api.git
