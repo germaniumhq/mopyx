@@ -20,6 +20,7 @@ mappings:
     archer: git@github.com:bmustiata/archer-py.git
     pyui:
       mopyx: git@github.com:germaniumhq/mopyx.git
+      felix: git@github.com:germaniumhq/felix.git
   ge-star:
     germanium:
       ge-python-api: git@github.com:germaniumhq/germanium-python-api.git
