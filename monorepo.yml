@@ -28,6 +28,7 @@ mappings:
       ge-get: git@github.com:germaniumhq/germanium-get.git
       ge-robot: git@github.com:germaniumhq/robotframework-germaniumlibrary.git
     ge-web: git@github.com:germaniumhq/germanium-star.git
+    ge-vue-patternfly: git@github.com:germaniumhq/germanium-vue-patternfly.git
     weary: git@github.com:germaniumhq/weary.git
   gbs:
     gbs-java: git@github.com:germaniumhq/germaniumhq-java-build-system.git
