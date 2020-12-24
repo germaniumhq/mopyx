@@ -1,0 +1,9 @@
+{
+  "name": "germanium-vue-patternfly",
+  "version": "1.0.0",
+  "description": "Selected components used using Patternfly",
+  "main": "index.js",
+  "repository": "aaa",
+  "author": "Bogdan Mustiata <bogdan.mustiata@gmail.com>",
+  "license": "AGPL"
+}
