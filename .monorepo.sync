@@ -12,6 +12,8 @@ gbs/gbs-python:
 - e7e4bb93feb66c0e3979fb8441f8f7314af9bd0a
 gbs/gbs-ubuntu:
 - c08ab60f6dc3dbdff2da6934b20094d7637d1711
+ge-star/ge-vue-patternfly:
+- 96a1c11a4b89c673ff9282748324f71da5082efd
 ge-star/ge-web:
 - 2f8a3b21336bb7ec73f7823bb4588aa0b0ef1d59
 ge-star/germanium/ge-get:
