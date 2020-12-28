@@ -24,6 +24,8 @@ ge-star/germanium/ge-python-drivers:
 - adb581e1ffacf116a9d700e97c062a4e94476ae0
 ge-star/germanium/ge-robot:
 - 0159fb8510e8825ffcd35a1ce57ea7cd03bd5eac
+ge-star/vue/germanium-vue-monaco:
+- fa205e68dd9e364f82861e651b7c34ae912fa15c
 ge-star/vue/germanium-vue-vega:
 - 77112bc21d277a57b4d0784d0bcb17eaeb8c40a0
 ge-star/weary:
