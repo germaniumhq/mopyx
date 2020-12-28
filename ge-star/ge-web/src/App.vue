@@ -13,7 +13,7 @@
 <script lang="ts">
 
 import hotkeys from 'hotkeys-js'
-import Backdrop from '@/components/patternfly/Backdrop.vue'
+import Backdrop from '@germanium-vue-patternfly/Backdrop.vue'
 
 import { Vue, Component } from 'vue-property-decorator'
 import model from '@/model'

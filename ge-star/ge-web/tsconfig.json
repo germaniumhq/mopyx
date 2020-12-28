@@ -21,7 +21,10 @@
     "paths": {
       "@/*": [
         "src/*"
-      ]
+      ],
+      "@germanium-vue-patternfly/*": [
+        "src/shared/germanium-vue-patternfly/*"
+      ],
     },
     "lib": [
       "esnext",

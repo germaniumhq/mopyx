@@ -2,7 +2,9 @@
   <li :class="cssClasses" @click="onclick">
     <Drag :transfer-data="{}">
       <button class="pf-c-tabs__link"><slot></slot></button>
-      <DragContainer slot="image" :model="this"/>
+      <slot name="drag-container">
+        <DragContainer :model="this"/>
+      </slot>
     </Drag>
   </li>
 </template>
@@ -11,8 +13,8 @@
 import { Drag } from 'vue-drag-drop'
 import { Component, Prop, Vue } from 'vue-property-decorator'
 
-import Icon from '@/components/app/Icon.vue'
-import DragContainer from '@/components/app/DragContainer.vue'
+import Icon from './Icon.vue'
+import DragContainer from './DragContainer.vue'
 
 @Component({
     components: {

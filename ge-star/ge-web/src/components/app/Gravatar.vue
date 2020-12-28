@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
-import Avatar from '@/components/patternfly/Avatar.vue'
+import Avatar from '@germanium-vue-patternfly/Avatar.vue'
 import { createHash } from 'crypto'
 
 @Component({

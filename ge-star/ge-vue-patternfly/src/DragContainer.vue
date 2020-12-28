@@ -18,7 +18,7 @@
 
 
 <script lang="ts">
-import Badge from '@/components/patternfly/Badge.vue'
+import Badge from './Badge.vue'
 
 import { Component, Vue, Prop } from 'vue-property-decorator';
 

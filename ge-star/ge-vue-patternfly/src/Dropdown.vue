@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Emit} from 'vue-property-decorator'
-import {isDomChild} from "@/components/patternfly/domutil";
+import {isDomChild} from "./domutil";
 
 @Component({})
 export default class Dropdown extends Vue {

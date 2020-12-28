@@ -5,7 +5,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
-import DropdownEntry from '@/components/patternfly/DropdownEntry.vue'
+import DropdownEntry from '@germanium-vue-patternfly/DropdownEntry.vue'
 
 @Component({
     components: {

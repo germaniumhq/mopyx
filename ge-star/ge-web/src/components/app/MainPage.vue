@@ -42,26 +42,26 @@
 </template>
 
 <script lang="ts">
+import Dropdown from "@germanium-vue-patternfly/Dropdown.vue";
+import DropdownEntry from "@germanium-vue-patternfly/DropdownEntry.vue";
+import TopLogoLink from "@germanium-vue-patternfly/TopLogoLink.vue";
+import TopNavigation from '@germanium-vue-patternfly/TopNavigation.vue'
+import TopNavigationLink from '@germanium-vue-patternfly/TopNavigationLink.vue'
+import AboutModalBox from '@germanium-vue-patternfly/AboutModalBox.vue'
+import Page from '@germanium-vue-patternfly/Page.vue'
+import Backdrop from '@germanium-vue-patternfly/Backdrop.vue'
+
 import AppMenu from '@/components/app/AppMenu.vue'
 import AppMenuEntry from '@/components/app/AppMenuEntry.vue'
 import Gravatar from '@/components/app/Gravatar.vue'
 import ToggleNavigation from '@/components/app/ToggleNavigation.vue'
-import TopNavigation from '@/components/patternfly/TopNavigation.vue'
-import TopNavigationLink from '@/components/patternfly/TopNavigationLink.vue'
 import TreeNodeView from '@/components/app/TreeNodeView.vue'
 
 import hotkeys from 'hotkeys-js'
 
-import AboutModalBox from '@/components/patternfly/AboutModalBox.vue'
-import Page from '@/components/patternfly/Page.vue'
-import Backdrop from '@/components/patternfly/Backdrop.vue'
-
 import {Component, Vue} from 'vue-property-decorator'
 
 import model from '@/model'
-import Dropdown from "@/components/patternfly/Dropdown.vue";
-import DropdownEntry from "@/components/patternfly/DropdownEntry.vue";
-import TopLogoLink from "@/components/patternfly/TopLogoLink.vue";
 
 @Component({
   components: {

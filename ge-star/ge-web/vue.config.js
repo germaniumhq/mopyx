@@ -10,15 +10,12 @@ function resolve(dir) {
 
 module.exports = {
     configureWebpack: {
-        /*
         resolve: {
             alias: {
                 '@': resolve('src'),
-                '@components': resolve('src/components'),
-                '@node': resolve('node_modules'),
+                '@germanium-vue-patternfly': resolve('src/shared/germanium-vue-patternfly'),
             },
         },
-        */
         plugins: [
             new MonacoWebpackPlugin(),
         ],

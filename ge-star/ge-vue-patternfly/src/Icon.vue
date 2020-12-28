@@ -22,8 +22,6 @@ export default class Icon extends Vue {
     }
 
     onClick() {
-/* eslint no-console: ["off", { allow: ["warn", "error"] }] */
-        console.log("click icon")
         this.$emit("click")
     }
 }

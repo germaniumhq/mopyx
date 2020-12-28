@@ -16,8 +16,8 @@ import TreeNodeView from '@/components/app/TreeNodeView.vue'
 
 import model from '@/model'
 import GeDocumentEditor from "@/components/app/GeDocumentEditor.vue";
-import Flex from "@/components/patternfly/Flex.vue";
-import FlexItem from "@/components/patternfly/FlexItem.vue";
+import Flex from "@germanium-vue-patternfly/Flex.vue";
+import FlexItem from "@germanium-vue-patternfly/FlexItem.vue";
 
 @Component({
     components: {

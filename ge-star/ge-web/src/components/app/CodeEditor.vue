@@ -70,13 +70,13 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 
-import Tabs from '@/components/patternfly/Tabs.vue'
-import Tab from '@/components/patternfly/Tab.vue'
-import Icon from '@/components/app/Icon.vue'
+import Tabs from '@germanium-vue-patternfly/Tabs.vue'
+import Tab from '@germanium-vue-patternfly/Tab.vue'
+import Icon from '@germanium-vue-patternfly/Icon.vue'
 
 import MonacoCodeEditor from '@/components/app/MonacoCodeEditor.vue'
 
-import EmptyState from '@/components/patternfly/EmptyState.vue'
+import EmptyState from '@germanium-vue-patternfly/EmptyState.vue'
 
 import { CodeEditor as EditorModel, CodeDocument } from '@/model/ui'
 import { unregisterDocument } from '@/model/actions/editor'

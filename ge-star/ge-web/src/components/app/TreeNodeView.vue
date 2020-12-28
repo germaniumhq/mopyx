@@ -75,8 +75,8 @@
 <script lang="ts">
 /* eslint no-console: ["off", { allow: ["warn", "error"] }] */
 
-import DragContainer from '@/components/app/DragContainer.vue'
-import Icon from '@/components/app/Icon.vue'
+import DragContainer from '@germanium-vue-patternfly/DragContainer.vue'
+import Icon from '@germanium-vue-patternfly/Icon.vue'
 
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import { Drag, Drop } from 'vue-drag-drop';

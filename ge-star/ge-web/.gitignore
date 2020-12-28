@@ -23,3 +23,6 @@ yarn-error.log*
 
 # Python things
 .mypy_cache
+
+# shared modules
+/src/shared

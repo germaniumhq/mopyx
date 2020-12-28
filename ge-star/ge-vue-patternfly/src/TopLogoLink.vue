@@ -1,4 +1,3 @@
-<script src="../../../vue.config.js"></script>
 <template>
   <router-link :to="route">
     <div :class="cssClasses">

@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
-import {box} from "@/components/patternfly/domutil";
+import { box } from "./domutil";
 
 @Component({})
 export default class Tooltip extends Vue {

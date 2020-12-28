@@ -56,15 +56,16 @@
 </template>
 
 <script lang="ts">
+import Tooltip from "@germanium-vue-patternfly/Tooltip.vue";
+import Dropdown from "@germanium-vue-patternfly/Dropdown.vue";
+import Expandable from "@germanium-vue-patternfly/Expandable.vue";
+import Tabs from "@germanium-vue-patternfly/Tabs.vue";
+import Tab from "@germanium-vue-patternfly/Tab.vue";
+
 import {EchoClient} from './echo_pb_service'
 import {EchoMessage} from './echo_pb'
 import {Component, Vue} from 'vue-property-decorator'
 import * as oaas from "@/model/oaas";
-import Tooltip from "@/components/patternfly/Tooltip.vue";
-import Dropdown from "@/components/patternfly/Dropdown.vue";
-import Expandable from "@/components/patternfly/Expandable.vue";
-import Tabs from "@/components/patternfly/Tabs.vue";
-import Tab from "@/components/patternfly/Tab.vue";
 import Vega from "@/components/vega/Vega.vue";
 
 

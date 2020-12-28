@@ -14,8 +14,9 @@
 
 <script lang="ts">
 import { Prop, Vue, Component } from 'vue-property-decorator'
-import Tabs from "@/components/patternfly/Tabs.vue";
-import Tab from "@/components/patternfly/Tab.vue";
+
+import Tabs from "@germanium-vue-patternfly/Tabs.vue";
+import Tab from "@germanium-vue-patternfly/Tab.vue";
 
 @Component({
   components: {

@@ -97,11 +97,11 @@ import TreeNodeView from '@/components/app/TreeNodeView.vue'
 import model from '@/model'
 import GeDocumentEditor from "@/components/app/GeDocumentEditor.vue";
 import Vega from "@/components/vega/Vega.vue";
-import Card from "@/components/patternfly/Card.vue";
-import Dropdown from "@/components/patternfly/Dropdown.vue";
-import DropdownEntry from "@/components/patternfly/DropdownEntry.vue";
-import Flex from "@/components/patternfly/Flex.vue";
-import FlexItem from "@/components/patternfly/FlexItem.vue";
+import Card from "@germanium-vue-patternfly/Card.vue";
+import Dropdown from "@germanium-vue-patternfly/Dropdown.vue";
+import DropdownEntry from "@germanium-vue-patternfly/DropdownEntry.vue";
+import Flex from "@germanium-vue-patternfly/Flex.vue";
+import FlexItem from "@germanium-vue-patternfly/FlexItem.vue";
 
 @Component({
     components: {
