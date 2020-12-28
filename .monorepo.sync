@@ -30,6 +30,8 @@ ge-star/vue/germanium-vue-monaco:
 - fa205e68dd9e364f82861e651b7c34ae912fa15c
 ge-star/vue/germanium-vue-vega:
 - 77112bc21d277a57b4d0784d0bcb17eaeb8c40a0
+ge-star/vue/monaco:
+- 8ff8f24ccf15dc2696d6598a2a30f7182ccbe478
 ge-star/weary:
 - e48d73f232b7c80915001eb0995eae2fb705d5cd
 oaas/envoy-proxy:
