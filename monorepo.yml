@@ -31,7 +31,7 @@ mappings:
     vue:
       germanium-vue-vega: git@github.com:germaniumhq/germanium-vue-vega.git
       germanium-vue-monaco: git@github.com:germaniumhq/germanium-vue-monaco.git
-    ge-vue-patternfly: git@github.com:germaniumhq/germanium-vue-patternfly.git
+      ge-vue-patternfly: git@github.com:germaniumhq/germanium-vue-patternfly.git
     weary: git@github.com:germaniumhq/weary.git
   gbs:
     gbs-java: git@github.com:germaniumhq/germaniumhq-java-build-system.git
