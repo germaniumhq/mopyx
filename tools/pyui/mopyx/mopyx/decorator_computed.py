@@ -22,7 +22,7 @@ def computed(f: Callable[..., T]) -> T:
         # when already inside a @render function.
         #
         # This is a problem since when the parent render refreshes,
-        # the computed wrapper will be called again. Since
+        # the computed wrapper will be called again, since
         # this is actually a forced rerender that should recreate the
         # render call, but not invoke the function again.
 

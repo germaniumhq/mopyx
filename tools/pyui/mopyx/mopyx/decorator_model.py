@@ -49,12 +49,21 @@ def model(base: Callable[..., T]) -> Callable[..., T]:
             return super().__getattribute__(name)
 
         def _mopyx_register_active_renderers(self, name: str) -> None:
+            """
+            Register the currently active renderer as a dependency for
+            the property with the `name` name.
+            """
             if rendering.renderers.active:
                 renderer = rendering.renderers.active[-1]
 
                 self._mopyx_register_renderer(name, renderer)
 
         def _mopyx_register_renderer(self, name: str, renderer) -> None:
+            """
+            Register a single renderer for a property with the `name`.
+            Whenever this property will be changed, the renderers
+            associated with it will be invoked.
+            """
             renderers = self._mopyx_renderers.get(name, None)
 
             if not renderers:
@@ -88,6 +97,9 @@ def model(base: Callable[..., T]) -> Callable[..., T]:
             self._mopyx_register_refresh(name)
 
         def _mopyx_register_refresh(self, name):
+            """
+            Register that a refresh is needed.
+            """
             renderers = self._mopyx_renderers.get(name, None)
             if renderers:
                 for renderer in renderers:
