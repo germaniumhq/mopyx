@@ -15,7 +15,7 @@ gbs/gbs-ubuntu:
 ge-star/ge-vue-patternfly:
 - 96a1c11a4b89c673ff9282748324f71da5082efd
 ge-star/ge-web:
-- 2f8a3b21336bb7ec73f7823bb4588aa0b0ef1d59
+- e0c6b6d68e301885cf5706379e643f42a67de4ae
 ge-star/germanium/ge-get:
 - f9534517d98f095feebacf430ec6f3169a0fdfd2
 ge-star/germanium/ge-python-api:
