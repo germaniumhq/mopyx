@@ -1,4 +1,0 @@
-arg0: mopyx
-mopyx: true
-templates:
-- py3/lib

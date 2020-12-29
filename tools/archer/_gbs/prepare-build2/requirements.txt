@@ -1,3 +1,0 @@
-termcolor-util
-click
-PyYAML >=5.1, <5.2

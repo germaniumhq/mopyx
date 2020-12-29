@@ -1,2 +1,0 @@
-
-from .checkout import checkout

@@ -1,8 +1,0 @@
-local: local
-environment: local
-local_list:
-  - "local_local_list_a"
-  - "local_local_list_b"
-environment_list:
-  - "local_environment_list_a"
-  - "local_environment_list_b"
